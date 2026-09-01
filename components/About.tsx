@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { projects } from "../data/projects";
 
 export default function About() {
   const today = new Date();
@@ -49,7 +50,7 @@ export default function About() {
             <div className="about-profile">
               <span className="about-badge">AI • ML • SOFTWARE ENGINEER</span>
               <h3 className="about-name">
-                Devanarayanan<span> V S</span>
+                Devanarayanan
               </h3>
               <p className="about-role">AI & Machine Learning Graduate</p>
               <p className="about-tagline">
@@ -108,23 +109,26 @@ export default function About() {
               complex challenges across different industries.
             </p>
 
-            {/* Focus Areas */}
-            <div className="about-focus">
-              <div className="highlight">🤖 Artificial Intelligence</div>
-              <div className="highlight">🧠 Machine Learning</div>
-              <div className="highlight">🏥 Healthcare AI</div>
-              <div className="highlight">👁️ Computer Vision</div>
-              <div className="highlight">💬 Large Language Models</div>
-              <div className="highlight">✨ Generative AI</div>
-              <div className="highlight">🌐 Full Stack Development</div>
-              <div className="highlight">📊 Data Science</div>
-              <div className="highlight">🚀 Intelligent Automation</div>
+            {/* Focus Areas — keyword pills neatly below description */}
+            <div className="about-keywords-section">
+              <p className="about-keywords-label">FOCUS AREAS</p>
+              <div className="about-focus">
+                <div className="highlight">🤖 Artificial Intelligence</div>
+                <div className="highlight">🧠 Machine Learning</div>
+                <div className="highlight">🏥 Healthcare AI</div>
+                <div className="highlight">👁️ Computer Vision</div>
+                <div className="highlight">💬 Large Language Models</div>
+                <div className="highlight">✨ Generative AI</div>
+                <div className="highlight">🌐 Full Stack Development</div>
+                <div className="highlight">📊 Data Science</div>
+                <div className="highlight">🚀 Intelligent Automation</div>
+              </div>
             </div>
 
             {/* Statistics */}
             <div className="about-stats">
               <div className="stat-item">
-                <div className="stat-value">10+</div>
+                <div className="stat-value">{projects.length}+</div>
                 <div className="stat-label">Projects Completed</div>
               </div>
               <div className="stat-item">

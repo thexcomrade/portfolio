@@ -16,12 +16,12 @@ const LONGITUDE = 76.6141;
 
 function latLonToVector3(lat: number, lon: number, radius: number) {
   const phi = (90 - lat) * (Math.PI / 180);
-  const theta = (lon + 180) * (Math.PI / 180);
+  const theta = lon * (Math.PI / 180);
 
   return new THREE.Vector3(
-    -(radius * Math.sin(phi) * Math.cos(theta)),
+    radius * Math.sin(phi) * Math.sin(theta),
     radius * Math.cos(phi),
-    radius * Math.sin(phi) * Math.sin(theta)
+    radius * Math.sin(phi) * Math.cos(theta)
   );
 }
 
@@ -35,12 +35,12 @@ export default function KeralaMarker() {
       {/* Core Beacon Sphere */}
       <mesh>
         <sphereGeometry args={[0.038, 32, 32]} />
-        <meshBasicMaterial color="#38bdf8" />
+        <meshBasicMaterial color="#00f0ff" />
       </mesh>
 
       {/* Glow Halo */}
       <mesh>
-        <sphereGeometry args={[0.075, 32, 32]} />
+        <sphereGeometry args={[0.078, 32, 32]} />
         <meshBasicMaterial color="#a855f7" transparent opacity={0.65} />
       </mesh>
 
@@ -48,9 +48,9 @@ export default function KeralaMarker() {
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.08, 0.098, 64]} />
         <meshBasicMaterial
-          color="#38bdf8"
+          color="#00f0ff"
           transparent
-          opacity={0.8}
+          opacity={0.85}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -61,7 +61,7 @@ export default function KeralaMarker() {
         <meshBasicMaterial
           color="#c084fc"
           transparent
-          opacity={0.45}
+          opacity={0.5}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -70,18 +70,18 @@ export default function KeralaMarker() {
       <Line
         points={[
           [0, 0, 0],
-          [0.42, -0.05, 0],
-          [0.68, 0.04, 0],
+          [0.45, -0.05, 0],
+          [0.72, 0.04, 0],
         ]}
-        color="#38bdf8"
-        lineWidth={2.2}
+        color="#00f0ff"
+        lineWidth={2.4}
         transparent
         opacity={0.95}
       />
 
       {/* Glassmorphic Callout Box matching target image */}
       <Html
-        position={[0.72, 0.04, 0]}
+        position={[0.76, 0.04, 0]}
         center={false}
         occlude={false}
         style={{
@@ -92,14 +92,14 @@ export default function KeralaMarker() {
         <div
           style={{
             width: "220px",
-            background: "rgba(8, 14, 30, 0.82)",
-            border: "1px solid rgba(56, 189, 248, 0.4)",
+            background: "rgba(8, 14, 30, 0.86)",
+            border: "1px solid rgba(0, 240, 255, 0.45)",
             backdropFilter: "blur(24px)",
             WebkitBackdropFilter: "blur(24px)",
             borderRadius: "18px",
             padding: "18px",
             boxShadow:
-              "0 20px 50px rgba(0, 0, 0, 0.75), 0 0 25px rgba(56, 189, 248, 0.25)",
+              "0 20px 50px rgba(0, 0, 0, 0.8), 0 0 28px rgba(0, 240, 255, 0.25)",
             color: "#ffffff",
             fontFamily: "var(--font-inter), sans-serif",
           }}
@@ -130,8 +130,8 @@ export default function KeralaMarker() {
                 width: "9px",
                 height: "9px",
                 borderRadius: "50%",
-                background: "#38bdf8",
-                boxShadow: "0 0 10px #38bdf8",
+                background: "#00f0ff",
+                boxShadow: "0 0 10px #00f0ff",
               }}
             />
           </div>
@@ -174,7 +174,7 @@ export default function KeralaMarker() {
               lineHeight: "1.3",
             }}
           >
-            <span>Building the future<br />with AI & ML</span>
+            <span>Building the future<br />with AI &amp; ML</span>
             <span style={{ fontSize: "15px", color: "#c084fc" }}>💜</span>
           </div>
         </div>

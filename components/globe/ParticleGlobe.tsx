@@ -1,12 +1,12 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
 
 const RADIUS = 1.45;
 
 /**
- * Creates a luminous radial glow texture for dots
+ * Luminous radial glow texture for dots
  */
 function createPointTexture() {
   if (typeof window === "undefined") return null;
@@ -19,8 +19,8 @@ function createPointTexture() {
 
   const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
   gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-  gradient.addColorStop(0.3, "rgba(34, 211, 238, 0.9)");
-  gradient.addColorStop(0.7, "rgba(139, 92, 246, 0.4)");
+  gradient.addColorStop(0.35, "rgba(0, 240, 255, 0.95)");
+  gradient.addColorStop(0.7, "rgba(168, 85, 247, 0.45)");
   gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
   ctx.fillStyle = gradient;
@@ -32,35 +32,18 @@ function createPointTexture() {
 }
 
 /**
- * Geographical Landmass Check for precise world continent rendering
+ * Analytical check for world landmasses (Fallback)
  */
-function checkLandmass(lat: number, lon: number): { isLand: boolean; isIndia: boolean } {
-  // 1. India & Sri Lanka
-  const isIndia = lat >= 5 && lat <= 36 && lon >= 68 && lon <= 97;
+function isLandFallback(lat: number, lon: number): { isLand: boolean; isIndia: boolean } {
+  const isIndia = lat >= 6 && lat <= 36 && lon >= 68 && lon <= 97;
   if (isIndia) return { isLand: true, isIndia: true };
 
-  // 2. East Asia, Southeast Asia, China, Japan, Indonesia
-  if (lat >= -11 && lat <= 55 && lon >= 97 && lon <= 148) return { isLand: true, isIndia: false };
-
-  // 3. Middle East & Arabian Peninsula
-  if (lat >= 12 && lat <= 48 && lon >= 35 && lon <= 78) return { isLand: true, isIndia: false };
-
-  // 4. Africa
+  if (lat >= -11 && lat <= 72 && lon >= 60 && lon <= 150) return { isLand: true, isIndia: false };
+  if (lat >= 12 && lat <= 45 && lon >= 35 && lon <= 60) return { isLand: true, isIndia: false };
   if (lat >= -35 && lat <= 37 && lon >= -18 && lon <= 52) return { isLand: true, isIndia: false };
-
-  // 5. Europe
   if (lat >= 36 && lat <= 71 && lon >= -10 && lon <= 45) return { isLand: true, isIndia: false };
-
-  // 6. Russia & Northern Asia
-  if (lat >= 48 && lat <= 75 && lon >= 45 && lon <= 180) return { isLand: true, isIndia: false };
-
-  // 7. Australia & New Zealand
   if (lat >= -47 && lat <= -10 && lon >= 113 && lon <= 178) return { isLand: true, isIndia: false };
-
-  // 8. North America
-  if (lat >= 14 && lat <= 75 && lon >= -168 && lon <= -52) return { isLand: true, isIndia: false };
-
-  // 9. South America
+  if (lat >= 14 && lat <= 72 && lon >= -168 && lon <= -52) return { isLand: true, isIndia: false };
   if (lat >= -56 && lat <= 13 && lon >= -82 && lon <= -34) return { isLand: true, isIndia: false };
 
   return { isLand: false, isIndia: false };
@@ -68,85 +51,118 @@ function checkLandmass(lat: number, lon: number): { isLand: boolean; isIndia: bo
 
 export default function ParticleGlobe() {
   const pointTexture = useMemo(() => createPointTexture(), []);
+  const [sampledLand, setSampledLand] = useState<{
+    landPts: number[];
+    landCols: number[];
+  } | null>(null);
 
-  const { landGeo, oceanGeo, gridLinesGeo } = useMemo(() => {
-    const landPts: number[] = [];
-    const landCols: number[] = [];
-    const oceanPts: number[] = [];
-    const oceanCols: number[] = [];
+  // Load and sample earth_specular.jpg (In earth_specular.jpg, Land is BLACK < 80, Ocean is WHITE > 180)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-    const TOTAL_SAMPLES = 40000;
-    const goldenRatio = (1 + Math.sqrt(5)) / 2;
+    const img = new Image();
+    img.src = "/earth_specular.jpg";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const w = 512;
+      const h = 256;
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
 
-    for (let i = 0; i < TOTAL_SAMPLES; i++) {
-      const y = 1 - (i / (TOTAL_SAMPLES - 1)) * 2;
-      const radiusAtY = Math.sqrt(1 - y * y);
-      const theta = (2 * Math.PI * i) / goldenRatio;
+      ctx.drawImage(img, 0, 0, w, h);
+      const imgData = ctx.getImageData(0, 0, w, h).data;
 
-      const px = -(RADIUS * radiusAtY * Math.cos(theta));
-      const py = RADIUS * y;
-      const pz = RADIUS * radiusAtY * Math.sin(theta);
+      const pts: number[] = [];
+      const cols: number[] = [];
 
-      const lat = Math.asin(y) * (180 / Math.PI);
-      let lon = Math.atan2(pz, -px) * (180 / Math.PI) - 180;
-      if (lon < -180) lon += 360;
+      for (let lat = -60; lat <= 75; lat += 1.1) {
+        for (let lon = -180; lon <= 180; lon += 1.1) {
+          const u = (lon + 180) / 360;
+          const v = (90 - lat) / 180;
+          const px = Math.floor(u * w);
+          const py = Math.floor(v * h);
+          const idx = (py * w + px) * 4;
+          const brightness = imgData[idx];
 
-      const { isLand, isIndia } = checkLandmass(lat, lon);
+          // Land in specular map is dark (< 90 brightness)
+          if (brightness < 90) {
+            const phi = (90 - lat) * (Math.PI / 180);
+            const theta = lon * (Math.PI / 180);
 
-      if (isLand) {
-        landPts.push(px, py, pz);
+            const x = RADIUS * Math.sin(phi) * Math.sin(theta);
+            const y = RADIUS * Math.cos(phi);
+            const z = RADIUS * Math.sin(phi) * Math.cos(theta);
 
-        const color = new THREE.Color();
-        if (isIndia) {
-          color.set("#00f0ff"); // Brightest Electric Cyan for India
-        } else {
-          const t = (py + RADIUS) / (2 * RADIUS);
-          color.lerpColors(
-            new THREE.Color("#00d2ff"), // Cyan bottom
-            new THREE.Color("#d946ef"), // Magenta top
-            t
-          );
+            pts.push(x, y, z);
+
+            const color = new THREE.Color();
+            const isIndia = lat >= 6 && lat <= 36 && lon >= 68 && lon <= 97;
+
+            if (isIndia) {
+              color.set("#00f0ff"); // Electric Cyan for India
+            } else {
+              // Color gradient matching reference image: Cyan-Blue bottom-left -> Neon Purple/Magenta top-right
+              const t = (y + RADIUS) / (2 * RADIUS);
+              color.lerpColors(
+                new THREE.Color("#00d2ff"),
+                new THREE.Color("#d946ef"),
+                t
+              );
+            }
+            cols.push(color.r, color.g, color.b);
+          }
         }
-
-        landCols.push(color.r, color.g, color.b);
-      } else if (i % 5 === 0) {
-        oceanPts.push(px, py, pz);
-        const oceanColor = new THREE.Color("#1e293b");
-        oceanCols.push(oceanColor.r * 0.4, oceanColor.g * 0.4, oceanColor.b * 0.7);
       }
-    }
 
-    // Grid lines
-    const gridPts: number[] = [];
-    const gridCols: number[] = [];
-    const gridColor = new THREE.Color("#a855f7");
+      setSampledLand({ landPts: pts, landCols: cols });
+    };
+  }, []);
 
-    for (let l = -180; l < 180; l += 30) {
-      const radLon = (l + 180) * (Math.PI / 180);
-      for (let a = 0; a <= 360; a += 4) {
-        const radLat = a * (Math.PI / 180);
-        const gx = -(RADIUS * 1.002 * Math.sin(radLat) * Math.cos(radLon));
-        const gy = RADIUS * 1.002 * Math.cos(radLat);
-        const gz = RADIUS * 1.002 * Math.sin(radLat) * Math.sin(radLon);
-        gridPts.push(gx, gy, gz);
-        gridCols.push(gridColor.r * 0.4, gridColor.g * 0.4, gridColor.b * 0.6);
+  const landGeo = useMemo(() => {
+    const pts: number[] = [];
+    const cols: number[] = [];
+
+    // Fallback generation while texture loads
+    for (let lat = -60; lat <= 75; lat += 1.2) {
+      for (let lon = -180; lon <= 180; lon += 1.2) {
+        const { isLand, isIndia } = isLandFallback(lat, lon);
+        if (isLand) {
+          const phi = (90 - lat) * (Math.PI / 180);
+          const theta = lon * (Math.PI / 180);
+
+          const x = RADIUS * Math.sin(phi) * Math.sin(theta);
+          const y = RADIUS * Math.cos(phi);
+          const z = RADIUS * Math.sin(phi) * Math.cos(theta);
+
+          pts.push(x, y, z);
+
+          const color = new THREE.Color();
+          if (isIndia) {
+            color.set("#00f0ff");
+          } else {
+            const t = (y + RADIUS) / (2 * RADIUS);
+            color.lerpColors(
+              new THREE.Color("#00d2ff"),
+              new THREE.Color("#d946ef"),
+              t
+            );
+          }
+          cols.push(color.r, color.g, color.b);
+        }
       }
     }
 
     const lGeo = new THREE.BufferGeometry();
-    lGeo.setAttribute("position", new THREE.Float32BufferAttribute(landPts, 3));
-    lGeo.setAttribute("color", new THREE.Float32BufferAttribute(landCols, 3));
+    const finalLandPts = sampledLand ? sampledLand.landPts : pts;
+    const finalLandCols = sampledLand ? sampledLand.landCols : cols;
 
-    const oGeo = new THREE.BufferGeometry();
-    oGeo.setAttribute("position", new THREE.Float32BufferAttribute(oceanPts, 3));
-    oGeo.setAttribute("color", new THREE.Float32BufferAttribute(oceanCols, 3));
+    lGeo.setAttribute("position", new THREE.Float32BufferAttribute(finalLandPts, 3));
+    lGeo.setAttribute("color", new THREE.Float32BufferAttribute(finalLandCols, 3));
 
-    const gGeo = new THREE.BufferGeometry();
-    gGeo.setAttribute("position", new THREE.Float32BufferAttribute(gridPts, 3));
-    gGeo.setAttribute("color", new THREE.Float32BufferAttribute(gridCols, 3));
-
-    return { landGeo: lGeo, oceanGeo: oGeo, gridLinesGeo: gGeo };
-  }, []);
+    return lGeo;
+  }, [sampledLand]);
 
   const landMat = useMemo(() => {
     return new THREE.PointsMaterial({
@@ -161,59 +177,33 @@ export default function ParticleGlobe() {
     });
   }, [pointTexture]);
 
-  const oceanMat = useMemo(() => {
-    return new THREE.PointsMaterial({
-      vertexColors: true,
-      size: 0.02,
-      map: pointTexture || undefined,
-      transparent: true,
-      opacity: 0.35,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      sizeAttenuation: true,
-    });
-  }, [pointTexture]);
-
-  const gridMat = useMemo(() => {
-    return new THREE.PointsMaterial({
-      vertexColors: true,
-      size: 0.016,
-      transparent: true,
-      opacity: 0.35,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
-  }, []);
-
   return (
     <group>
-      {/* Dark glowing volume core */}
+      {/* Semi-transparent dark volume core — matching reference image depth */}
       <mesh>
-        <sphereGeometry args={[RADIUS * 0.99, 64, 64]} />
+        <sphereGeometry args={[RADIUS * 0.985, 64, 64]} />
         <meshBasicMaterial
-          color="#060919"
+          color="#030514"
           transparent
-          opacity={0.82}
+          opacity={0.88}
         />
       </mesh>
 
-      {/* Luminous Landmass Particles */}
+      {/* Luminous Landmass Particles (Geographically exact continents) */}
       <points geometry={landGeo} material={landMat} />
 
-      {/* Ocean Particles */}
-      <points geometry={oceanGeo} material={oceanMat} />
-
-      {/* Lat/Lon Grid Lines */}
-      <points geometry={gridLinesGeo} material={gridMat} />
-
-      {/* Top-Right Lens Flare Highlight */}
-      <mesh position={[1.1, 1.1, 0.7]}>
-        <sphereGeometry args={[0.12, 32, 32]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.95} />
+      {/* Top-Right Lens Flare Highlight matching reference image */}
+      <mesh position={[0.92, 1.12, 0.5]}>
+        <sphereGeometry args={[0.07, 32, 32]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.98} />
       </mesh>
-      <mesh position={[1.1, 1.1, 0.7]}>
-        <sphereGeometry args={[0.3, 32, 32]} />
-        <meshBasicMaterial color="#d946ef" transparent opacity={0.5} />
+      <mesh position={[0.92, 1.12, 0.5]}>
+        <sphereGeometry args={[0.24, 32, 32]} />
+        <meshBasicMaterial color="#ec4899" transparent opacity={0.65} />
+      </mesh>
+      <mesh position={[0.92, 1.12, 0.5]}>
+        <sphereGeometry args={[0.48, 32, 32]} />
+        <meshBasicMaterial color="#a855f7" transparent opacity={0.3} />
       </mesh>
     </group>
   );

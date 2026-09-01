@@ -21,12 +21,19 @@ export default function Atmosphere() {
         varying vec3 vNormal;
         varying vec3 vPosition;
         void main() {
-          float intensity = pow(0.6 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.5);
-          vec3 cyan = vec3(0.133, 0.827, 0.933);
-          vec3 purple = vec3(0.545, 0.361, 0.965);
-          float t = smoothstep(-1.45, 1.45, vPosition.y);
-          vec3 color = mix(cyan, purple, t);
-          gl_FragColor = vec4(color, intensity * 0.45);
+          // Fresnel rim calculation
+          float fresnel = pow(1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0))), 2.6);
+          
+          // Color gradient matching reference image: Neon Cyan bottom-left -> Vivid Magenta top-right
+          float t = clamp((vPosition.y + ${GLOBE_RADIUS.toFixed(2)}) / (2.0 * ${GLOBE_RADIUS.toFixed(2)}), 0.0, 1.0);
+          vec3 cyan   = vec3(0.0, 0.85, 1.0);
+          vec3 purple = vec3(0.65, 0.32, 0.96);
+          vec3 magenta = vec3(0.92, 0.25, 0.75);
+          
+          vec3 color = mix(cyan, mix(purple, magenta, t), t);
+          float alpha = fresnel * 0.82;
+          
+          gl_FragColor = vec4(color, alpha);
         }
       `,
       blending: THREE.AdditiveBlending,
@@ -38,7 +45,7 @@ export default function Atmosphere() {
 
   return (
     <mesh material={material}>
-      <sphereGeometry args={[GLOBE_RADIUS * 1.15, 64, 64]} />
+      <sphereGeometry args={[GLOBE_RADIUS * 1.16, 64, 64]} />
     </mesh>
   );
 }

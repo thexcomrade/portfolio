@@ -15,7 +15,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Devanarayanan V S | AI & ML Engineer",
+  title: "Devanarayanan | AI & ML Engineer",
   description: "Ultra-realistic AI & ML Engineer Portfolio featuring 3D holographic innovations.",
 };
 

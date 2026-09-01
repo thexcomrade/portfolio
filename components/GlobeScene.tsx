@@ -10,13 +10,12 @@ import KeralaMarker from "./globe/KeralaMarker";
 import Stars from "./globe/Stars";
 
 /**
- * Static Holographic Earth (No rotation!)
- * India facing front-center, Africa on left, Australia on right.
- * Globe group rotation: X=0.18 (slight tilt) Y=Math.PI*0.88 (India forward)
+ * Holographic Earth with Kollam, Kerala, India facing front-center
+ * Globe group rotation: X=0.15 (slight tilt) Y=-1.25 (India forward-left facing camera)
  */
 function StaticGlobeGroup() {
   return (
-    <group rotation={[0.18, Math.PI * 0.88, 0]}>
+    <group rotation={[0.15, -1.25, 0]}>
       <ParticleGlobe />
       <KeralaMarker />
     </group>
@@ -25,7 +24,11 @@ function StaticGlobeGroup() {
 
 export default function GlobeScene() {
   return (
-    <div className="globe-container">
+    <div
+      className="globe-container"
+      role="img"
+      aria-label="3D Interactive Holographic Globe showing Kollam, Kerala, India"
+    >
       <Canvas
         camera={{
           position: [0, 0, 3.8],
@@ -42,7 +45,6 @@ export default function GlobeScene() {
       >
         <Suspense fallback={null}>
           <Lights />
-          <Stars />
           <Atmosphere />
           <StaticGlobeGroup />
           <OrbitRings />
