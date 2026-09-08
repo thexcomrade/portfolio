@@ -781,9 +781,9 @@ main {
 
 .section-inner {
   width: 100%;
-  max-width: 1280px;
+  max-width: min(1560px, 94vw);
   margin-inline: auto;
-  padding: 80px 32px 60px;
+  padding: 70px clamp(20px, 3.5vw, 48px) 50px;
 }
 
 .section-header {
