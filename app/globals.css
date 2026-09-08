@@ -15540,15 +15540,16 @@ appearance:none;
    RESPONSIVE
 ====================================================== */
 
-@media (max-width: 1100px) {
-  .hero-globe-wrapper {
-    width: 480px;
-    height: 480px;
-    right: -10px;
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 80px;
   }
 
-  .hero-title {
-    font-size: clamp(28px, 4vw, 46px);
+  .hero-showcase-wrapper {
+    max-width: 100%;
+    margin-left: 0;
   }
 }
 
@@ -15568,19 +15569,37 @@ appearance:none;
 }
 
 @media (max-width: 768px) {
-  .hero-globe-wrapper {
-    display: none;
-  }
-
   .hero-text-content {
     max-width: 100%;
   }
 
+  .navbar-glass {
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    padding: 0 16px;
+    height: 58px;
+  }
+
   .nav-menu {
-    gap: 18px;
+    gap: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    justify-content: flex-start;
+    padding: 4px 6px;
+  }
+
+  .nav-menu::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-link {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .resume-btn {
+    padding: 6px 12px;
     font-size: 0.75rem;
   }
 }
@@ -16746,9 +16765,11 @@ appearance:none;
 ====================================================== */
 
 .footer-container {
-  background: rgba(8, 7, 6, 0.85);
+  background: rgba(6, 8, 19, 0.72);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 50px 0 30px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 48px 0 32px;
   position: relative;
   z-index: 20;
 }
@@ -16759,10 +16780,13 @@ appearance:none;
 }
 
 .footer-top-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 36px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
 }
 
 .footer-logo {
@@ -16888,21 +16912,12 @@ appearance:none;
 
 @media (max-width: 768px) {
   .hero-container {
-    flex-direction: column;
-    padding-top: 100px;
+    padding-top: 80px;
+    gap: 32px;
   }
 
   .hero-text-content {
     max-width: 100%;
-  }
-
-  .hero-globe-wrapper {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    width: 100%;
-    height: 420px;
   }
 
   .exp-focus-cards {

@@ -16,7 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Devanarayanan | AI & ML Engineer",
-  description: "Ultra-realistic AI & ML Engineer Portfolio featuring 3D holographic innovations.",
+  description: "Modern AI & ML Engineer Portfolio featuring cutting-edge artificial intelligence, machine learning, and deep learning engineering solutions.",
 };
 
 export default function RootLayout({
