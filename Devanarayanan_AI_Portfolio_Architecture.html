@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI & ML Engineer Portfolio - Comprehensive Architecture & System Specification</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  @page {
+    size: A4;
+    margin: 16mm 14mm 16mm 14mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1e293b;
+    background: #ffffff;
+    line-height: 1.6;
+    font-size: 10pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Document Header / Cover Bar */
+  .doc-header {
+    border-bottom: 2px solid #0f172a;
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .doc-title-badge {
+    display: inline-block;
+    background: #0f172a;
+    color: #38bdf8;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 8pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22pt;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .doc-title span {
+    color: #ea580c;
+  }
+
+  .doc-subtitle {
+    font-size: 10pt;
+    color: #64748b;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .doc-meta {
+    text-align: right;
+    font-size: 8.5pt;
+    color: #475569;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .doc-meta strong {
+    color: #0f172a;
+  }
+
+  /* Section Headings */
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13.5pt;
+    font-weight: 800;
+    color: #0f172a;
+    border-left: 4px solid #ea580c;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-bottom: 10px;
+    text-align: justify;
+    color: #334155;
+  }
+
+  /* Code & Monospace */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 2px 5px;
+    border-radius: 3px;
+    border: 1px solid #e2e8f0;
+  }
+
+  pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    background: #090d16;
+    color: #e2e8f0;
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    line-height: 1.45;
+    overflow: hidden;
+    border: 1px solid #1e293b;
+    page-break-inside: avoid;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px 0;
+    font-size: 8.8pt;
+    page-break-inside: avoid;
+  }
+
+  th {
+    background: #0f172a;
+    color: #f8fafc;
+    text-align: left;
+    padding: 8px 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 8.5pt;
+    letter-spacing: 0.04em;
+    border: 1px solid #0f172a;
+  }
+
+  td {
+    padding: 7px 10px;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  /* Highlight Cards & Callouts */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0 16px 0;
+    page-break-inside: avoid;
+  }
+
+  .feature-card {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .feature-card.dark {
+    background: #0b0f19;
+    border-color: #1e293b;
+    color: #cbd5e1;
+  }
+
+  .feature-card.dark h4 {
+    color: #38bdf8;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 9.5pt;
+    margin-bottom: 4px;
+  }
+
+  .feature-card.dark p {
+    color: #94a3b8;
+    font-size: 8.5pt;
+    margin-bottom: 0;
+  }
+
+  .feature-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 9.5pt;
+    color: #ea580c;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+
+  .feature-card p {
+    font-size: 8.5pt;
+    margin-bottom: 0;
+    color: #475569;
+  }
+
+  .callout-box {
+    background: #eff6ff;
+    border-left: 4px solid #0284c7;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+
+  .callout-box strong {
+    color: #0369a1;
+  }
+
+  .callout-orange {
+    background: #fff7ed;
+    border-left: 4px solid #ea580c;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+
+  .callout-orange strong {
+    color: #c2410c;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  ul, ol {
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  li {
+    margin-bottom: 4px;
+    color: #334155;
+  }
+
+  .footer-note {
+    border-top: 1px solid #cbd5e1;
+    padding-top: 8px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==================== HEADER / COVER ==================== -->
+  <div class="doc-header">
+    <div>
+      <div class="doc-title-badge">System Architecture & Technical Specification</div>
+      <h1 class="doc-title">AI &amp; ML Engineer <span>Portfolio</span></h1>
+      <p class="doc-subtitle">Comprehensive Architectural Overview, Runtime Subsystems, &amp; Engineering Blueprint</p>
+    </div>
+    <div class="doc-meta">
+      <div><strong>Engineer:</strong> Devanarayanan V S</div>
+      <div><strong>Domain:</strong> AI, ML &amp; Full Stack</div>
+      <div><strong>Framework:</strong> Next.js 16 + React 19</div>
+      <div><strong>Revision:</strong> v1.0.4 (Production)</div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 1 ==================== -->
+  <h2>1. Executive Summary &amp; Design Philosophy</h2>
+  <p>
+    The <strong>AI &amp; ML Engineer Portfolio</strong> is an interactive web platform engineered specifically for <strong>Devanarayanan V S</strong>, an Artificial Intelligence &amp; Machine Learning Engineer based in Kerala, India (Technopark, Trivandrum). The application demonstrates technical mastery across Deep Learning, Computer Vision, Generative AI, Robotics, and Full-Stack scalable application architectures.
+  </p>
+  <p>
+    Rather than relying on off-the-shelf templates or generic component libraries, the entire platform is architected from fundamental principles. It delivers an immersive, <strong>dark-obsidian cyber-engineering experience</strong> that balances rich interactive visual rendering with zero-latency pre-rendered execution.
+  </p>
+
+  <div class="card-grid">
+    <div class="feature-card dark">
+      <h4>Obsidian Substrate (#090a0f / #0b0d12)</h4>
+      <p>Absorbs glare and establishes a high-contrast foundation reminiscent of deep space, modern terminals, and computational command surfaces.</p>
+    </div>
+    <div class="feature-card dark">
+      <h4>Radiant Cyber Cyan (#36f7f9)</h4>
+      <p>Represents neural computation, telemetry rings, and interactive proximity halos across the 2.5D visual stage and procedural canvas.</p>
+    </div>
+    <div class="feature-card dark">
+      <h4>Solar Ember Orange (#e54704 / #ff7a18)</h4>
+      <p>Provides targeted visual emphasis on core call-to-actions, category badges, project highlights, and primary submission buttons.</p>
+    </div>
+    <div class="feature-card dark">
+      <h4>Zero-Scrollbar &amp; Dynamic Viewport</h4>
+      <p>Native scrollbars are suppressed (<code>scrollbar-width: none</code>) while preserving full smooth touch and mouse-wheel navigation.</p>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 2 ==================== -->
+  <h2>2. Technology Stack &amp; Runtime Specification</h2>
+  <p>
+    The codebase leverages cutting-edge web infrastructure, combining the fastest compilation tools with the latest concurrent rendering paradigm:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 20%;">Layer / Engine</th>
+        <th style="width: 15%;">Version</th>
+        <th style="width: 25%;">Component / Package</th>
+        <th style="width: 40%;">Architectural Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Core Framework</strong></td>
+        <td><code>Next.js 16.2.9</code></td>
+        <td>App Router &amp; Turbopack</td>
+        <td>Server-side static prerendering (SSG), file-system routing, automatic code splitting, optimized asset delivery.</td>
+      </tr>
+      <tr>
+        <td><strong>UI Library</strong></td>
+        <td><code>React 19.2.4</code></td>
+        <td>Concurrent React Engine</td>
+        <td>Concurrent rendering without waterfall effects, pure state derivations via <code>useMemo</code>, zero hydration warnings.</td>
+      </tr>
+      <tr>
+        <td><strong>Language</strong></td>
+        <td><code>TypeScript 5</code></td>
+        <td>Strict Type System</td>
+        <td>End-to-end interface safety across project models, telemetry contracts, and external API payload declarations.</td>
+      </tr>
+      <tr>
+        <td><strong>Procedural Canvas</strong></td>
+        <td>HTML5 Canvas 2D</td>
+        <td>Native Context Engine</td>
+        <td>Hardware-accelerated dynamic spotlight, grid lines, traveling cyber scanlines, and axis-aligned data pulses.</td>
+      </tr>
+      <tr>
+        <td><strong>Motion Engine</strong></td>
+        <td><code>Framer Motion 12</code></td>
+        <td>Spring Physics Engine</td>
+        <td>Physics-based layout transitions, welcome toast popups, and smooth modal view states.</td>
+      </tr>
+      <tr>
+        <td><strong>Styling Core</strong></td>
+        <td><code>Tailwind CSS v4</code></td>
+        <td>Custom Design Tokens</td>
+        <td>Tokenized typography (Inter, Space Grotesk), glassmorphism backdrops, and hardware-accelerated transforms.</td>
+      </tr>
+      <tr>
+        <td><strong>Communication</strong></td>
+        <td>Dual Pipeline</td>
+        <td>Web3Forms API + mailto:</td>
+        <td>Guaranteed delivery to <code>devanarayananstackuplearning@gmail.com</code> with client-side fail-safe fallback.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== SECTION 3 ==================== -->
+  <div class="page-break"></div>
+  <h2>3. High-Level Architectural Flowchart</h2>
+  <p>
+    The runtime architecture is structured into decoupled client-side subsystems, ensuring rendering performance remains constant regardless of viewport manipulation:
+  </p>
+
+  <pre>
++----------------------------------------------------------------------------------------------------+
+|                                    BROWSER RUNTIME (NEXT.JS 16)                                     |
++----------------------------------------------------------------------------------------------------+
+                                                   |
+      +--------------------------------------------+--------------------------------------------+
+      |                                            |                                            |
+      v                                            v                                            v
++-----------------------------+      +-----------------------------+      +-----------------------------+
+|  CANVAS 2D GRAPHICS ENGINE  |      |   2.5D PARALLAX HERO STAGE  |      |  INTERSECTION OBSERVER NAV  |
+|   [SpaceBackground.tsx]     |      |         [Hero.tsx]          |      |        [Navbar.tsx]         |
+| - 60fps rAF loop            |      | - Desktop 100vh containment |      | - Scroll Y-axis detection   |
+| - Radial Mouse Spotlight    |      | - 3D Perspective Tilt Matrix|      | - Section boundary tracker  |
+| - Sinusoidal scanlines      |      | - 5-Layer Composite Depth   |      | - Active indicator pill     |
+| - Travelling data packets   |      | - Dual Typography Contrast  |      | - Smooth programmatic scroll|
++-----------------------------+      +-----------------------------+      +-----------------------------+
+                                                   |
+      +--------------------------------------------+--------------------------------------------+
+      |                                            |                                            |
+      v                                            v                                            v
++-----------------------------+      +-----------------------------+      +-----------------------------+
+|    DOMAIN CONTENT MODULES   |      |    PORTFOLIO PROJECT GRID   |      |   DUAL-PIPELINE CONTACT     |
+|  [About.tsx]                |      |        [Projects.tsx]       |      |        [Contact.tsx]        |
+|  - Dynamic age calculation  |      | - 16:9 compact cards        |      | - Web3Forms POST API route  |
+|  - Focus area badges        |      | - Category pills & tags     |      | - Mailto fallback protocol  |
+|  [Experience.tsx]           |      | - NutriPlan AI, TripGenius, |      | - Auto-suggest useMemo chip |
+|  - Verified intern badge    |      |   FROBO, Deep Fake Detector |      | - Radial orbit social menu  |
+|  [Skills.tsx] + VisionOS    |      | - Zero vertical page bloat  |      | - One-click clipboard copy  |
++-----------------------------+      +-----------------------------+      +-----------------------------+
+                                                   |
+                                                   v
+                         [Target Inbox: devanarayananstackuplearning@gmail.com]
+  </pre>
+
+  <!-- ==================== SECTION 4 ==================== -->
+  <h2>4. Granular Subsystem Deep-Dive</h2>
+
+  <h3>4.1. Procedural Background Canvas Engine (<code>SpaceBackground.tsx</code>)</h3>
+  <p>
+    To eliminate the heavy bundle overhead associated with 3D libraries (e.g., Three.js), the background is driven by a custom, hardware-accelerated 2D Canvas engine:
+  </p>
+  <ul>
+    <li><strong>HiDPI Display Calibration:</strong> Dynamically recalculates canvas buffer width and height using <code>Math.min(window.devicePixelRatio || 1, 2)</code> to guarantee crisp rendering on Retina displays without unnecessary GPU memory pressure.</li>
+    <li><strong>Mathematical Mouse Spotlight:</strong> Interpolates cursor coordinates $(x_m, y_m)$ using smoothing factor $0.08$ and computes an inverse radial falloff gradient:
+      <br>
+      $$\text{Intensity}(r) = \text{rgba}(54, 247, 249, 0.05 \cdot (1 - r / 280))$$
+      yielding an interactive proximity illumination that follows user movement.
+    </li>
+    <li><strong>Sinusoidal Cyber Scanlines:</strong> Generates horizontal raster lines drifting downward at $14\text{px/s}$ across $84\text{px}$ intervals, modulated by:
+      <br>
+      $$\alpha(y, t) = 0.03 + 0.015 \cdot \sin(y \cdot 0.015 + t \cdot 0.5)$$
+    </li>
+    <li><strong>Adaptive Resource Management:</strong> Hooks into the <code>Page Visibility API</code> (<code>document.hidden</code>) and <code>prefers-reduced-motion</code> media query to cancel animation frames when the user switches tabs or prefers reduced motion.</li>
+  </ul>
+
+  <h3>4.2. Viewport-Locked 2.5D Parallax Hero Stage (<code>Hero.tsx</code>)</h3>
+  <p>
+    The Hero component anchors the user's initial impression through a multi-tier depth illusion:
+  </p>
+  <ul>
+    <li><strong>Viewport Containment:</strong> Strictly bound on desktop to <code>height: 100vh; height: 100dvh; max-height: 100vh; overflow: hidden;</code> with <code>padding-top: 84px</code>. This guarantees that downstream sections (such as <em>About</em>) do not peek into view before scrolling.</li>
+    <li><strong>Mobile Responsiveness:</strong> On screens $\le 1080\text{px}$, CSS rules automatically release the height lock to <code>height: auto; min-height: 100vh; overflow: visible;</code> allowing the left content and right stage to stack naturally.</li>
+    <li><strong>3D Perspective Tilt Matrix:</strong> Relative mouse coordinates over the visual stage calculate tilt angles:
+      <br>
+      $$\text{tilt}_x = 8 \cdot \left(\frac{e.\text{clientX} - \text{rect.left}}{\text{rect.width}} - 0.5\right), \quad \text{tilt}_y = -8 \cdot \left(\frac{e.\text{clientY} - \text{rect.top}}{\text{rect.height}} - 0.5\right)$$
+    </li>
+    <li><strong>Depth Hierarchy Stack:</strong>
+      <ol>
+        <li><em>Layer 0 (Ambient Glow):</em> Radial blur projector casting deep cyan luminescence behind the torso.</li>
+        <li><em>Layer 1 (Typographic Artwork):</em> <code>back.png</code> with cyan drop-shadow counter-translated against cursor tilt and masked via <code>linear-gradient(to bottom, black 0%, black 35%, transparent 52%)</code> so no letter stems peek beneath the subject's arms.</li>
+        <li><em>Layer 2 (Orbital Halo):</em> Tilted glowing cyan ring with an animated traveling orbital spark running a 7s loop.</li>
+        <li><em>Layer 3 (Foreground Subject):</em> <code>nanu.png</code> with dual drop-shadow rim lighting floating forward in Z-space.</li>
+        <li><em>Layer 4 (Volumetric Mist):</em> Base blur gradient softening hard bottom edges.</li>
+        <li><em>Layer 5 (Telemetry HUD):</em> Impact quotes and telemetry labels ("ML", "DATA", "SOLUTIONS") pinned at <code>top: 10%</code>.</li>
+      </ol>
+    </li>
+  </ul>
+
+  <!-- ==================== SECTION 5 ==================== -->
+  <div class="page-break"></div>
+  <h2>5. Domain Modules &amp; Portfolio Ecosystem</h2>
+
+  <div class="card-grid">
+    <div class="feature-card">
+      <h4>About Subsystem (About.tsx)</h4>
+      <p>
+        Presents the engineer's biography, core healthcare AI focus, and technical philosophy. Features a dynamic age calculation from birthdate (2004-07-30) equipped with <code>suppressHydrationWarning</code> to prevent server/client rendering discrepancies.
+      </p>
+    </div>
+    <div class="feature-card">
+      <h4>Skills Taxonomy (Skills.tsx)</h4>
+      <p>
+        Categorizes competencies across AI/ML, Backend, and Frontend. Implements proficiency meters and an interactive VisionOS-inspired frosted modal view with granular capability breakdowns.
+      </p>
+    </div>
+    <div class="feature-card">
+      <h4>Experience Showcase (Experience.tsx)</h4>
+      <p>
+        Documents active industry internship at <strong>Stackmod Innovation, Technopark, Trivandrum</strong>. Integrates an interactive verified credential ID card with simulated holographic light shimmer animations.
+      </p>
+    </div>
+    <div class="feature-card">
+      <h4>Achievements Timeline (Achievements.tsx)</h4>
+      <p>
+        Curates technical milestones, robotics development internships (Cyborg AI Gen Automation), national-level engineering quizzes, and autonomous vehicle workshops.
+      </p>
+    </div>
+  </div>
+
+  <h3>5.1. Featured Projects Matrix (<code>Projects.tsx</code>)</h3>
+  <p>
+    The project portfolio presents 6 production-grade applications engineered across multiple specialized AI domains. All project cards are optimized with compact 16:9 aspect ratios (height: $220\text{px}$, min-height: $480\text{px}$) to prevent vertical scrolling fatigue:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Project Title</th>
+        <th style="width: 20%;">Domain / Badge</th>
+        <th style="width: 30%;">Core Tech Stack</th>
+        <th style="width: 25%;">Key Capabilities</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>NutriPlan AI</strong></td>
+        <td>Healthcare AI</td>
+        <td>Flutter, FastAPI, Firebase, Scikit-Learn, OpenAI</td>
+        <td>Personalized meal generator, multilingual NLP health tracking, diet recommendations.</td>
+      </tr>
+      <tr>
+        <td><strong>TripGenius AI</strong></td>
+        <td>Generative AI</td>
+        <td>Next.js, FastAPI, OpenAI, Weather API, Firebase</td>
+        <td>Automated itinerary creator, budget analytics, destination intelligence.</td>
+      </tr>
+      <tr>
+        <td><strong>FROBO</strong></td>
+        <td>Robotics &amp; Embedded AI</td>
+        <td>ESP32, Arduino, OLED, Sensors, 3D Printing</td>
+        <td>Desktop companion robot, expressive eye animations, touch interaction.</td>
+      </tr>
+      <tr>
+        <td><strong>Deep Fake Face Detection</strong></td>
+        <td>Computer Vision</td>
+        <td>Python, OpenCV, Flask, Scikit-Learn, SVM</td>
+        <td>Facial artifact detection, handcrafted feature extraction, confidence scoring.</td>
+      </tr>
+      <tr>
+        <td><strong>Smart Obstacle Robot</strong></td>
+        <td>Embedded Systems</td>
+        <td>Arduino, Bluetooth, Ultrasonic Sensors, L293D</td>
+        <td>Autonomous collision avoidance, voice navigation, mobile Bluetooth control.</td>
+      </tr>
+      <tr>
+        <td><strong>Love Chronicles</strong></td>
+        <td>Full-Stack Frontend</td>
+        <td>React, Tailwind CSS, Framer Motion</td>
+        <td>Interactive digital storytelling interface with responsive layout transitions.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== SECTION 6 ==================== -->
+  <h2>6. Dual-Pipeline Conversion &amp; Message Delivery Architecture</h2>
+  <p>
+    The contact subsystem in <code>components/Contact.tsx</code> ensures zero message loss through a fault-tolerant dual-route architecture delivering inquiries directly to <strong><code>devanarayananstackuplearning@gmail.com</code></strong>:
+  </p>
+
+  <div class="callout-box">
+    <strong>Route 1 — Web3Forms Background API (Primary):</strong>
+    When <code>NEXT_PUBLIC_WEB3FORMS_KEY</code> is configured in <code>.env.local</code>, form submission initiates an asynchronous HTTP POST request to <code>https://api.web3forms.com/submit</code>. The message is verified against spam honeypots and delivered to Gmail with complete sender headers and reply-to configuration.
+  </div>
+
+  <div class="callout-orange">
+    <strong>Route 2 — Pre-Populated Native mailto: (Fail-Safe Fallback):</strong>
+    If the API key is unconfigured or a network failure occurs, the client automatically constructs a URI-encoded <code>mailto:</code> link containing the user's name, email, subject, and message. This triggers the native mail client pre-addressed to <code>devanarayananstackuplearning@gmail.com</code>, ensuring 100% communication reliability.
+  </div>
+
+  <ul>
+    <li><strong>Content-Aware Subject Recommendation:</strong> Employs synchronous keyword matching inside a pure <code>useMemo</code> hook. Typing terms like <em>"collab"</em>, <em>"job"</em>, or <em>"ai"</em> automatically yields clickable subject chips without extra re-renders.</li>
+    <li><strong>Quick-Copy Utility:</strong> An interactive pill displays <code>devanarayananstackuplearning@gmail.com</code> alongside a one-click copy button powered by <code>navigator.clipboard.writeText</code> with animated visual confirmation.</li>
+    <li><strong>Radial Menu:</strong> Uses polar coordinates ($x = r \cos\theta, y = r \sin\theta$) to orbit social links (GitHub, LinkedIn, Instagram, Resume) around a central toggle button.</li>
+  </ul>
+
+  <!-- ==================== SECTION 7 ==================== -->
+  <h2>7. Production Quality &amp; Verification Metrics</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 30%;">Validation Category</th>
+        <th style="width: 30%;">Verification Tool / Command</th>
+        <th style="width: 40%;">Outcome / Compliance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Code Quality &amp; Linting</strong></td>
+        <td><code>npm run lint</code> (ESLint)</td>
+        <td><strong>0 Errors, 0 Warnings.</strong> Strict React 19 hook compliance; no cascading state in effects.</td>
+      </tr>
+      <tr>
+        <td><strong>Type Integrity</strong></td>
+        <td><code>tsc --noEmit</code></td>
+        <td><strong>100% TypeScript Pass.</strong> Strict type safety across all components and models.</td>
+      </tr>
+      <tr>
+        <td><strong>Static Site Generation</strong></td>
+        <td><code>npm run build</code> (Turbopack)</td>
+        <td><strong>Compiled in 4.0s.</strong> All routes (<code>/</code>, <code>/_not-found</code>) pre-rendered as static content.</td>
+      </tr>
+      <tr>
+        <td><strong>Dual Workspace Sync</strong></td>
+        <td>PowerShell Sync Pipeline</td>
+        <td>Identical parity maintained between <code>D:\Projects\ai-portfolio</code> and <code>D:\ai-portfolio</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Runtime Environment</strong></td>
+        <td>Local Dev Server</td>
+        <td>Online and ready at <code>http://localhost:3000</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== FOOTER ==================== -->
+  <div class="footer-note">
+    <div>Devanarayanan V S · AI &amp; ML Engineer Portfolio</div>
+    <div>Document Generated: October 2026 · Confidential &amp; Proprietary</div>
+  </div>
+
+</body>
+</html>

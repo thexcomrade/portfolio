@@ -1,6 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import {
+  MapPin,
+  Bot,
+  BrainCircuit,
+  Activity,
+  Eye,
+  MessageSquareCode,
+  Sparkles,
+  Globe,
+  BarChart3,
+  Zap,
+} from "lucide-react";
 import { projects } from "../data/projects";
 
 export default function About() {
@@ -11,35 +23,40 @@ export default function About() {
     age--;
   }
 
+  const focusAreas = [
+    { label: "Artificial Intelligence", icon: <Bot size={14} aria-hidden="true" /> },
+    { label: "Machine Learning", icon: <BrainCircuit size={14} aria-hidden="true" /> },
+    { label: "Healthcare AI", icon: <Activity size={14} aria-hidden="true" /> },
+    { label: "Computer Vision", icon: <Eye size={14} aria-hidden="true" /> },
+    { label: "Large Language Models", icon: <MessageSquareCode size={14} aria-hidden="true" /> },
+    { label: "Generative AI", icon: <Sparkles size={14} aria-hidden="true" /> },
+    { label: "Full Stack Development", icon: <Globe size={14} aria-hidden="true" /> },
+    { label: "Data Science", icon: <BarChart3 size={14} aria-hidden="true" /> },
+    { label: "Intelligent Automation", icon: <Zap size={14} aria-hidden="true" /> },
+  ];
+
   return (
     <section id="about" className="page-section">
       <div className="section-inner">
-        {/* ===========================
-            Section Header
-        =========================== */}
+        {/* Section Header */}
         <div className="section-header">
           <p className="section-eyebrow">GET TO KNOW ME</p>
           <h2 className="section-title">
             About <span>Me</span>
           </h2>
           <p className="section-subtitle">
-            Building intelligent AI solutions that bridge technology,
-            innovation, and real-world impact.
+            Building intelligent AI solutions that bridge research, engineering, and real-world impact.
           </p>
         </div>
 
-        {/* ===========================
-            Main Grid
-        =========================== */}
+        {/* Main Grid */}
         <div className="about-grid">
-          {/* =========================================
-              LEFT SIDE
-          ========================================= */}
+          {/* Left Column: Profile Card */}
           <div className="about-left">
             <div className="about-image-card">
               <Image
                 src="/deva.jpg"
-                alt="Devanarayanan V S"
+                alt="Devanarayanan V S portrait"
                 width={420}
                 height={420}
                 priority
@@ -49,87 +66,73 @@ export default function About() {
 
             <div className="about-profile">
               <span className="about-badge">AI • ML • SOFTWARE ENGINEER</span>
-              <h3 className="about-name">
-                Devanarayanan
-              </h3>
-              <p className="about-role">AI & Machine Learning Graduate</p>
+              <h3 className="about-name">Devanarayanan</h3>
+              <p className="about-role">AI &amp; Machine Learning Graduate</p>
               <p className="about-tagline">
-                Passionate about developing intelligent software that
-                transforms ideas into meaningful real-world impact.
+                Passionate about developing intelligent software that transforms innovative ideas into scalable systems.
               </p>
 
               <div className="about-meta">
-                <span>📍 Kerala, India</span>
-                <span className="meta-divider">•</span>
-                {/* Only render age once it's calculated */}
-                <span>
+                <span className="about-location">
+                  <MapPin size={13} aria-hidden="true" />
+                  <span>Kerala, India</span>
+                </span>
+                <span className="meta-divider" aria-hidden="true">•</span>
+                <span suppressHydrationWarning>
                   {age !== null ? `${age} Years Old` : "..."}
                 </span>
               </div>
 
               <div className="availability">
-                <span className="availability-dot"></span>
-                Available for AI & ML Opportunities
+                <span className="availability-dot" aria-hidden="true" />
+                <span>Available for AI &amp; ML Opportunities</span>
               </div>
             </div>
           </div>
 
-          {/* =========================================
-              RIGHT SIDE
-          ========================================= */}
+          {/* Right Column: Bio, Focus Areas, Stats, Vision */}
           <div className="about-content">
             <h3 className="about-heading">
-              Crafting Intelligent Solutions with Artificial Intelligence
+              Engineering Intelligent Systems with Purpose &amp; Precision
             </h3>
 
             <p className="about-paragraph">
-              I am an Artificial Intelligence and Machine Learning graduate
-              from Kerala, India, passionate about building intelligent
-              software that solves meaningful real-world problems. My primary
-              interest lies in applying Artificial Intelligence to healthcare,
-              where technology can enhance decision-making, improve patient
-              outcomes, and create solutions that positively impact people&apos;s
-              lives.
+              I am an Artificial Intelligence and Machine Learning graduate from Kerala, India,
+              dedicated to developing reliable and production-grade software that solves meaningful challenges.
+              My primary interest lies in the application of AI to healthcare, where computer vision and predictive
+              modeling can accelerate diagnosis, optimize care delivery, and improve patient outcomes.
             </p>
 
             <p className="about-paragraph">
-              My expertise spans Machine Learning, Deep Learning, Computer
-              Vision, Generative AI, Large Language Models, and Full Stack AI
-              application development. I enjoy transforming innovative ideas
-              into complete software solutions by combining modern AI
-              technologies with scalable web applications and intuitive user
-              experiences.
+              My engineering stack spans Machine Learning algorithms, Deep Learning architectures (CNNs, RNNs, Transformers),
+              Computer Vision pipelines, Generative AI models, and scalable full-stack web applications.
+              I focus on bridging experimental neural models with high-throughput API services and intuitive user interfaces.
             </p>
 
             <p className="about-paragraph">
-              I believe that continuous learning drives innovation. Every
-              project I build is an opportunity to explore emerging
-              technologies, strengthen my engineering skills, and develop AI
-              systems that are reliable, practical, and capable of solving
-              complex challenges across different industries.
+              Continuous learning is core to my engineering approach. Every system I build provides an opportunity
+              to explore architectural optimizations, write clean maintainable code, and deliver reliable solutions
+              tailored to real-world industrial environments.
             </p>
 
-            {/* Focus Areas — keyword pills neatly below description */}
+            {/* Focus Areas */}
             <div className="about-keywords-section">
-              <p className="about-keywords-label">FOCUS AREAS</p>
+              <p className="about-keywords-label">CORE FOCUS AREAS</p>
               <div className="about-focus">
-                <div className="highlight">🤖 Artificial Intelligence</div>
-                <div className="highlight">🧠 Machine Learning</div>
-                <div className="highlight">🏥 Healthcare AI</div>
-                <div className="highlight">👁️ Computer Vision</div>
-                <div className="highlight">💬 Large Language Models</div>
-                <div className="highlight">✨ Generative AI</div>
-                <div className="highlight">🌐 Full Stack Development</div>
-                <div className="highlight">📊 Data Science</div>
-                <div className="highlight">🚀 Intelligent Automation</div>
+                {focusAreas.map((area) => (
+                  <div key={area.label} className="highlight">
+                    {area.icon}
+                    <span>{area.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Statistics */}
+            {/* Metrics */}
             <div className="about-stats">
               <div className="stat-item">
                 <div className="stat-value">{projects.length}+</div>
-                <div className="stat-label">Projects Completed</div>
+                <div className="stat-label">Projects Built</div>
               </div>
               <div className="stat-item">
                 <div className="stat-value">10+</div>
@@ -141,15 +144,13 @@ export default function About() {
               </div>
             </div>
 
-            {/* Vision */}
+            {/* Engineering Vision */}
             <div className="about-vision">
-              <h4>My Vision</h4>
+              <h4>Engineering Vision</h4>
               <p className="about-paragraph">
-                My goal is to contribute to the future of Artificial
-                Intelligence by developing ethical, reliable, and
-                human-centered AI systems that make a lasting impact,
-                particularly in healthcare, intelligent automation, and
-                next-generation software solutions.
+                My objective is to advance ethical, dependable, and human-centered AI systems—developing robust
+                software architectures that enhance healthcare accessibility, automate complex processes, and power
+                the next generation of intelligent software products.
               </p>
             </div>
           </div>

@@ -1,14 +1,22 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import {
   FaGithub,
   FaLinkedin,
   FaInstagram,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaFileDownload,
 } from "react-icons/fa";
+import {
+  Mail,
+  MapPin,
+  Download,
+  Share2,
+  X,
+  Copy,
+  Check,
+  ArrowRight,
+  ExternalLink,
+} from "lucide-react";
 
 type Panel = "email" | "location";
 
@@ -53,9 +61,9 @@ const socialLinks: SocialLink[] = [
   {
     id: 3,
     label: "Resume",
-    icon: <FaFileDownload />,
+    icon: <Download size={18} aria-hidden="true" />,
     color: "#ffffff",
-    bgColor: "#fe4e03",
+    bgColor: "#e54704",
     action: "link",
     href: "/resume.pdf",
   },
@@ -82,16 +90,17 @@ export default function Contact() {
   const [activePanel, setActivePanel] = useState<Panel>("email");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [subject, setSubject] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [copied, setCopied] = useState(false);
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "fallback">("idle");
+  const [statusMessage, setStatusMessage] = useState("");
 
   // Auto-suggest subjects based on message content
-  useEffect(() => {
-    if (!message.trim()) {
-      setSuggestions([]);
-      return;
-    }
+  const suggestions = useMemo(() => {
+    if (!message.trim()) return [];
     const lower = message.toLowerCase();
     const found = new Set<string>();
     for (const [keyword, subs] of Object.entries(SUBJECT_SUGGESTIONS)) {
@@ -99,7 +108,7 @@ export default function Contact() {
         subs.forEach((s) => found.add(s));
       }
     }
-    setSuggestions(Array.from(found).slice(0, 3));
+    return Array.from(found).slice(0, 3);
   }, [message]);
 
   function handleIconClick(link: SocialLink) {
@@ -117,17 +126,76 @@ export default function Contact() {
     }
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleCopyEmail() {
+    navigator.clipboard.writeText("devanarayananstackuplearning@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  }
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setStatusMessage("Please provide your name, email, and message.");
+      return;
+    }
+
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-      setMessage("");
-      setSubject("");
-      setSuggestions([]);
-      setTimeout(() => setSubmitted(false), 4000);
-    }, 1800);
+    setStatusMessage("");
+
+    const targetEmail = "devanarayananstackuplearning@gmail.com";
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+
+    if (accessKey && accessKey.trim() !== "") {
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: accessKey.trim(),
+            name: name.trim(),
+            email: email.trim(),
+            subject: subject.trim() || `Portfolio Inquiry from ${name}`,
+            message: message.trim(),
+            from_name: `${name} (via Portfolio)`,
+          }),
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          setSubmitted(true);
+          setFormStatus("success");
+          setName("");
+          setEmail("");
+          setMessage("");
+          setSubject("");
+          setLoading(false);
+          return;
+        } else {
+          throw new Error(data.message || "Failed to send via Web3Forms");
+        }
+      } catch (err) {
+        console.warn("Web3Forms submission failed, launching direct mail client:", err);
+      }
+    }
+
+    // Direct Mailto Fallback: Opens email client prefilled to devanarayananstackuplearning@gmail.com
+    const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(
+      subject.trim() || `Portfolio Inquiry from ${name}`
+    )}&body=${encodeURIComponent(
+      `Hi Devanarayanan,\n\n${message.trim()}\n\n---\nFrom: ${name.trim()} (${email.trim()})`
+    )}`;
+    window.location.href = mailtoUrl;
+
+    setSubmitted(true);
+    setFormStatus("fallback");
+    setName("");
+    setEmail("");
+    setMessage("");
+    setSubject("");
+    setLoading(false);
   }
 
   return (
@@ -135,13 +203,13 @@ export default function Contact() {
       <div className="section-inner contact-inner">
         {/* Section Header */}
         <div className="section-header">
-          <p className="section-eyebrow">LET&apos;S CONNECT</p>
+          <p className="section-eyebrow">START A CONVERSATION</p>
           <h2 className="section-title">
             Get In <span>Touch</span>
           </h2>
           <p className="section-subtitle">
-            Whether you&apos;re looking for an AI engineer, collaborator, or have an
-            innovative idea — I&apos;d love to hear from you.
+            Whether you&apos;re looking for an AI engineer, research collaborator, or have an
+            innovative problem to solve — my inbox is always open.
           </p>
         </div>
 
@@ -149,17 +217,17 @@ export default function Contact() {
         <div className="contact-grid">
           {/* LEFT — Radial Contact Menu + Info */}
           <div className="contact-left">
-            {/* ✦ Toggle Radial Menu */}
+            {/* Toggle Radial Menu */}
             <div className={`contact-radial-menu ${menuOpen ? "active" : ""}`}>
               {/* Center toggle */}
               <button
                 className="contact-radial-toggle"
                 onClick={() => setMenuOpen((p) => !p)}
-                aria-label="Toggle contact menu"
+                aria-label={menuOpen ? "Close contact orbit menu" : "Open contact orbit menu"}
                 aria-expanded={menuOpen}
               >
-                <span className="contact-radial-toggle-icon">
-                  {menuOpen ? "✕" : "✦"}
+                <span className="contact-radial-toggle-icon" aria-hidden="true">
+                  {menuOpen ? <X size={18} /> : <Share2 size={18} />}
                 </span>
               </button>
 
@@ -194,7 +262,7 @@ export default function Contact() {
                     title={link.label}
                     aria-label={link.label}
                   >
-                    <span className="contact-orbit-icon-inner">{link.icon}</span>
+                    <span className="contact-orbit-icon-inner" aria-hidden="true">{link.icon}</span>
                     <span className="contact-orbit-label">{link.label}</span>
                   </button>
                 );
@@ -204,8 +272,8 @@ export default function Contact() {
             {/* Info block */}
             <div className="contact-info-block">
               <div className="contact-status-badge">
-                <span className="contact-status-dot" />
-                Available for AI &amp; ML Opportunities
+                <span className="contact-status-dot" aria-hidden="true" />
+                <span>Available for AI &amp; ML Opportunities</span>
               </div>
 
               <h3 className="contact-cta-heading">
@@ -215,33 +283,49 @@ export default function Contact() {
 
               <ul className="contact-details-list">
                 <li>
-                  <span className="contact-detail-icon"><FaMapMarkerAlt /></span>
+                  <span className="contact-detail-icon" aria-hidden="true">
+                    <MapPin size={16} />
+                  </span>
                   <div>
                     <span className="contact-detail-label">Location</span>
                     <span className="contact-detail-value">Kalluvathukkal, Kollam, Kerala</span>
                   </div>
                 </li>
                 <li>
-                  <span className="contact-detail-icon"><FaEnvelope /></span>
+                  <span className="contact-detail-icon" aria-hidden="true">
+                    <Mail size={16} />
+                  </span>
                   <div>
-                    <span className="contact-detail-label">Email</span>
-                    <span className="contact-detail-value">sskzm5780@gmail.com</span>
+                    <span className="contact-detail-label">Direct Email</span>
+                    <a
+                      href="mailto:devanarayananstackuplearning@gmail.com"
+                      className="contact-detail-value"
+                      style={{ color: "#36f7f9", textDecoration: "none" }}
+                    >
+                      devanarayananstackuplearning@gmail.com
+                    </a>
                   </div>
                 </li>
               </ul>
 
-              <div className="contact-panel-tabs">
+              <div className="contact-panel-tabs" role="tablist" aria-label="Contact View Options">
                 <button
+                  role="tab"
+                  aria-selected={activePanel === "email"}
                   className={`contact-panel-tab ${activePanel === "email" ? "active" : ""}`}
                   onClick={() => setActivePanel("email")}
                 >
-                  <FaEnvelope /> Message
+                  <Mail size={14} aria-hidden="true" />
+                  <span>Send Message</span>
                 </button>
                 <button
+                  role="tab"
+                  aria-selected={activePanel === "location"}
                   className={`contact-panel-tab ${activePanel === "location" ? "active" : ""}`}
                   onClick={() => setActivePanel("location")}
                 >
-                  <FaMapMarkerAlt /> Location
+                  <MapPin size={14} aria-hidden="true" />
+                  <span>View Location</span>
                 </button>
               </div>
             </div>
@@ -253,24 +337,64 @@ export default function Contact() {
             {activePanel === "email" && (
               <div className="contact-form-card">
                 <div className="contact-form-card-header">
-                  <p className="contact-form-eyebrow">SEND A MESSAGE</p>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8, flexWrap: "wrap", gap: 8 }}>
+                    <p className="contact-form-eyebrow" style={{ margin: 0 }}>SEND A MESSAGE</p>
+                    <button
+                      type="button"
+                      onClick={handleCopyEmail}
+                      className="contact-copy-badge"
+                      title="Click to copy email address"
+                      aria-label="Copy direct email address to clipboard"
+                    >
+                      {copied ? (
+                        <>
+                          <Check size={13} aria-hidden="true" />
+                          <span>Copied Email!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy size={13} aria-hidden="true" />
+                          <span>Copy Email</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                   <h3 className="contact-form-title">Start a Conversation</h3>
                   <p className="contact-form-sub">
-                    Fill out the form and I&apos;ll get back to you as soon as possible.
+                    Directly delivered to <strong style={{ color: "#36f7f9" }}>devanarayananstackuplearning@gmail.com</strong>
                   </p>
                 </div>
 
                 {submitted ? (
                   <div className="contact-success">
-                    <div className="contact-success-icon">✓</div>
+                    <div className="contact-success-icon" aria-hidden="true">
+                      <Check size={28} />
+                    </div>
                     <h4>Message Sent!</h4>
                     <p>
-                      Thank you for reaching out. I&apos;ll review your message and get
-                      back to you within 24 hours.
+                      {formStatus === "fallback"
+                        ? "Opening your default email app to send directly to devanarayananstackuplearning@gmail.com. I will review and reply within 24 hours!"
+                        : "Thank you for reaching out! Your message was delivered directly to devanarayananstackuplearning@gmail.com. I will reply within 24 hours."}
                     </p>
+                    <button
+                      type="button"
+                      className="btn-primary"
+                      style={{ marginTop: 16 }}
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormStatus("idle");
+                      }}
+                    >
+                      Send Another Message
+                    </button>
                   </div>
                 ) : (
                   <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                    {statusMessage && (
+                      <div className="contact-form-error" style={{ color: "#ff8c38", fontSize: "0.85rem", fontWeight: 600 }}>
+                        {statusMessage}
+                      </div>
+                    )}
                     <div className="contact-row">
                       <div className="contact-field">
                         <label htmlFor="c-name">Your Name</label>
@@ -280,7 +404,9 @@ export default function Contact() {
                           name="name"
                           required
                           autoComplete="name"
-                          placeholder="Devanarayanan"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="Your Name"
                         />
                       </div>
                       <div className="contact-field">
@@ -291,6 +417,8 @@ export default function Contact() {
                           name="email"
                           required
                           autoComplete="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           placeholder="you@example.com"
                         />
                       </div>
@@ -348,11 +476,13 @@ export default function Contact() {
                       >
                         {loading ? (
                           <>
-                            <span className="contact-spinner" /> Sending…
+                            <span className="contact-spinner" aria-hidden="true" />
+                            <span>Sending…</span>
                           </>
                         ) : (
                           <>
-                            Let&apos;s Build Together <span className="submit-arrow">→</span>
+                            <span>Let&apos;s Build Together</span>
+                            <ArrowRight size={15} className="submit-arrow" aria-hidden="true" />
                           </>
                         )}
                       </button>
@@ -366,8 +496,8 @@ export default function Contact() {
             {activePanel === "location" && (
               <div className="contact-map-card">
                 <div className="contact-map-header">
-                  <div className="contact-map-pin">
-                    <FaMapMarkerAlt />
+                  <div className="contact-map-pin" aria-hidden="true">
+                    <MapPin size={20} />
                   </div>
                   <div>
                     <h3 className="contact-map-title">KALLUVATHUKKAL, KOLLAM</h3>
@@ -387,14 +517,19 @@ export default function Contact() {
                   />
                 </div>
                 <div className="contact-map-footer">
-                  <span>📍 Building the future with AI &amp; ML from Kerala, India</span>
+                  <span className="contact-map-footer-text">
+                    <MapPin size={13} aria-hidden="true" />
+                    <span>Building the future with AI &amp; ML from Kerala, India</span>
+                  </span>
                   <a
                     href="https://maps.app.goo.gl/psnkTCYgaqk1KnRt6"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contact-map-open-btn"
+                    aria-label="Open Kalluvathukkal location in Google Maps"
                   >
-                    Open in Maps →
+                    <span>Open in Maps</span>
+                    <ExternalLink size={13} aria-hidden="true" />
                   </a>
                 </div>
               </div>

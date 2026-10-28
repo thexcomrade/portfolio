@@ -1,124 +1,206 @@
 "use client";
 
+import { useState, useRef } from "react";
 import Image from "next/image";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!stageRef.current) return;
+    const rect = stageRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: x * 8, y: -y * 8 });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ x: 0, y: 0 });
+  };
+
   return (
-    <section id="home" className="page-section hero-section">
+    <section id="home" className="hero-section">
       <div className="hero-container">
 
         {/* =====================================================
-            HERO TEXT CONTENT
+            LEFT CONTENT AREA (1:1 PIXEL MATCH TO REFERENCE)
         ====================================================== */}
-        <div className="hero-text-content">
+        <div className="hero-left-content hero-fade-enter">
 
-          {/* Availability Status */}
-          <div className="hero-status-pill">
-            <span className="status-live-dot" />
-            <span>AVAILABLE FOR OPPORTUNITIES</span>
+          {/* Availability Status Badge */}
+          <div className="hero-status-badge">
+            <span className="hero-status-dot" aria-hidden="true" />
+            <span className="hero-status-text">AVAILABLE FOR OPPORTUNITIES</span>
           </div>
 
-          {/* Main Name */}
-          <h1 className="hero-title">
+          {/* Main Name — DEVA (solid bold pure white), NARAYANAN (crisp outline) */}
+          <h1 className="hero-name-heading">
             <span className="hero-name-solid">DEVA</span>
-
-            <span className="hero-name-outline">
-              NARAYANAN
-            </span>
+            <span className="hero-name-outline">NARAYANAN</span>
           </h1>
 
-          {/* Professional Roles */}
-          <div className="hero-subtitle-bar">
-            <span className="sub-tag-dash">—</span>
-
+          {/* Professional Role Bar */}
+          <div className="hero-role-bar">
+            <span className="hero-role-dash" aria-hidden="true" />
             <span>AI &amp; ML ENGINEER</span>
-
-            <span className="sub-tag-dot">•</span>
-
+            <span className="hero-role-separator" aria-hidden="true">•</span>
             <span>DEVELOPER</span>
-
-            <span className="sub-tag-dot">•</span>
-
+            <span className="hero-role-separator" aria-hidden="true">•</span>
             <span>RESEARCHER</span>
           </div>
 
-          {/* Description */}
-          <p className="hero-description">
-            Passionate about Artificial Intelligence, Machine Learning,
-            Data Science, and modern software engineering. Focused on
-            building intelligent applications, production-ready neural
-            pipelines, and scalable software solutions with real-world
-            impact.
+          {/* Description Paragraph */}
+          <p className="hero-description-text">
+            Computer Science and AI graduate passionate about building intelligent
+            web applications and machine learning pipelines. Focused on creating
+            intuitive user experiences and developing scalable software for real-world impact.
           </p>
+
+          {/* Action Buttons Row (Exact Match to Reference Theme) */}
+          <div className="hero-actions-row">
+            <a href="#projects" className="hero-cta-btn-primary">
+              <span>VIEW PROJECTS</span>
+              <ArrowRight size={15} aria-hidden="true" />
+            </a>
+            <a href="#contact" className="hero-cta-btn-secondary">
+              <span>RESUME</span>
+              <ArrowUpRight size={15} aria-hidden="true" />
+            </a>
+          </div>
+
+          {/* Quick Metrics (Exact Match to Reference Theme) */}
+          <div className="hero-metrics-row">
+            <div className="hero-metric-target" aria-hidden="true">
+              <span className="hero-metric-dot" />
+            </div>
+            <div className="hero-metric-item">
+              <span className="hero-metric-value">3+</span>
+              <span className="hero-metric-label">PROJECTS BUILT</span>
+            </div>
+            <div className="hero-metric-item">
+              <span className="hero-metric-value">B.Tech</span>
+              <span className="hero-metric-label">AI &amp; ML ENGINEERING</span>
+            </div>
+          </div>
+
         </div>
 
         {/* =====================================================
-            VISUAL / PORTRAIT AREA
+            RIGHT VISUAL STAGE (STRICTLY CONSTRAINED BOUNDING BOX)
         ====================================================== */}
-        <div className="hero-visual">
+        <div
+          ref={stageRef}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="hero-visual-stage"
+          style={{
+            transform: isHovered
+              ? `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`
+              : "perspective(1000px) rotateY(0deg) rotateX(0deg)",
+          }}
+        >
+          {/* Deep Cyan Atmospheric Glow Aura */}
+          <div className="hero-stage-ambient-glow" aria-hidden="true" />
 
-          {/* Background Artwork */}
-          <div className="hero-background-art" aria-hidden="true">
-            <Image
-              src="/back.png"
-              alt=""
-              fill
-              priority
-              className="hero-background-image"
-              sizes="(max-width: 768px) 100vw, 65vw"
-            />
+          {/* Inner Stage Frame with exact 3464 / 2309 aspect ratio */}
+          <div className="hero-stage-frame">
+
+            {/* Layer 1: Background Typography Artwork (back.png with dual Orange & Blue glow) */}
+            <div
+              className="hero-layer-back hero-back-revealed"
+              style={{
+                transform: isHovered
+                  ? `translate3d(${tilt.x * -0.6}px, ${tilt.y * -0.6}px, 0)`
+                  : "translate3d(0, 0, 0)",
+              }}
+            >
+              <Image
+                src="/back.png"
+                alt="DEVA NARAYANAN Typography"
+                width={3464}
+                height={2309}
+                priority
+                unoptimized
+                className="hero-back-img"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 55vw"
+              />
+            </div>
+
+            {/* Layer 2: Glowing Cyan Orbital Ellipse Ring */}
+            <div className="hero-orbital-ring" aria-hidden="true">
+              <span className="hero-orbital-spark" />
+            </div>
+
+            {/* Layer 3: Foreground Person (nanu.png) */}
+            <div
+              className="hero-layer-person hero-person-revealed"
+              style={{
+                transform: isHovered
+                  ? `translate3d(${tilt.x * 1.2}px, ${tilt.y * 1.2}px, 0)`
+                  : "translate3d(0, 0, 0)",
+              }}
+            >
+              <Image
+                src="/nanu.png"
+                alt="Devanarayanan"
+                width={3464}
+                height={2309}
+                priority
+                unoptimized
+                className="hero-person-img"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 55vw"
+              />
+            </div>
+
+            {/* Layer 4: Volumetric Bottom Mist Blend */}
+            <div className="hero-bottom-mist" aria-hidden="true" />
+
+            {/* Layer 5: Technical Telemetry (Repositioned in Off-White) */}
+            {/* Lower-left impact quote — Cleanly visible in off-white */}
+            <div className="hero-telemetry-left" aria-hidden="true">
+              <span className="hero-quote-line">TURNING</span>
+              <span className="hero-quote-line">IDEAS INTO</span>
+              <span className="hero-quote-line">REAL IMPACT</span>
+              <div className="hero-quote-accent" />
+            </div>
+
+            {/* Right telemetry stack — Cleanly visible in off-white */}
+            <div className="hero-telemetry-right" aria-hidden="true">
+              <div className="hero-telemetry-dash" />
+              <span className="hero-telemetry-item">ML</span>
+              <span className="hero-telemetry-item">DATA</span>
+              <span className="hero-telemetry-item">SOLUTIONS</span>
+            </div>
+
           </div>
 
-          {/* Atmospheric Glow */}
-          <div
-            className="hero-ambient-glow"
-            aria-hidden="true"
-          />
-
-          {/* Decorative Orbit */}
-          <div
-            className="hero-orbit hero-orbit-one"
-            aria-hidden="true"
-          />
-
-          <div
-            className="hero-orbit hero-orbit-two"
-            aria-hidden="true"
-          />
-
-          {/* Main Portrait */}
-          <div className="hero-person">
-            <Image
-              src="/nanu.png"
-              alt="Devanarayanan V S"
-              fill
-              priority
-              className="hero-person-image"
-              sizes="(max-width: 768px) 90vw, 60vw"
-            />
-          </div>
-
-          {/* Bottom Fade / Ground Glow */}
-          <div
-            className="hero-person-ground-glow"
-            aria-hidden="true"
-          />
-        </div>
-
-        {/* =====================================================
-            SCROLL INDICATOR
-        ====================================================== */}
-        <div className="scroll-indicator">
-          <div className="scroll-mouse">
-            <div className="scroll-dot" />
-          </div>
-
-          <span className="scroll-text">
-            SCROLL DOWN
-          </span>
         </div>
 
       </div>
+
+      {/* =====================================================
+          SCROLL DOWN INDICATOR (PERFECTLY IN THE MIDDLE)
+      ====================================================== */}
+      <a
+        href="#about"
+        className="hero-scroll-indicator"
+        aria-label="Scroll down to About section"
+      >
+        <div className="hero-mouse-pill">
+          <span className="hero-mouse-wheel-dot" />
+        </div>
+        <span className="hero-scroll-label">SCROLL DOWN</span>
+      </a>
+
     </section>
   );
 }

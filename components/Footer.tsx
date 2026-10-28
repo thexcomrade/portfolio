@@ -47,7 +47,7 @@ export default function Footer() {
 
         {/* Bottom Footer Row */}
         <div className="footer-bottom-row">
-          <p className="footer-copyright">
+          <p className="footer-copyright" suppressHydrationWarning>
             © {new Date().getFullYear()} Devanarayanan. All rights reserved.
           </p>
 

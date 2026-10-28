@@ -41,7 +41,7 @@ export const projects: Project[] = [
       "Weather API",
     ],
     github: "https://github.com/thexcomrade/TripGenius",
-    demo: "",
+    demo: "https://tripgenius-kohl.vercel.app/",
   },
   {
     image: "/projects/frobo.jpg",
@@ -99,10 +99,10 @@ export const projects: Project[] = [
     badge: "Frontend",
     title: "Love Chronicles",
     description:
-      "Interactive anniversary website featuring dynamic storytelling, animated user interface, personalized memories, image galleries, and responsive web design for creating memorable digital experiences.",
+      "Interactive digital anniversary website featuring dynamic storytelling, animated user interface, personalized memories, image galleries, and responsive web design for creating memorable digital experiences.",
     technologies: [
-      "HTML",
-      "CSS",
+      "HTML5",
+      "CSS3",
       "JavaScript",
       "Flask",
       "Responsive UI",

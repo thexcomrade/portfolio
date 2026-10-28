@@ -17,6 +17,7 @@ import {
   SiScikitlearn,
   SiMongodb,
 } from "react-icons/si";
+import { X, Sparkles } from "lucide-react";
 
 interface SkillItem {
   name: string;
@@ -33,10 +34,10 @@ const skillsData: SkillItem[] = [
     name: "Python",
     category: "AI & Machine Learning",
     icon: <FaPython />,
-    color: "#3776AB",
+    color: "#38bdf8",
     proficiency: 95,
-    description: "Primary language for deep learning, NLP, computer vision, and backend APIs.",
-    details: ["NumPy & Pandas workflows", "PyTorch / TensorFlow pipelines", "Async I/O & FastAPI integration"],
+    description: "Primary language for deep learning, NLP, computer vision, and high-performance backend APIs.",
+    details: ["NumPy & Pandas data pipelines", "PyTorch & TensorFlow model workflows", "Async I/O & FastAPI integration"],
   },
   {
     name: "PyTorch",
@@ -44,8 +45,8 @@ const skillsData: SkillItem[] = [
     icon: <SiPytorch />,
     color: "#EE4C2C",
     proficiency: 90,
-    description: "Research & production framework for neural network training and fine-tuning.",
-    details: ["Custom Loss Functions & Optimizers", "CNNs, RNNs & Transformers", "CUDA acceleration & PyTorch Lightning"],
+    description: "Research & production framework for neural network training, fine-tuning, and evaluation.",
+    details: ["Custom Loss Functions & Optimizers", "CNNs, RNNs & Transformer Architectures", "CUDA acceleration & PyTorch Lightning"],
   },
   {
     name: "TensorFlow",
@@ -53,7 +54,7 @@ const skillsData: SkillItem[] = [
     icon: <SiTensorflow />,
     color: "#FF6F00",
     proficiency: 88,
-    description: "End-to-end open source platform for machine learning model development.",
+    description: "End-to-end open source platform for machine learning model development and inference optimization.",
     details: ["Keras High-Level API", "TensorFlow Lite & Edge Deployment", "Model Optimization & Quantization"],
   },
   {
@@ -62,17 +63,17 @@ const skillsData: SkillItem[] = [
     icon: <SiScikitlearn />,
     color: "#F7931E",
     proficiency: 92,
-    description: "Classical machine learning library for regression, classification & clustering.",
-    details: ["Pipeline Automation", "Cross-Validation & Grid Search", "Feature Engineering & PCA"],
+    description: "Classical machine learning library for regression, classification, clustering, and data preparation.",
+    details: ["Pipeline Automation", "Cross-Validation & Hyperparameter Tuning", "Feature Engineering & Dimensionality Reduction"],
   },
   {
     name: "Computer Vision",
     category: "AI & Machine Learning",
     icon: <FaEye />,
-    color: "#00F0FF",
+    color: "#36f7f9",
     proficiency: 86,
-    description: "Image processing, object detection, segmentation, and real-time video analytics.",
-    details: ["OpenCV & YOLO Models", "Face Recognition & Detection", "Medical Image Processing"],
+    description: "Image processing, object detection, facial recognition, and real-time video analytics.",
+    details: ["OpenCV & YOLO Model Deployments", "Facial Landmark & Deepfake Detection", "Medical Image Preprocessing"],
   },
   {
     name: "FastAPI",
@@ -80,17 +81,17 @@ const skillsData: SkillItem[] = [
     icon: <SiFastapi />,
     color: "#009688",
     proficiency: 88,
-    description: "High-performance Python web framework for serving AI model inference endpoints.",
-    details: ["Pydantic Data Validation", "Async Request Handling", "Swagger / OpenAPI Documentation"],
+    description: "High-performance Python web framework for serving production AI model inference endpoints.",
+    details: ["Pydantic Schema Validation", "Asynchronous Endpoint Optimization", "Swagger / OpenAPI Documentation"],
   },
   {
     name: "React & Next.js",
     category: "Web & Frontend",
     icon: <SiNextdotjs />,
-    color: "#00E5FF",
+    color: "#ffffff",
     proficiency: 86,
-    description: "Full-stack web application development with React 19, Turbopack, and SSR.",
-    details: ["App Router Architecture", "Server Actions & API Routes", "Framer Motion & Three.js Canvas"],
+    description: "Full-stack web application development with React 19, Next.js App Router, and static generation.",
+    details: ["App Router Architecture", "Server Actions & API Handlers", "Framer Motion & Canvas 2D Integration"],
   },
   {
     name: "TypeScript",
@@ -98,29 +99,29 @@ const skillsData: SkillItem[] = [
     icon: <SiTypescript />,
     color: "#3178C6",
     proficiency: 84,
-    description: "Typed JavaScript development for scalable frontend applications and APIs.",
+    description: "Typed JavaScript development for scalable frontend architectures and robust API contracts.",
     details: ["Strict Type Safety", "Interface & Generic Design", "React Component Typing"],
   },
   {
-    name: "Docker & Containerization",
+    name: "Docker & Containers",
     category: "Cloud & DevOps",
     icon: <FaDocker />,
     color: "#2496ED",
     proficiency: 80,
-    description: "Containerizing AI applications and backend microservices for reproducible deployments.",
-    details: ["Multi-stage Dockerfiles", "Docker Compose Orchestration", "Environment Isolation"],
+    description: "Containerizing AI applications and backend microservices for reproducible cross-platform deployments.",
+    details: ["Multi-stage Dockerfiles", "Docker Compose Orchestration", "Isolated GPU-enabled Environments"],
   },
   {
-    name: "AWS & Cloud",
+    name: "AWS Cloud",
     category: "Cloud & DevOps",
     icon: <FaAws />,
     color: "#FF9900",
     proficiency: 76,
-    description: "Cloud computing services for hosting, model storage, and scalable infrastructure.",
-    details: ["S3 Bucket Management", "EC2 Instance Configuration", "Lambda Serverless Computing"],
+    description: "Cloud computing infrastructure for model hosting, object storage, and serverless execution.",
+    details: ["S3 Bucket Management", "EC2 Instance Configuration", "Lambda Serverless Functions"],
   },
   {
-    name: "MongoDB & Databases",
+    name: "MongoDB & NoSQL",
     category: "Backend & Systems",
     icon: <SiMongodb />,
     color: "#47A248",
@@ -134,8 +135,8 @@ const skillsData: SkillItem[] = [
     icon: <FaGitAlt />,
     color: "#F05032",
     proficiency: 92,
-    description: "Distributed version control, collaborative Git workflows, and CI/CD pipelines.",
-    details: ["Branching & Pull Requests", "Git Actions Automation", "Conflict Resolution & History Maintenance"],
+    description: "Distributed version control, collaborative Git workflows, and continuous integration pipelines.",
+    details: ["Branching & Pull Request Workflows", "GitHub Actions Automation", "Conflict Resolution & Clean History"],
   },
 ];
 
@@ -162,21 +163,23 @@ export default function Skills() {
       <div className="section-inner">
         {/* Section Header */}
         <div className="section-header">
-          <p className="section-eyebrow">TECHNICAL EXPERTISE</p>
+          <p className="section-eyebrow">TECHNICAL CAPABILITIES</p>
           <h2 className="section-title">
             Skills &amp; <span>Technologies</span>
           </h2>
           <p className="section-subtitle">
-            A comprehensive overview of my technical stack spanning Artificial Intelligence,
-            Machine Learning, Full-Stack Web Development, and Cloud Technologies.
+            A specialized engineering stack across Artificial Intelligence,
+            Machine Learning, Full-Stack Web Architecture, and Cloud Systems.
           </p>
         </div>
 
         {/* Category Filters */}
-        <div className="skills-filter-bar">
+        <div className="skills-filter-bar" role="tablist" aria-label="Technology Categories">
           {categories.map((category) => (
             <button
               key={category}
+              role="tab"
+              aria-selected={activeCategory === category}
               className={`skills-filter-btn ${
                 activeCategory === category ? "active" : ""
               }`}
@@ -187,7 +190,7 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Spacious Responsive Cards Grid */}
+        {/* Responsive Cards Grid */}
         <div className="skills-cards-grid">
           {filteredSkills.map((skill) => (
             <div
@@ -197,17 +200,18 @@ export default function Skills() {
               onClick={() => setSelectedSkill(skill)}
               role="button"
               tabIndex={0}
+              aria-label={`View detailed competencies for ${skill.name}`}
               onKeyDown={(e) => e.key === "Enter" && setSelectedSkill(skill)}
             >
               <div className="skill-card-top">
-                <div className="skill-card-icon">{skill.icon}</div>
+                <div className="skill-card-icon" aria-hidden="true">{skill.icon}</div>
                 <div className="skill-card-badge">{skill.category}</div>
               </div>
 
               <h3 className="skill-card-title">{skill.name}</h3>
               <p className="skill-card-desc">{skill.description}</p>
 
-              {/* Progress bar */}
+              {/* Progress Bar */}
               <div className="skill-progress-container">
                 <div className="skill-progress-header">
                   <span>Proficiency</span>
@@ -232,6 +236,7 @@ export default function Skills() {
           onClick={() => setSelectedSkill(null)}
           role="dialog"
           aria-modal="true"
+          aria-labelledby="modal-skill-title"
         >
           <div
             className="skills-modal-card"
@@ -243,13 +248,13 @@ export default function Skills() {
               onClick={() => setSelectedSkill(null)}
               aria-label="Close modal"
             >
-              ✕
+              <X size={18} aria-hidden="true" />
             </button>
 
             <div className="skills-modal-header">
-              <div className="skills-modal-icon">{selectedSkill.icon}</div>
+              <div className="skills-modal-icon" aria-hidden="true">{selectedSkill.icon}</div>
               <div>
-                <h3 className="skills-modal-title">{selectedSkill.name}</h3>
+                <h3 id="modal-skill-title" className="skills-modal-title">{selectedSkill.name}</h3>
                 <span className="skills-modal-tag">{selectedSkill.category}</span>
               </div>
             </div>
@@ -257,11 +262,14 @@ export default function Skills() {
             <p className="skills-modal-desc">{selectedSkill.description}</p>
 
             <div className="skills-modal-details">
-              <h4>Key Capabilities &amp; Workflows</h4>
+              <h4>
+                <Sparkles size={14} aria-hidden="true" style={{ display: "inline-block", marginRight: "6px" }} />
+                Key Capabilities &amp; Workflows
+              </h4>
               <ul>
                 {selectedSkill.details.map((detail, idx) => (
                   <li key={idx}>
-                    <span className="detail-dot" /> {detail}
+                    <span className="detail-dot" aria-hidden="true" /> {detail}
                   </li>
                 ))}
               </ul>

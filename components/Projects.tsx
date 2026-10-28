@@ -1,56 +1,33 @@
 "use client";
 
 import Image from "next/image";
-
+import { FaGithub } from "react-icons/fa";
+import { ExternalLink, Lock, ArrowRight } from "lucide-react";
 import { projects } from "../data/projects";
 
 export default function Projects() {
   return (
-    <section
-      id="projects"
-      className="page-section"
-    >
+    <section id="projects" className="page-section">
       <div className="section-inner">
-
         {/* Section Heading */}
-
         <div className="section-header">
-
-          <p className="section-eyebrow">
-            MY PORTFOLIO
-          </p>
-
+          <p className="section-eyebrow">PORTFOLIO SHOWCASE</p>
           <h2 className="section-title">
             Featured <span>Projects</span>
           </h2>
-
           <p className="section-subtitle">
-            A collection of Artificial Intelligence,
-            Machine Learning, Robotics, Computer
-            Vision, and Full Stack applications
-            developed to solve real-world challenges
-            through innovation and intelligent
-            engineering.
+            A curated portfolio of Artificial Intelligence, Machine Learning,
+            Robotics, Computer Vision, and Full Stack applications developed to
+            solve real-world engineering challenges.
           </p>
-
         </div>
 
         {/* Projects Grid */}
-
         <div className="projects-grid">
-                    {projects.map((project) => (
-
-            <article
-              key={project.title}
-              className="project-card"
-            >
-
-              {/* ===========================
-                  Project Preview
-              =========================== */}
-
+          {projects.map((project) => (
+            <article key={project.title} className="project-card">
+              {/* Project Visual Preview */}
               <div className="project-image-wrapper">
-
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -59,147 +36,89 @@ export default function Projects() {
                   className="project-image"
                   priority={project.title === "NutriPlan AI"}
                 />
-
-                <div className="project-image-overlay"></div>
-
+                <div className="project-image-overlay" aria-hidden="true" />
               </div>
 
-              {/* ===========================
-                  Card Content
-              =========================== */}
-
+              {/* Card Content */}
               <div className="project-content">
+                <span className="project-badge">{project.badge}</span>
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-description">{project.description}</p>
 
-                {/* Category */}
-
-                <span className="project-badge">
-
-                  {project.badge}
-
-                </span>
-
-                {/* Title */}
-
-                <h3 className="project-title">
-
-                  {project.title}
-
-                </h3>
-
-                {/* Description */}
-
-                <p className="project-description">
-
-                  {project.description}
-
-                </p>
-
-                {/* Technologies */}
-
+                {/* Technologies List */}
                 <div className="project-technologies">
-
                   {project.technologies.map((tech) => (
-
-                    <span
-                      key={tech}
-                      className="project-chip"
-                    >
-
+                    <span key={tech} className="project-chip">
                       {tech}
-
                     </span>
-
                   ))}
-
                 </div>
 
-                {/* Push buttons to bottom */}
+                <div className="project-spacer" />
 
-                <div className="project-spacer"></div>
-
-                {/* Buttons */}
-
+                {/* Project Actions */}
                 <div className="project-buttons">
-
                   {project.github ? (
-
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="project-button project-github"
+                      aria-label={`View ${project.title} source code on GitHub`}
                     >
-
-                      GitHub
-
+                      <FaGithub aria-hidden="true" />
+                      <span> Code </span>
                     </a>
-
                   ) : (
-
                     <button
                       className="project-button project-disabled"
                       disabled
+                      aria-label={`${project.title} is a proprietary private repository`}
                     >
-
-                      Private Project
-
+                      <Lock size={13} aria-hidden="true" />
+                      <span>Private</span>
                     </button>
-
                   )}
 
                   {project.demo && (
-
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="project-button project-demo"
+                      aria-label={`Open live demo for ${project.title}`}
                     >
-
-                      Live Demo
-
+                      <span>Live Demo</span>
+                      <ExternalLink size={13} aria-hidden="true" />
                     </a>
-
                   )}
-
                 </div>
-
               </div>
-
             </article>
-
           ))}
-                  </div>
+        </div>
 
-        {/* ============================================
-            GitHub CTA
-        ============================================ */}
-
+        {/* GitHub Footer Callout */}
         <div className="projects-footer">
-
-          <div className="projects-divider"></div>
-
+          <div className="projects-divider" />
           <p className="projects-footer-text">
-            These projects represent my continuous journey of learning,
-            experimenting, and building intelligent solutions using
-            Artificial Intelligence, Machine Learning, Robotics,
-            Computer Vision, Embedded Systems, and Full Stack
-            Development. I&apos;m constantly exploring emerging
-            technologies and transforming innovative ideas into
-            practical real-world applications.
+            These systems represent continuous exploration across autonomous
+            robotics, generative models, and scalable machine learning pipelines.
+            Additional open-source repositories, experiments, and technical notebooks
+            are available on GitHub.
           </p>
-
           <a
             href="https://github.com/thexcomrade"
             target="_blank"
             rel="noopener noreferrer"
             className="projects-github-button"
+            aria-label="Visit Devanarayanan's GitHub Profile"
           >
-            Explore More Projects on GitHub
+            <FaGithub size={17} aria-hidden="true" />
+            <span>Explore More on GitHub</span>
+            <ArrowRight size={15} aria-hidden="true" />
           </a>
-
         </div>
-
       </div>
     </section>
   );
