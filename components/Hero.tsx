@@ -75,35 +75,6 @@ export default function Home() {
         <div className="ref-hero-grid-bg" aria-hidden="true">
           <div className="ref-grid-lines" />
           <div className="ref-grid-vignette" />
-
-          <span
-            className="ref-grid-node"
-            style={{ top: "17%", left: "49%" }}
-          />
-          <span
-            className="ref-grid-node"
-            style={{ top: "24%", left: "87%" }}
-          />
-          <span
-            className="ref-grid-node"
-            style={{ top: "39%", left: "51%" }}
-          />
-          <span
-            className="ref-grid-node"
-            style={{ top: "58%", left: "91%" }}
-          />
-          <span
-            className="ref-grid-node"
-            style={{ top: "79%", left: "39%" }}
-          />
-          <span
-            className="ref-grid-node"
-            style={{ top: "91%", left: "82%" }}
-          />
-          <span
-            className="ref-grid-node"
-            style={{ top: "64%", left: "7%" }}
-          />
         </div>
 
         {/* Ambient lighting */}
@@ -280,27 +251,6 @@ export default function Home() {
                   stroke="currentColor"
                   strokeOpacity=".2"
                   strokeDasharray="4 8"
-                />
-
-                <circle
-                  cx="630"
-                  cy="350"
-                  r="4"
-                  fill="currentColor"
-                />
-
-                <circle
-                  cx="118"
-                  cy="245"
-                  r="3"
-                  fill="currentColor"
-                />
-
-                <circle
-                  cx="350"
-                  cy="70"
-                  r="3"
-                  fill="currentColor"
                 />
               </svg>
             </div>

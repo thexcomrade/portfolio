@@ -6,7 +6,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Eye,
-  Maximize2,
   Palette,
   X,
   Sparkles,
@@ -207,10 +206,6 @@ export default function Posters() {
                       {poster.description}
                     </p>
                   </div>
-
-                  <span className="premium-expand-icon" aria-hidden="true">
-                    <Maximize2 size={15} />
-                  </span>
                 </div>
               </article>
             );
@@ -334,32 +329,32 @@ export default function Posters() {
                   brightness = 1;
                   opacity = 1;
                 } else if (absDiff === 1) {
-                  tx = diff * 255;
-                  tz = -150;
+                  tx = diff * 270;
+                  tz = -155;
                   ry = diff * -25;
                   scale = 0.86;
                   blurPx = 4;
                   brightness = 0.58;
                   opacity = 0.8;
                 } else if (absDiff === 2) {
-                  tx = diff * 230;
-                  tz = -290;
+                  tx = diff * 245;
+                  tz = -295;
                   ry = diff * -38;
                   scale = 0.72;
                   blurPx = 7;
                   brightness = 0.38;
                   opacity = 0.48;
                 } else if (absDiff === 3) {
-                  tx = diff * 210;
-                  tz = -420;
+                  tx = diff * 222;
+                  tz = -430;
                   ry = diff * -48;
                   scale = 0.6;
                   blurPx = 10;
                   brightness = 0.22;
                   opacity = 0.24;
                 } else {
-                  tx = diff * 190;
-                  tz = -540;
+                  tx = diff * 200;
+                  tz = -550;
                   ry = diff * -54;
                   scale = 0.5;
                   blurPx = 14;

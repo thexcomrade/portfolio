@@ -2,10 +2,32 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Download, Menu, X } from "lucide-react";
+import {
+  Award,
+  Briefcase,
+  Cpu,
+  Download,
+  Home as HomeIcon,
+  Mail,
+  Menu,
+  Palette,
+  Sparkles,
+  User,
+  X,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { navigation } from "@/constants/navigation";
+
+const navIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  home: HomeIcon,
+  about: User,
+  skills: Cpu,
+  projects: Briefcase,
+  designs: Palette,
+  experience: Sparkles,
+  achievements: Award,
+  contact: Mail,
+};
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
@@ -161,49 +183,33 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
-          <ul className="ref-nav-menu" aria-label="Primary navigation">
+          {/* DESKTOP DOCK NAVIGATION (Expanding Glass Bar Animation) */}
+          <div className="ref-dock-menu" role="menubar" aria-label="Primary navigation">
             {navigation.map((item) => {
               const id = item.href.replace("#", "");
               const isActive = activeSection === id;
+              const IconComponent = navIcons[id] || HomeIcon;
 
               return (
-                <li key={item.name} className="ref-nav-item">
-                  <Link
-                    href={item.href}
-                    className={`ref-nav-link ${
-                      isActive ? "active" : ""
-                    }`}
-                    aria-current={isActive ? "location" : undefined}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      handleNavigationClick(item.href);
-                    }}
-                  >
-                    <span className="ref-nav-text">{item.name}</span>
-
-                    {isActive && (
-                      <motion.span
-                        layoutId="ref-nav-indicator"
-                        className="ref-nav-indicator"
-                        transition={{
-                          type: "spring",
-                          stiffness: 340,
-                          damping: 28,
-                          mass: 0.75,
-                        }}
-                        aria-hidden="true"
-                      >
-                        <span className="ref-nav-indicator-glow" />
-                        <span className="ref-nav-indicator-bar" />
-                        <span className="ref-nav-indicator-dot" />
-                      </motion.span>
-                    )}
-                  </Link>
-                </li>
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`ref-dock-link ${isActive ? "active" : ""}`}
+                  aria-current={isActive ? "location" : undefined}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleNavigationClick(item.href);
+                  }}
+                  title={item.name}
+                >
+                  <span className="ref-dock-icon" aria-hidden="true">
+                    <IconComponent size={17} />
+                  </span>
+                  <span className="ref-dock-title">{item.name}</span>
+                </Link>
               );
             })}
-          </ul>
+          </div>
 
           {/* RESUME + MOBILE MENU */}
           <div className="ref-navbar-right">
