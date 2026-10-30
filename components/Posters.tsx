@@ -1,16 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
-  Download,
   Eye,
   Maximize2,
   Palette,
-  Play,
-  Pause,
   X,
   Sparkles,
 } from "lucide-react";
@@ -27,8 +24,7 @@ export default function Posters() {
   const [activePosterIndex, setActivePosterIndex] = useState<number | null>(
     null
   );
-  const [isAutoSpinning, setIsAutoSpinning] = useState(false);
-  const autoSpinTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const filteredPosters = useMemo(() => {
     if (selectedCategory === "All Posters") return posters;
@@ -42,13 +38,13 @@ export default function Posters() {
 
   const openCarousel = useCallback((index: number) => {
     setActivePosterIndex(index);
-    setIsAutoSpinning(false);
+    setIsHovered(false);
     document.body.style.overflow = "hidden";
   }, []);
 
   const closeCarousel = useCallback(() => {
     setActivePosterIndex(null);
-    setIsAutoSpinning(false);
+    setIsHovered(false);
     document.body.style.overflow = "";
   }, []);
 
@@ -68,6 +64,19 @@ export default function Posters() {
     );
   }, [activePosterIndex, filteredPosters.length]);
 
+  // Auto-scroll carousel every 2.5 seconds (paused when hovered)
+  useEffect(() => {
+    if (activePosterIndex === null || isHovered || filteredPosters.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setActivePosterIndex((prev) =>
+        prev === null ? 0 : (prev + 1) % filteredPosters.length
+      );
+    }, 1200);
+
+    return () => clearInterval(timer);
+  }, [activePosterIndex, isHovered, filteredPosters.length]);
+
   // Keyboard navigation
   useEffect(() => {
     if (activePosterIndex === null) return;
@@ -76,33 +85,11 @@ export default function Posters() {
       if (e.key === "Escape") closeCarousel();
       if (e.key === "ArrowRight") showNext();
       if (e.key === "ArrowLeft") showPrev();
-      if (e.key === " ") {
-        e.preventDefault();
-        setIsAutoSpinning((prev) => !prev);
-      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activePosterIndex, closeCarousel, showNext, showPrev]);
-
-  // Optional auto-spin timer
-  useEffect(() => {
-    if (!isAutoSpinning || activePosterIndex === null) {
-      if (autoSpinTimerRef.current) clearInterval(autoSpinTimerRef.current);
-      return;
-    }
-
-    autoSpinTimerRef.current = setInterval(() => {
-      setActivePosterIndex((prev) =>
-        prev === null ? 0 : (prev + 1) % filteredPosters.length
-      );
-    }, 3000);
-
-    return () => {
-      if (autoSpinTimerRef.current) clearInterval(autoSpinTimerRef.current);
-    };
-  }, [isAutoSpinning, activePosterIndex, filteredPosters.length]);
 
   return (
     <section id="designs" className="page-section posters-section">
@@ -119,9 +106,9 @@ export default function Posters() {
           </h2>
 
           <p className="section-subtitle">
-            Beyond code, I craft high-impact visual media in Adobe Photoshop—blending
+            Beyond code, I craft high-impact visual media in Adobe Photoshop - blending
             digital surrealism, cinematic lighting, brutalist typography, and 3D
-            vectors into gallery-grade poster designs.
+            vectors into poster designs.
           </p>
         </div>
 
@@ -207,7 +194,7 @@ export default function Posters() {
                   <div className="premium-hover-overlay" aria-hidden="true">
                     <div className="premium-zoom-pill">
                       <Sparkles size={15} />
-                      <span>View in 3D</span>
+                      <span>View Image</span>
                     </div>
                   </div>
                 </div>
@@ -280,32 +267,6 @@ export default function Posters() {
             <div className="carousel-actions-hud">
               <button
                 type="button"
-                className={`hud-btn ${isAutoSpinning ? "active-spin" : ""}`}
-                onClick={() => setIsAutoSpinning((prev) => !prev)}
-                title={isAutoSpinning ? "Pause 3D rotation" : "Auto rotate 3D carousel"}
-                aria-label={isAutoSpinning ? "Pause 3D rotation" : "Auto rotate 3D carousel"}
-              >
-                {isAutoSpinning ? <Pause size={17} /> : <Play size={17} />}
-                <span className="hud-btn-text">
-                  {isAutoSpinning ? "Pause" : "Spin 3D"}
-                </span>
-              </button>
-
-              <a
-                href={activePoster.fullSrc}
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-                className="hud-btn"
-                title="Download full resolution print artwork"
-                aria-label="Download full resolution print artwork"
-              >
-                <Download size={17} />
-                <span className="hud-btn-text">Original</span>
-              </a>
-
-              <button
-                type="button"
                 className="hud-btn hud-close-btn"
                 onClick={closeCarousel}
                 aria-label="Close 3D Carousel (Esc)"
@@ -319,6 +280,8 @@ export default function Posters() {
           {/* 3D Scene Viewport */}
           <div
             className="carousel-scene"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Left / Right Nav Arrows */}
@@ -353,8 +316,7 @@ export default function Posters() {
                 const isCurrent = diff === 0;
                 const absDiff = Math.abs(diff);
 
-                // 3D positioning parameters
-                // Center card at 0, immediate neighbors shifted along X and tilted in Y
+                // 3D positioning parameters for compact, fully-visible cards
                 let tx = 0;
                 let tz = 0;
                 let ry = 0;
@@ -367,41 +329,41 @@ export default function Posters() {
                   tx = 0;
                   tz = 0;
                   ry = 0;
-                  scale = 1.08;
+                  scale = 1.05;
                   blurPx = 0;
                   brightness = 1;
                   opacity = 1;
                 } else if (absDiff === 1) {
-                  tx = diff * 295;
-                  tz = -170;
-                  ry = diff * -24;
-                  scale = 0.88;
+                  tx = diff * 255;
+                  tz = -150;
+                  ry = diff * -25;
+                  scale = 0.86;
                   blurPx = 4;
                   brightness = 0.58;
-                  opacity = 0.78;
+                  opacity = 0.8;
                 } else if (absDiff === 2) {
-                  tx = diff * 270;
-                  tz = -320;
-                  ry = diff * -36;
-                  scale = 0.75;
+                  tx = diff * 230;
+                  tz = -290;
+                  ry = diff * -38;
+                  scale = 0.72;
                   blurPx = 7;
-                  brightness = 0.4;
+                  brightness = 0.38;
                   opacity = 0.48;
                 } else if (absDiff === 3) {
-                  tx = diff * 255;
-                  tz = -460;
-                  ry = diff * -46;
-                  scale = 0.63;
+                  tx = diff * 210;
+                  tz = -420;
+                  ry = diff * -48;
+                  scale = 0.6;
                   blurPx = 10;
-                  brightness = 0.25;
-                  opacity = 0.25;
+                  brightness = 0.22;
+                  opacity = 0.24;
                 } else {
-                  tx = diff * 240;
-                  tz = -600;
-                  ry = diff * -52;
+                  tx = diff * 190;
+                  tz = -540;
+                  ry = diff * -54;
                   scale = 0.5;
                   blurPx = 14;
-                  brightness = 0.15;
+                  brightness = 0.12;
                   opacity = 0;
                 }
 
@@ -421,7 +383,6 @@ export default function Posters() {
                     onClick={() => {
                       if (!isCurrent) {
                         setActivePosterIndex(i);
-                        setIsAutoSpinning(false);
                       }
                     }}
                     title={isCurrent ? poster.title : `Click to view ${poster.title}`}
@@ -431,7 +392,7 @@ export default function Posters() {
                         src={poster.src}
                         alt={poster.title}
                         fill
-                        sizes="380px"
+                        sizes="(max-width: 768px) 240px, 320px"
                         priority={isCurrent}
                         className="carousel-card-img"
                       />
@@ -440,7 +401,7 @@ export default function Posters() {
                       {isCurrent && (
                         <div className="carousel-active-badge">
                           <span className="badge-pulse-dot" />
-                          <span>ART #{String(poster.id).padStart(2, "0")} • {poster.category}</span>
+                          <span>ART {String(poster.id).padStart(2, "0")} • {poster.category}</span>
                         </div>
                       )}
                     </div>
@@ -459,15 +420,6 @@ export default function Posters() {
               <span className="hud-category-pill">{activePoster.category}</span>
               <h3 className="hud-title">{activePoster.title}</h3>
               <p className="hud-desc">{activePoster.description}</p>
-            </div>
-
-            <div className="hud-info-right">
-              <span className="hud-dim-pill">
-                Print Resolution: {activePoster.width} &times; {activePoster.height} px
-              </span>
-              <span className="hud-nav-hint">
-                Use Left / Right Arrows or click any background card to rotate
-              </span>
             </div>
           </div>
         </div>

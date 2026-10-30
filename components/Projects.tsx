@@ -85,7 +85,6 @@ export default function Projects() {
                     >
                       <span className="inline-flex items-center gap-2">
   Live Demo
-  <ExternalLink size={15} aria-hidden="true" />
 </span>
                     </a>
                   )}
@@ -98,12 +97,6 @@ export default function Projects() {
         {/* GitHub Footer Callout */}
         <div className="projects-footer">
           <div className="projects-divider" />
-          <p className="projects-footer-text">
-            These systems represent continuous exploration across autonomous
-            robotics, generative models, and scalable machine learning pipelines.
-            Additional open-source repositories, experiments, and technical notebooks
-            are available on GitHub.
-          </p>
           <a
             href="https://github.com/thexcomrade"
             target="_blank"

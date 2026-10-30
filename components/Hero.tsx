@@ -212,7 +212,7 @@ export default function Home() {
               />
 
               <div className="ref-stat-item">
-                <span className="ref-stat-value">80+</span>
+                <span className="ref-stat-value">25+</span>
                 <span className="ref-stat-label">
                   Happy Clients
                 </span>

@@ -359,9 +359,6 @@ export default function Contact() {
                     </button>
                   </div>
                   <h3 className="contact-form-title">Start a Conversation</h3>
-                  <p className="contact-form-sub">
-                    Directly delivered to <strong style={{ color: "#ff8c38" }}>devanarayananstackuplearning@gmail.com</strong>
-                  </p>
                 </div>
 
                 {submitted ? (

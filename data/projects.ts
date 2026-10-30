@@ -91,7 +91,7 @@ export const projects: Project[] = [
       "Embedded Systems",
       "Robotics",
     ],
-    github: "",
+    github: "https://github.com/thexcomrade/smart-obstacle-avoiding-robot",
     demo: "",
   },
   {
