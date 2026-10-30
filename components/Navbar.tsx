@@ -1,265 +1,232 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { Download } from "lucide-react";
+import { Download, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-
 import { navigation } from "@/constants/navigation";
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] =
-    useState("home");
-
-  const [scrolled, setScrolled] =
-    useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     /* =========================================================
        SCROLL STATE
     ========================================================= */
-
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener(
-      "scroll",
-      handleScroll,
-      { passive: true }
-    );
-
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
     /* =========================================================
        ACTIVE SECTION OBSERVER
     ========================================================= */
-
     const sectionIds = navigation
-      .map((item) =>
-        item.href.replace("#", "")
-      )
+      .map((item) => item.href.replace("#", ""))
       .filter(Boolean);
 
     const observer = new IntersectionObserver(
       (entries) => {
-        /*
-         * Sort intersecting sections by their
-         * position in the document so the active
-         * navigation state remains predictable.
-         */
         const visibleSections = entries
-          .filter(
-            (entry) =>
-              entry.isIntersecting
-          )
-          .sort(
-            (a, b) =>
-              a.boundingClientRect.top -
-              b.boundingClientRect.top
-          );
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
-        if (
-          visibleSections.length > 0
-        ) {
-          setActiveSection(
-            visibleSections[0].target.id
-          );
+        if (visibleSections.length > 0) {
+          setActiveSection(visibleSections[0].target.id);
         }
       },
       {
         root: null,
-
-        /*
-         * Activates a section when it enters
-         * the upper-middle area of the viewport.
-         */
-        rootMargin:
-          "-18% 0px -58% 0px",
-
+        rootMargin: "-18% 0px -58% 0px",
         threshold: [0.05, 0.1, 0.25],
       }
     );
 
-    /* =========================================================
-       OBSERVE SECTIONS
-    ========================================================= */
-
     sectionIds.forEach((id) => {
-      const section =
-        document.getElementById(id);
-
+      const section = document.getElementById(id);
       if (section) {
         observer.observe(section);
       }
     });
 
-    /* =========================================================
-       CLEANUP
-    ========================================================= */
-
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
-
+      window.removeEventListener("scroll", handleScroll);
       observer.disconnect();
     };
   }, []);
 
-  /* =========================================================
-     NAVIGATION CLICK
-  ========================================================= */
+  const handleNavigationClick = (href: string) => {
+    const id = href.replace("#", "");
+    const target = document.getElementById(id);
+    if (!target) return;
 
-  const handleNavigationClick = (
-    href: string
-  ) => {
-    const id =
-      href.replace("#", "");
-
-    const target =
-      document.getElementById(id);
-
-    if (!target) {
-      return;
-    }
-
-    /*
-     * Manually scroll so the browser uses
-     * the portfolio's smooth scrolling behavior.
-     */
     target.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
 
-    /*
-     * Update immediately instead of waiting
-     * for IntersectionObserver.
-     */
     setActiveSection(id);
+    setMobileMenuOpen(false);
   };
 
   return (
-    <header
-      className={`site-header ${
-        scrolled
-          ? "header-scrolled"
-          : ""
-      }`}
-    >
-      <div className="container">
-        <nav
-          className="navbar-glass"
-          aria-label="Main navigation"
-        >
+    <header className={`ref-site-header ${scrolled ? "ref-header-scrolled" : ""}`}>
+      <div className="ref-navbar-container">
+        <nav className="ref-navbar-glass" aria-label="Main navigation">
           {/* =====================================================
-              LOGO
-          ===================================================== */}
-
+              LEFT: LOGO + DEVANARAYANAN V S
+          ====================================================== */}
           <Link
             href="#home"
-            className="logo"
-            aria-label="Go to Home"
-            onClick={() =>
-              handleNavigationClick(
-                "#home"
-              )
-            }
+            className="ref-navbar-brand"
+            aria-label="Devanarayanan V S Portfolio Home"
+            onClick={() => handleNavigationClick("#home")}
           >
-            <Image
-              src="/file.svg"
-              alt="DV Logo"
-              width={40}
-              height={40}
-              priority
-              className="navbar-logo-img"
-            />
+            {/* Stylized Glowing Orange "D" Monogram */}
+            <div className="ref-brand-logo-box" aria-hidden="true">
+              <svg
+                width="34"
+                height="34"
+                viewBox="0 0 34 34"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="ref-brand-svg"
+              >
+                <defs>
+                  <linearGradient id="brandOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#ff8c38" />
+                    <stop offset="100%" stopColor="#e54704" />
+                  </linearGradient>
+                  <filter id="brandGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="2.5" floodColor="#ff7a18" floodOpacity="0.6" />
+                  </filter>
+                </defs>
+                <rect
+                  x="1.5"
+                  y="1.5"
+                  width="31"
+                  height="31"
+                  rx="9"
+                  fill="#11141e"
+                  stroke="rgba(255, 122, 24, 0.35)"
+                  strokeWidth="1.2"
+                />
+                <path
+                  d="M10 8.5H17.5C22.1944 8.5 25.5 12 25.5 17C25.5 22 22.1944 25.5 17.5 25.5H10V8.5Z"
+                  fill="url(#brandOrange)"
+                  filter="url(#brandGlow)"
+                />
+                <path
+                  d="M14.5 12.5H17C19.5 12.5 21.2 14.3 21.2 17C21.2 19.7 19.5 21.5 17 21.5H14.5V12.5Z"
+                  fill="#11141e"
+                />
+                <circle cx="17.2" cy="17" r="1.8" fill="#ff8c38" />
+              </svg>
+            </div>
+            <span className="ref-brand-title">DEVANARAYANAN V S</span>
           </Link>
 
           {/* =====================================================
-              NAVIGATION
-          ===================================================== */}
+              CENTER: NAVIGATION LINKS
+          ====================================================== */}
+          <ul className="ref-nav-menu" aria-label="Primary navigation">
+            {navigation.map((item) => {
+              const id = item.href.replace("#", "");
+              const isActive = activeSection === id;
 
-          <ul
-            className="nav-menu"
-            aria-label="Primary navigation"
-          >
-            {navigation.map(
-              (item) => {
-                const id =
-                  item.href.replace(
-                    "#",
-                    ""
-                  );
-
-                const isActive =
-                  activeSection === id;
-
-                return (
-                  <li
-                    key={item.name}
-                    className="nav-item"
+              return (
+                <li key={item.name} className="ref-nav-item">
+                  <Link
+                    href={item.href}
+                    className={`ref-nav-link ${isActive ? "active" : ""}`}
+                    aria-current={isActive ? "page" : undefined}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavigationClick(item.href);
+                    }}
                   >
-                    <Link
-                      href={item.href}
-                      className={`nav-link ${
-                        isActive
-                          ? "active"
-                          : ""
-                      }`}
-                      aria-current={
-                        isActive
-                          ? "page"
-                          : undefined
-                      }
-                      onClick={() =>
-                        handleNavigationClick(
-                          item.href
-                        )
-                      }
-                    >
-                      <span className="nav-link-text">
-                        {item.name}
+                    <span className="ref-nav-text">{item.name}</span>
+                    {isActive && (
+                      <span className="ref-nav-indicator" aria-hidden="true">
+                        <span className="ref-nav-indicator-dot" />
                       </span>
-
-                      {isActive && (
-                        <span
-                          className="nav-active-indicator"
-                          aria-hidden="true"
-                        />
-                      )}
-                    </Link>
-                  </li>
-                );
-              }
-            )}
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           {/* =====================================================
-              RIGHT SIDE
-          ===================================================== */}
-
-          <div className="navbar-right">
+              RIGHT: RESUME BUTTON & MOBILE TOGGLE
+          ====================================================== */}
+          <div className="ref-navbar-right">
             <a
               href="/resume.pdf"
-              download
-              className="resume-btn"
+              download="Devanarayanan_Resume.pdf"
+              className="ref-resume-btn"
               aria-label="Download Resume"
             >
-              <Download
-                size={15}
-                strokeWidth={2}
-                aria-hidden="true"
-              />
-
-              <span>
-                Resume
-              </span>
+              <Download size={14} strokeWidth={2.4} aria-hidden="true" />
+              <span>Resume</span>
             </a>
+
+            {/* Mobile Hamburger Toggle Button */}
+            <button
+              type="button"
+              className="ref-mobile-toggle"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </nav>
+
+        {/* =====================================================
+            MOBILE SLIDE-DOWN DRAWER
+        ====================================================== */}
+        {mobileMenuOpen && (
+          <div className="ref-mobile-drawer" role="dialog" aria-label="Mobile Navigation">
+            <ul className="ref-mobile-menu">
+              {navigation.map((item) => {
+                const id = item.href.replace("#", "");
+                const isActive = activeSection === id;
+
+                return (
+                  <li key={item.name} className="ref-mobile-item">
+                    <Link
+                      href={item.href}
+                      className={`ref-mobile-link ${isActive ? "active" : ""}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavigationClick(item.href);
+                      }}
+                    >
+                      <span>{item.name}</span>
+                      {isActive && <span className="ref-mobile-dot" aria-hidden="true" />}
+                    </Link>
+                  </li>
+                );
+              })}
+              <li className="ref-mobile-resume-item">
+                <a
+                  href="/resume.pdf"
+                  download="Devanarayanan_Resume.pdf"
+                  className="ref-resume-btn w-full justify-center"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Download size={14} strokeWidth={2.4} aria-hidden="true" />
+                  <span>Download Resume</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -11,14 +11,12 @@ export default function Projects() {
       <div className="section-inner">
         {/* Section Heading */}
         <div className="section-header">
-          <p className="section-eyebrow">PORTFOLIO SHOWCASE</p>
+          <p className="section-eyebrow">CHAPTER 02 // SIGNATURE CREATIONS</p>
           <h2 className="section-title">
-            Featured <span>Projects</span>
+            Flagship <span>Projects &amp; Systems</span>
           </h2>
           <p className="section-subtitle">
-            A curated portfolio of Artificial Intelligence, Machine Learning,
-            Robotics, Computer Vision, and Full Stack applications developed to
-            solve real-world engineering challenges.
+            Tangible, production-tested proofs of concept engineered for real-world impact.
           </p>
         </div>
 
@@ -53,8 +51,6 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-
-                <div className="project-spacer" />
 
                 {/* Project Actions */}
                 <div className="project-buttons">

@@ -203,13 +203,12 @@ export default function Contact() {
       <div className="section-inner contact-inner">
         {/* Section Header */}
         <div className="section-header">
-          <p className="section-eyebrow">START A CONVERSATION</p>
+          <p className="section-eyebrow">CHAPTER 06 // INITIATE TRANSMISSION</p>
           <h2 className="section-title">
-            Get In <span>Touch</span>
+            Start a <span>Conversation</span>
           </h2>
           <p className="section-subtitle">
-            Whether you&apos;re looking for an AI engineer, research collaborator, or have an
-            innovative problem to solve — my inbox is always open.
+            Ready to build something intelligent? My inbox and channels are always open.
           </p>
         </div>
 

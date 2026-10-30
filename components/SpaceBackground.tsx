@@ -18,11 +18,16 @@ export default function SpaceBackground() {
     let isVisible = !document.hidden;
     let prefersReducedMotion = false;
 
-    // Mouse position for subtle spotlight / interactive grid illumination
-    const mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+    // Mouse coordinates for subtle interactive ambient lighting
+    const mouse = {
+      x: -1000,
+      y: -1000,
+      targetX: -1000,
+      targetY: -1000,
+    };
 
     /* =========================================================
-       REDUCED MOTION QUERY
+       REDUCED MOTION CHECK
     ========================================================= */
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     prefersReducedMotion = motionQuery.matches;
@@ -32,7 +37,7 @@ export default function SpaceBackground() {
       if (prefersReducedMotion && animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
         animationRef.current = null;
-        render(performance.now());
+        renderStatic();
       } else if (isVisible && animationRef.current === null) {
         animationRef.current = requestAnimationFrame(render);
       }
@@ -40,13 +45,46 @@ export default function SpaceBackground() {
     motionQuery.addEventListener("change", handleMotionPreference);
 
     /* =========================================================
-       CANVAS RESIZE
+       SUBTLE AMBIENT GRAPHITE & ORANGE PHOTONS
     ========================================================= */
-    const GRID_SIZE = 56;
-    const STRIPE_SPACING = 84;
+    interface AmbientNode {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      alpha: number;
+      maxAlpha: number;
+      pulseSpeed: number;
+      color: string;
+    }
 
-    function resize() {
-      if (!canvas || !ctx) return;
+    const nodes: AmbientNode[] = [];
+    const NODE_COUNT = 38;
+
+    const initNodes = () => {
+      nodes.length = 0;
+      for (let i = 0; i < NODE_COUNT; i++) {
+        const isOrange = i % 4 === 0;
+        nodes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: (Math.random() - 0.5) * 0.18,
+          size: isOrange ? Math.random() * 1.5 + 1 : Math.random() * 1.2 + 0.6,
+          alpha: Math.random() * 0.3 + 0.1,
+          maxAlpha: isOrange ? 0.45 : 0.25,
+          pulseSpeed: Math.random() * 0.012 + 0.005,
+          color: isOrange ? "255, 122, 24" : "148, 163, 184",
+        });
+      }
+    };
+
+    /* =========================================================
+       CANVAS RESIZE & PIXEL RATIO
+    ========================================================= */
+    const handleResize = () => {
+      if (!canvas) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = window.innerWidth;
       height = window.innerHeight;
@@ -59,280 +97,159 @@ export default function SpaceBackground() {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
 
+      initNodes();
       if (prefersReducedMotion) {
-        render(performance.now());
+        renderStatic();
       }
-    }
+    };
 
-    resize();
-    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
+    handleResize();
 
     /* =========================================================
-       MOUSE MOVEMENT
+       MOUSE TRACKING (SMOOTH INTERPOLATION)
     ========================================================= */
-    function handleMouseMove(e: MouseEvent) {
+    const handleMouseMove = (e: MouseEvent) => {
       mouse.targetX = e.clientX;
       mouse.targetY = e.clientY;
       if (mouse.x < 0) {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
+        mouse.x = mouse.targetX;
+        mouse.y = mouse.targetY;
       }
-    }
+    };
+
+    const handleMouseLeave = () => {
+      mouse.targetX = -1000;
+      mouse.targetY = -1000;
+    };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseleave", handleMouseLeave, { passive: true });
 
     /* =========================================================
-       VISIBILITY CHANGE
+       VISIBILITY OBSERVER
     ========================================================= */
-    function handleVisibilityChange() {
+    const handleVisibilityChange = () => {
       isVisible = !document.hidden;
-      if (isVisible && !prefersReducedMotion) {
-        if (animationRef.current === null) {
-          animationRef.current = requestAnimationFrame(render);
-        }
+      if (isVisible && !prefersReducedMotion && animationRef.current === null) {
+        animationRef.current = requestAnimationFrame(render);
       } else if (!isVisible && animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
         animationRef.current = null;
       }
-    }
+    };
+
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     /* =========================================================
-       SUBTLE DATA PACKETS
+       STATIC RENDER FOR REDUCED MOTION
     ========================================================= */
-    interface DataPulse {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      length: number;
-      life: number;
-      maxLife: number;
-    }
+    const renderStatic = () => {
+      ctx.clearRect(0, 0, width, height);
 
-    const pulses: DataPulse[] = [];
-    let lastPulseTime = 0;
-
-    function spawnPulse() {
-      if (pulses.length >= 4) return;
-      const isHorizontal = Math.random() > 0.3;
-      const speed = 1.8 + Math.random() * 2.0;
-
-      if (isHorizontal) {
-        const lineY = Math.floor(Math.random() * (height / STRIPE_SPACING)) * STRIPE_SPACING;
-        pulses.push({
-          x: -80,
-          y: lineY,
-          vx: speed,
-          vy: 0,
-          length: 60 + Math.random() * 90,
-          life: 0,
-          maxLife: width + 160,
-        });
-      } else {
-        const lineX = Math.floor(Math.random() * (width / GRID_SIZE)) * GRID_SIZE;
-        pulses.push({
-          x: lineX,
-          y: -80,
-          vx: 0,
-          vy: speed,
-          length: 60 + Math.random() * 90,
-          life: 0,
-          maxLife: height + 160,
-        });
-      }
-    }
-
-    /* =========================================================
-       DRAW PROCEDURAL BACKGROUND (CLEAN OBSIDIAN + SUBTLE GRID)
-    ========================================================= */
-    function drawBackground(timeSec: number) {
-      if (!ctx) return;
-
-      // 1. Deep solid obsidian base
-      ctx.fillStyle = "#090a0f";
+      // Deep obsidian charcoal background
+      ctx.fillStyle = "#07080b";
       ctx.fillRect(0, 0, width, height);
 
-      // 2. Soft, ambient glow behind right visual stage
-      const rightGlow = ctx.createRadialGradient(
-        width * 0.74, height * 0.45, 0,
-        width * 0.74, height * 0.45, Math.min(width, height) * 0.55
-      );
-      rightGlow.addColorStop(0, "rgba(54, 247, 249, 0.07)");
-      rightGlow.addColorStop(0.5, "rgba(54, 247, 249, 0.018)");
-      rightGlow.addColorStop(1, "rgba(9, 10, 15, 0)");
-      ctx.fillStyle = rightGlow;
-      ctx.fillRect(0, 0, width, height);
-
-      // 3. Subtle interactive mouse spotlight
-      if (mouse.x > 0 && mouse.y > 0) {
-        const spot = ctx.createRadialGradient(
-          mouse.x, mouse.y, 0,
-          mouse.x, mouse.y, 280
-        );
-        spot.addColorStop(0, "rgba(54, 247, 249, 0.05)");
-        spot.addColorStop(0.6, "rgba(54, 247, 249, 0.01)");
-        spot.addColorStop(1, "rgba(9, 10, 15, 0)");
-        ctx.fillStyle = spot;
-        ctx.fillRect(0, 0, width, height);
-      }
-
-      // 4. Clean, subtle technical blueprint grid (No harsh crosses or clutter)
-      ctx.save();
-      ctx.lineWidth = 0.75;
-
-      // Vertical grid lines
-      for (let x = 0; x <= width; x += GRID_SIZE) {
-        const distFromMouse = Math.abs(x - mouse.x);
-        let alpha = 0.03;
-        if (distFromMouse < 180) {
-          alpha += (1 - distFromMouse / 180) * 0.035;
-        }
-
-        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
+      // Draw stationary ambient nodes
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
         ctx.beginPath();
-        ctx.moveTo(x + 0.5, 0);
-        ctx.lineTo(x + 0.5, height);
-        ctx.stroke();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${n.color}, ${n.alpha * 0.7})`;
+        ctx.fill();
       }
-
-      // Horizontal grid lines
-      for (let y = 0; y <= height; y += GRID_SIZE) {
-        const distFromMouse = Math.abs(y - mouse.y);
-        let alpha = 0.03;
-        if (distFromMouse < 180) {
-          alpha += (1 - distFromMouse / 180) * 0.035;
-        }
-
-        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
-        ctx.beginPath();
-        ctx.moveTo(0, y + 0.5);
-        ctx.lineTo(width, y + 0.5);
-        ctx.stroke();
-      }
-      ctx.restore();
-
-      // 5. Very subtle drifting cyber scanlines (Seen lightly, elegant & quiet)
-      if (!prefersReducedMotion) {
-        ctx.save();
-        const drift = (timeSec * 14) % STRIPE_SPACING;
-
-        for (let y = -STRIPE_SPACING + drift; y <= height + STRIPE_SPACING; y += STRIPE_SPACING) {
-          const wave = Math.sin(y * 0.015 + timeSec * 0.5);
-          const alpha = 0.03 + wave * 0.015;
-
-          ctx.strokeStyle = `rgba(54, 247, 249, ${Math.max(0.015, alpha).toFixed(3)})`;
-          ctx.lineWidth = 0.75;
-          ctx.beginPath();
-          ctx.moveTo(0, y + 0.5);
-          ctx.lineTo(width, y + 0.5);
-          ctx.stroke();
-        }
-        ctx.restore();
-
-        // 6. Occasional gentle data pulses along grid lines
-        ctx.save();
-        for (let i = pulses.length - 1; i >= 0; i--) {
-          const p = pulses[i];
-          p.x += p.vx;
-          p.y += p.vy;
-          p.life += Math.hypot(p.vx, p.vy);
-
-          const tailX = p.vx !== 0 ? p.x - p.length : p.x;
-          const tailY = p.vy !== 0 ? p.y - p.length : p.y;
-
-          const pGrad = ctx.createLinearGradient(tailX, tailY, p.x, p.y);
-          pGrad.addColorStop(0, "rgba(54, 247, 249, 0)");
-          pGrad.addColorStop(0.8, "rgba(54, 247, 249, 0.35)");
-          pGrad.addColorStop(1, "rgba(255, 255, 255, 0.75)");
-
-          ctx.strokeStyle = pGrad;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(tailX + 0.5, tailY + 0.5);
-          ctx.lineTo(p.x + 0.5, p.y + 0.5);
-          ctx.stroke();
-
-          // Subtle head dot
-          ctx.fillStyle = "#ffffff";
-          ctx.beginPath();
-          ctx.arc(p.x + 0.5, p.y + 0.5, 1, 0, Math.PI * 2);
-          ctx.fill();
-
-          if (p.life >= p.maxLife) {
-            pulses.splice(i, 1);
-          }
-        }
-        ctx.restore();
-      }
-    }
+    };
 
     /* =========================================================
-       MAIN RENDER LOOP
+       ANIMATION LOOP (60FPS HARDWARE ACCELERATED)
     ========================================================= */
-    function render(currentTime: number) {
-      if (!isVisible) return;
-
-      const timeSec = currentTime * 0.001;
-
-      // Mouse smooth interpolation
+    const render = (currentTime: number) => {
+      // Mouse position smoothing
       mouse.x += (mouse.targetX - mouse.x) * 0.08;
       mouse.y += (mouse.targetY - mouse.y) * 0.08;
 
-      // Spawn pulses along stripes periodically
-      if (timeSec - lastPulseTime > 2.8 && Math.random() < 0.04) {
-        spawnPulse();
-        lastPulseTime = timeSec;
+      ctx.clearRect(0, 0, width, height);
+
+      // Base Obsidian Surface
+      ctx.fillStyle = "#07080b";
+      ctx.fillRect(0, 0, width, height);
+
+      // Subtle Warm Mouse Spotlight
+      if (mouse.x > 0 && mouse.y > 0) {
+        const spotlight = ctx.createRadialGradient(
+          mouse.x,
+          mouse.y,
+          0,
+          mouse.x,
+          mouse.y,
+          320
+        );
+        spotlight.addColorStop(0, "rgba(255, 122, 24, 0.04)");
+        spotlight.addColorStop(0.5, "rgba(255, 122, 24, 0.015)");
+        spotlight.addColorStop(1, "transparent");
+        ctx.fillStyle = spotlight;
+        ctx.fillRect(0, 0, width, height);
       }
 
-      drawBackground(timeSec);
+      // Draw and animate ambient nodes
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
 
-      if (!prefersReducedMotion && isVisible) {
+        // Wrap around boundaries
+        if (n.x < 0) n.x = width;
+        if (n.x > width) n.x = 0;
+        if (n.y < 0) n.y = height;
+        if (n.y > height) n.y = 0;
+
+        // Pulse alpha
+        n.alpha = (Math.sin(currentTime * n.pulseSpeed * 0.1) * 0.5 + 0.5) * n.maxAlpha;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${n.color}, ${n.alpha})`;
+        ctx.fill();
+      }
+
+      if (isVisible && !prefersReducedMotion) {
         animationRef.current = requestAnimationFrame(render);
-      } else {
-        animationRef.current = null;
       }
-    }
+    };
 
-    /* =========================================================
-       START
-    ========================================================= */
-    if (prefersReducedMotion) {
-      render(performance.now());
-    } else {
+    if (!prefersReducedMotion) {
       animationRef.current = requestAnimationFrame(render);
+    } else {
+      renderStatic();
     }
 
-    /* =========================================================
-       CLEANUP
-    ========================================================= */
     return () => {
       if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
-        animationRef.current = null;
       }
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
       motionQuery.removeEventListener("change", handleMotionPreference);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      aria-hidden="true"
+      className="fixed inset-0 pointer-events-none z-[-1]"
       style={{
         position: "fixed",
-        inset: 0,
+        top: 0,
+        left: 0,
         width: "100%",
         height: "100%",
-        maxWidth: "100vw",
-        maxHeight: "100vh",
         pointerEvents: "none",
         zIndex: -1,
-        display: "block",
-        contain: "strict",
       }}
+      aria-hidden="true"
     />
   );
 }

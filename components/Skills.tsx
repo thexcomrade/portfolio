@@ -163,13 +163,12 @@ export default function Skills() {
       <div className="section-inner">
         {/* Section Header */}
         <div className="section-header">
-          <p className="section-eyebrow">TECHNICAL CAPABILITIES</p>
+          <p className="section-eyebrow">CHAPTER 03 // THE CAPABILITIES</p>
           <h2 className="section-title">
-            Skills &amp; <span>Technologies</span>
+            Neural &amp; <span>Engineering Stack</span>
           </h2>
           <p className="section-subtitle">
-            A specialized engineering stack across Artificial Intelligence,
-            Machine Learning, Full-Stack Web Architecture, and Cloud Systems.
+            Specialized tools, frameworks, and architecture deployed across production environments.
           </p>
         </div>
 

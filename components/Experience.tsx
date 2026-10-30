@@ -25,15 +25,14 @@ export default function Experience() {
       <div className="section-inner">
         {/* Section Heading */}
         <div className="section-header">
-          <p className="section-eyebrow">CAREER &amp; INDUSTRY</p>
+          <p className="section-eyebrow">CHAPTER 04 // FIELD DOSSIER</p>
 
           <h2 className="section-title">
-            Professional <span>Experience</span>
+            Professional <span>Experience &amp; Industry</span>
           </h2>
 
           <p className="section-subtitle">
-            Transforming AI &amp; ML theoretical expertise into scalable,
-            production-grade solutions in an active industry environment.
+            Transforming AI &amp; ML theoretical models into scalable, production-grade applications.
           </p>
         </div>
 

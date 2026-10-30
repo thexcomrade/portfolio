@@ -2,18 +2,14 @@
 
 import Image from "next/image";
 import {
-  MapPin,
-  Bot,
   BrainCircuit,
-  Activity,
-  Eye,
-  MessageSquareCode,
-  Sparkles,
-  Globe,
-  BarChart3,
   Zap,
+  Sparkles,
+  MapPin,
+  Terminal,
+  Code2,
+  CheckCircle2,
 } from "lucide-react";
-import { projects } from "../data/projects";
 
 export default function About() {
   const today = new Date();
@@ -23,135 +19,143 @@ export default function About() {
     age--;
   }
 
-  const focusAreas = [
-    { label: "Artificial Intelligence", icon: <Bot size={14} aria-hidden="true" /> },
-    { label: "Machine Learning", icon: <BrainCircuit size={14} aria-hidden="true" /> },
-    { label: "Healthcare AI", icon: <Activity size={14} aria-hidden="true" /> },
-    { label: "Computer Vision", icon: <Eye size={14} aria-hidden="true" /> },
-    { label: "Large Language Models", icon: <MessageSquareCode size={14} aria-hidden="true" /> },
-    { label: "Generative AI", icon: <Sparkles size={14} aria-hidden="true" /> },
-    { label: "Full Stack Development", icon: <Globe size={14} aria-hidden="true" /> },
-    { label: "Data Science", icon: <BarChart3 size={14} aria-hidden="true" /> },
-    { label: "Intelligent Automation", icon: <Zap size={14} aria-hidden="true" /> },
+  const storyActs = [
+    {
+      act: "ACT 01",
+      title: "The Physical Spark",
+      subtitle: "Robotics & Embedded Telemetry",
+      icon: <Zap size={20} className="story-act-icon" aria-hidden="true" />,
+      description:
+        "My journey began in physical computing—programming microcontrollers, routing motor drivers, and tuning drone aerodynamics. Grounding code in the physical realm forged an obsession with autonomous behavior.",
+      highlight: "Hardware-to-Software Bridge",
+    },
+    {
+      act: "ACT 02",
+      title: "The Neural Transition",
+      subtitle: "Machine Learning & Vision",
+      icon: <BrainCircuit size={20} className="story-act-icon" aria-hidden="true" />,
+      description:
+        "Transitioned from rule-based logic to statistical machine learning. Developed deep computer vision models, predictive health analytics, and high-accuracy classification pipelines with Scikit-Learn and PyTorch.",
+      highlight: "Mathematical Foundations",
+    },
+    {
+      act: "ACT 03",
+      title: "Generative Intelligence",
+      subtitle: "LLMs, RAG & Autonomous Agents",
+      icon: <Sparkles size={20} className="story-act-icon" aria-hidden="true" />,
+      description:
+        "Architecting modern Generative AI systems. Building production-grade retrieval-augmented generation (RAG) pipelines, context-aware autonomous agents, and intelligent travel assistants like TripGenius.",
+      highlight: "Production GenAI Pipelines",
+    },
+    {
+      act: "ACT 04",
+      title: "The Engineering Ethos",
+      subtitle: "Scalable Full-Stack Systems",
+      icon: <Code2 size={20} className="story-act-icon" aria-hidden="true" />,
+      description:
+        "An algorithm is only as impactful as its interface. I engineer resilient Next.js frontends, high-throughput FastAPI backends, and deterministic state systems that turn complex models into seamless products.",
+      highlight: "End-to-End System Design",
+    },
   ];
 
   return (
-    <section id="about" className="page-section">
+    <section id="about" className="page-section story-section">
       <div className="section-inner">
         {/* Section Header */}
         <div className="section-header">
-          <p className="section-eyebrow">GET TO KNOW ME</p>
+          <p className="section-eyebrow">CHAPTER 01 // THE MANIFESTO</p>
           <h2 className="section-title">
-            About <span>Me</span>
+            The Story of <span>Me &amp; My Code</span>
           </h2>
           <p className="section-subtitle">
-            Building intelligent AI solutions that bridge research, engineering, and real-world impact.
+            Not a blog of text—a journey of curiosity, autonomy, and deliberate engineering.
           </p>
         </div>
 
-        {/* Main Grid */}
-        <div className="about-grid">
-          {/* Left Column: Profile Card */}
-          <div className="about-left">
-            <div className="about-image-card">
-              <Image
-                src="/deva.jpg"
-                alt="Devanarayanan V S portrait"
-                width={420}
-                height={420}
-                priority
-                className="about-image"
-              />
+        {/* Narrative Manifesto Banner */}
+        <div className="story-manifesto-card">
+          <div className="story-manifesto-badge">
+            <Terminal size={14} aria-hidden="true" />
+            <span>MY CORE PHILOSOPHY</span>
+          </div>
+          <blockquote className="story-manifesto-quote">
+            &ldquo;I don&apos;t write software merely to generate lines of code. I build autonomous intelligence that bridges abstract neural mathematics with tangible, real-world human solutions.&rdquo;
+          </blockquote>
+          <div className="story-manifesto-footer">
+            <span className="story-manifesto-author">— DEVANARAYANAN</span>
+            <span className="story-manifesto-role">AI &amp; Machine Learning Engineer</span>
+          </div>
+        </div>
+
+        {/* Interactive Story Grid: Bio Dossier & 4 Narrative Acts */}
+        <div className="story-master-grid">
+          {/* Left Column: Personal Identity Dossier */}
+          <div className="story-dossier-col">
+            <div className="story-portrait-card">
+              <div className="story-portrait-wrapper">
+                <Image
+                  src="/deva.jpg"
+                  alt="Devanarayanan V S portrait"
+                  width={420}
+                  height={420}
+                  priority
+                  className="story-portrait-img"
+                />
+              </div>
+              <div className="story-portrait-info">
+                <span className="story-dossier-badge">DEV DOSSIER</span>
+                <h3 className="story-dossier-name">Devanarayanan</h3>
+                <p className="story-dossier-title">AI &amp; ML Systems Architect</p>
+
+                <div className="story-dossier-meta">
+                  <span className="story-dossier-location">
+                    <MapPin size={13} aria-hidden="true" />
+                    <span>Kerala, India</span>
+                  </span>
+                  <span className="story-meta-dot" aria-hidden="true">•</span>
+                  <span suppressHydrationWarning>
+                    {age !== null ? `${age} Years Old` : "..."}
+                  </span>
+                </div>
+
+                <div className="story-status-pill">
+                  <span className="story-status-pulse" aria-hidden="true" />
+                  <span>Available for Visionary AI Roles</span>
+                </div>
+              </div>
             </div>
 
-            <div className="about-profile">
-              <span className="about-badge">AI • ML • SOFTWARE ENGINEER</span>
-              <h3 className="about-name">Devanarayanan</h3>
-              <p className="about-role">AI &amp; Machine Learning Graduate</p>
-              <p className="about-tagline">
-                Passionate about developing intelligent software that transforms innovative ideas into scalable systems.
-              </p>
-
-              <div className="about-meta">
-                <span className="about-location">
-                  <MapPin size={13} aria-hidden="true" />
-                  <span>Kerala, India</span>
-                </span>
-                <span className="meta-divider" aria-hidden="true">•</span>
-                <span suppressHydrationWarning>
-                  {age !== null ? `${age} Years Old` : "..."}
-                </span>
+            {/* Quick Metrics Cards */}
+            <div className="story-metrics-stack">
+              <div className="story-metric-box">
+                <span className="story-metric-number">3+</span>
+                <span className="story-metric-desc">Autonomous Systems Deployed</span>
               </div>
-
-              <div className="availability">
-                <span className="availability-dot" aria-hidden="true" />
-                <span>Available for AI &amp; ML Opportunities</span>
+              <div className="story-metric-box">
+                <span className="story-metric-number">100%</span>
+                <span className="story-metric-desc">Production-Tested Code</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Bio, Focus Areas, Stats, Vision */}
-          <div className="about-content">
-            <h3 className="about-heading">
-              Engineering Intelligent Systems with Purpose &amp; Precision
-            </h3>
-
-            <p className="about-paragraph">
-              I am an Artificial Intelligence and Machine Learning graduate from Kerala, India,
-              dedicated to developing reliable and production-grade software that solves meaningful challenges.
-              My primary interest lies in the application of AI to healthcare, where computer vision and predictive
-              modeling can accelerate diagnosis, optimize care delivery, and improve patient outcomes.
-            </p>
-
-            <p className="about-paragraph">
-              My engineering stack spans Machine Learning algorithms, Deep Learning architectures (CNNs, RNNs, Transformers),
-              Computer Vision pipelines, Generative AI models, and scalable full-stack web applications.
-              I focus on bridging experimental neural models with high-throughput API services and intuitive user interfaces.
-            </p>
-
-            <p className="about-paragraph">
-              Continuous learning is core to my engineering approach. Every system I build provides an opportunity
-              to explore architectural optimizations, write clean maintainable code, and deliver reliable solutions
-              tailored to real-world industrial environments.
-            </p>
-
-            {/* Focus Areas */}
-            <div className="about-keywords-section">
-              <p className="about-keywords-label">CORE FOCUS AREAS</p>
-              <div className="about-focus">
-                {focusAreas.map((area) => (
-                  <div key={area.label} className="highlight">
-                    {area.icon}
-                    <span>{area.label}</span>
+          {/* Right Column: The 4 Chronological Story Acts */}
+          <div className="story-acts-col">
+            <div className="story-acts-grid">
+              {storyActs.map((act) => (
+                <div key={act.act} className="story-act-card">
+                  <div className="story-act-header">
+                    <span className="story-act-tag">{act.act}</span>
+                    <div className="story-act-icon-box">{act.icon}</div>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Metrics */}
-            <div className="about-stats">
-              <div className="stat-item">
-                <div className="stat-value">{projects.length}+</div>
-                <div className="stat-label">Projects Built</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-value">10+</div>
-                <div className="stat-label">Certifications</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-value">AI</div>
-                <div className="stat-label">Healthcare Focus</div>
-              </div>
-            </div>
-
-            {/* Engineering Vision */}
-            <div className="about-vision">
-              <h4>Engineering Vision</h4>
-              <p className="about-paragraph">
-                My objective is to advance ethical, dependable, and human-centered AI systems—developing robust
-                software architectures that enhance healthcare accessibility, automate complex processes, and power
-                the next generation of intelligent software products.
-              </p>
+                  <h4 className="story-act-title">{act.title}</h4>
+                  <p className="story-act-subtitle">{act.subtitle}</p>
+                  <p className="story-act-description">{act.description}</p>
+                  <div className="story-act-footer">
+                    <CheckCircle2 size={13} className="story-act-check" aria-hidden="true" />
+                    <span className="story-act-highlight">{act.highlight}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

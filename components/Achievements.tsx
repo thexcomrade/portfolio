@@ -90,14 +90,12 @@ export default function Achievements() {
       <div className="section-inner">
         {/* Section Heading */}
         <div className="section-header">
-          <p className="section-eyebrow">PROFESSIONAL MILESTONES</p>
+          <p className="section-eyebrow">CHAPTER 05 // FIELD RECORDS</p>
           <h2 className="section-title">
-            Certifications &amp; <span>Training</span>
+            Certifications &amp; <span>Honors</span>
           </h2>
           <p className="section-subtitle">
-            Professional internships, technical workshops, industry credentials,
-            and leadership programs that validate practical knowledge across
-            Artificial Intelligence, Robotics, and modern software engineering.
+            Verified industry training, robotics workshops, and national technical credentials.
           </p>
         </div>
 
