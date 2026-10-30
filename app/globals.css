@@ -389,7 +389,7 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 85px 24px 30px;
+  padding: 68px 24px 20px;
   background: #07080b;
   overflow: hidden;
   box-sizing: border-box;
@@ -423,15 +423,15 @@ section {
 
 /* Two-Column Container Layout */
 .ref-hero-container {
-  max-width: 1440px;
+  max-width: 1380px;
   width: 100%;
-  margin: 0 auto;
+  margin: auto auto;
   display: grid;
   grid-template-columns: 46% 54%;
   align-items: center;
   position: relative;
   z-index: 3;
-  padding: 0 32px;
+  padding: 0 28px;
 }
 
 /* Left Column: Typography, Actions & Stats */
@@ -445,12 +445,12 @@ section {
 .ref-hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: rgba(18, 21, 30, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
-  padding: 6px 14px;
-  margin-bottom: 22px;
+  padding: 5px 12px;
+  margin-bottom: 12px;
   backdrop-filter: blur(12px);
 }
 .ref-badge-dot {
@@ -476,14 +476,14 @@ section {
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  max-width: 520px;
-  margin: 0 0 20px;
+  max-width: 450px;
+  margin: 0 0 14px;
   overflow: visible;
 }
 .ref-hero-name-artwork {
   display: block;
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
   height: auto;
   object-fit: contain;
   user-select: none;
@@ -598,12 +598,12 @@ section {
 
 .ref-hero-descriptor {
   font-family: var(--font-space), sans-serif;
-  font-size: clamp(0.72rem, 0.85vw, 0.8rem);
+  font-size: clamp(0.72rem, 0.85vw, 0.78rem);
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #94a3b8;
-  margin: 0 0 22px 0;
+  margin: 0 0 14px 0;
 }
 .ref-descriptor-bullet {
   color: #ff7a18;
@@ -612,18 +612,18 @@ section {
   text-shadow: 0 0 8px rgba(255, 122, 24, 0.6);
 }
 .ref-hero-intro {
-  font-size: 0.92rem;
-  line-height: 1.7;
+  font-size: 0.88rem;
+  line-height: 1.58;
   color: #94a3b8;
-  max-width: 480px;
-  margin: 0 0 30px 0;
+  max-width: 440px;
+  margin: 0 0 18px 0;
   text-align: left;
 }
 .ref-hero-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 34px;
+  gap: 14px;
+  margin-bottom: 22px;
 }
 .ref-btn-primary {
   display: inline-flex;
@@ -631,11 +631,11 @@ section {
   justify-content: center;
   background: linear-gradient(135deg, #ff7a18 0%, #ea580c 100%);
   color: #ffffff;
-  padding: 13px 34px;
+  padding: 10px 28px;
   border-radius: 9px;
   font-family: var(--font-space), sans-serif;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-decoration: none;
   box-shadow: 0 8px 24px rgba(255, 122, 24, 0.4);
   transition: all 0.3s ease;
@@ -653,11 +653,11 @@ section {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.22);
   color: #ffffff;
-  padding: 13px 30px;
+  padding: 10px 24px;
   border-radius: 9px;
   font-family: var(--font-space), sans-serif;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -676,8 +676,8 @@ section {
   border-bottom: 1.5px solid rgba(255, 122, 24, 0.45);
   border-left: 1.5px solid rgba(255, 122, 24, 0.45);
   border-radius: 14px;
-  padding: 18px 24px;
-  max-width: 460px;
+  padding: 12px 18px;
+  max-width: 420px;
   width: 100%;
   backdrop-filter: blur(20px);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 122, 24, 0.03);
@@ -689,23 +689,23 @@ section {
 }
 .ref-stat-value {
   font-family: var(--font-space), sans-serif;
-  font-size: 1.55rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: #ff7a18;
   line-height: 1.1;
 }
 .ref-stat-label {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 500;
   color: #94a3b8;
-  margin-top: 4px;
+  margin-top: 3px;
   white-space: nowrap;
 }
 .ref-stat-divider {
   width: 1px;
-  height: 32px;
+  height: 26px;
   background: rgba(255, 255, 255, 0.08);
-  margin: 0 12px;
+  margin: 0 10px;
 }
 
 /* Right Column: Portrait, Geometry & Labels */
@@ -716,42 +716,42 @@ section {
   justify-content: center;
   width: 100%;
   min-width: 0;
-  min-height: 740px;
-  height: 86vh;
-  max-height: 920px;
+  min-height: 440px;
+  height: clamp(450px, 58vh, 560px);
+  max-height: 580px;
   overflow: visible;
   isolation: isolate;
 }
 .ref-hero-ambient-glow {
   position: absolute;
-  top: 45%;
-  left: calc(50% - 40px);
+  top: 42%;
+  left: calc(50% - 25px);
   transform: translate(-50%, -50%);
 
-  width: min(72vw, 620px);
+  width: min(52vw, 440px);
   aspect-ratio: 1 / 1;
   height: auto;
 
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 122, 24, 0.92) 0%,
-    rgba(234, 88, 12, 0.55) 38%,
-    rgba(255, 100, 0, 0.18) 60%,
+    rgba(255, 122, 24, 0.88) 0%,
+    rgba(234, 88, 12, 0.5) 38%,
+    rgba(255, 100, 0, 0.16) 60%,
     transparent 74%
   );
 
-  filter: blur(55px);
+  filter: blur(48px);
   pointer-events: none;
   z-index: 1;
 }
 .ref-hero-sun-disc {
   position: absolute;
-  top: 45%;
-  left: calc(50% - 40px);
+  top: 42%;
+  left: calc(50% - 25px);
   transform: translate(-50%, -50%);
 
-  width: min(44vw, 340px);
+  width: min(30vw, 260px);
   aspect-ratio: 1 / 1;
   height: auto;
 
@@ -766,8 +766,8 @@ section {
   );
 
   box-shadow:
-    0 0 55px rgba(255, 122, 24, 0.75),
-    0 0 110px rgba(234, 88, 12, 0.45);
+    0 0 35px rgba(255, 122, 24, 0.75),
+    0 0 75px rgba(234, 88, 12, 0.45);
 
   border: 1.5px solid rgba(255, 150, 50, 0.5);
   pointer-events: none;
@@ -775,15 +775,15 @@ section {
 }
 .ref-hero-orbitals {
   position: absolute;
-  top: 45%;
-  left: calc(50% - 40px);
+  top: 42%;
+  left: calc(50% - 25px);
   transform: translate(-50%, -50%);
 
-  width: min(84vw, 740px);
+  width: min(64vw, 540px);
   aspect-ratio: 1 / 1;
   height: auto;
 
-  color: rgba(255, 122, 24, 0.42);
+  color: rgba(255, 122, 24, 0.38);
   pointer-events: none;
   z-index: 3;
 }
@@ -797,7 +797,7 @@ section {
   z-index: 4;
   width: 100%;
   height: 100%;
-  margin-left: -40px;
+  margin-left: -25px;
 
   display: flex;
   align-items: center;
@@ -812,7 +812,7 @@ section {
 
   display: block;
   width: auto !important;
-  height: min(88vh, 840px) !important;
+  height: clamp(400px, 54vh, 520px) !important;
   max-width: none !important;
   max-height: none !important;
 
@@ -824,8 +824,8 @@ section {
   -webkit-user-drag: none;
 
   filter:
-    drop-shadow(0 0 20px rgba(255, 122, 24, 0.8))
-    drop-shadow(0 0 50px rgba(255, 122, 24, 0.4));
+    drop-shadow(0 0 16px rgba(255, 122, 24, 0.8))
+    drop-shadow(0 0 42px rgba(255, 122, 24, 0.38));
 }
 .ref-portrait-fade {
   position: absolute;
@@ -846,29 +846,29 @@ section {
 /* Large desktop */
 @media (min-width: 1440px) {
   .ref-hero-ambient-glow {
-    top: 50%;
-    left: calc(50% - 50px);
-    width: 680px;
+    top: 42%;
+    left: calc(50% - 30px);
+    width: 480px;
   }
 
   .ref-hero-sun-disc {
-    top: 50%;
-    left: calc(50% - 50px);
-    width: 380px;
+    top: 42%;
+    left: calc(50% - 30px);
+    width: 280px;
   }
 
   .ref-hero-orbitals {
-    top: 50%;
-    left: calc(50% - 50px);
-    width: 820px;
+    top: 42%;
+    left: calc(50% - 30px);
+    width: 580px;
   }
 
   .ref-portrait-stage {
-    margin-left: -50px;
+    margin-left: -30px;
   }
 
   .ref-portrait-img {
-    height: min(90vh, 880px) !important;
+    height: clamp(430px, 56vh, 550px) !important;
     width: auto !important;
     max-width: none !important;
   }
@@ -877,26 +877,26 @@ section {
 /* Laptop and tablet */
 @media (max-width: 1024px) {
   .ref-hero-right {
-    min-height: 600px;
-    height: 70vh;
+    min-height: 380px;
+    height: 52vh;
   }
 
   .ref-hero-ambient-glow {
-    top: 48%;
+    top: 44%;
     left: 50%;
-    width: 480px;
+    width: 380px;
   }
 
   .ref-hero-sun-disc {
-    top: 48%;
+    top: 44%;
     left: 50%;
-    width: 280px;
+    width: 220px;
   }
 
   .ref-hero-orbitals {
-    top: 48%;
+    top: 44%;
     left: 50%;
-    width: 580px;
+    width: 460px;
   }
 
   .ref-portrait-stage {
@@ -905,7 +905,7 @@ section {
   }
 
   .ref-portrait-img {
-    height: min(72vh, 620px) !important;
+    height: clamp(340px, 46vh, 460px) !important;
     width: auto !important;
     max-width: none !important;
   }
