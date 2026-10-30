@@ -75,7 +75,7 @@ export const projects: Project[] = [
       "Computer Vision",
     ],
     github: "https://github.com/thexcomrade/DEEP-FAKE-FACE-DETECTION",
-    demo: "",
+    demo: "https://deepfakefacedetection.vercel.app/",
   },
   {
     image: "/projects/robot.jpg",

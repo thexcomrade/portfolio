@@ -200,7 +200,7 @@ export default function Home() {
               />
 
               <div className="ref-stat-item">
-                <span className="ref-stat-value">20+</span>
+                <span className="ref-stat-value">10+</span>
                 <span className="ref-stat-label">
                   Projects
                 </span>
@@ -314,7 +314,7 @@ export default function Home() {
               }}
             >
               <Image
-  src="/nanu.png"
+  src="/nanappan.png"
   alt="Devanarayanan V S"
   width={2800}
   height={1345}
@@ -354,6 +354,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* Full-width seamless shadow transition connecting hero to about page */}
+        <div className="ref-hero-bottom-blend" aria-hidden="true" />
 
         {/* Scroll indicator */}
         <a

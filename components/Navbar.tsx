@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Download, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { navigation } from "@/constants/navigation";
 
@@ -11,50 +11,68 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isClickScrollingRef = useRef(false);
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    const sectionIds = navigation
+      .map((item) => item.href.replace("#", ""))
+      .filter(Boolean);
+
+    let rafId: number | null = null;
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // If user clicked a nav link, let smooth scroll finish without jittering
+      if (isClickScrollingRef.current) return;
+
+      if (rafId !== null) return;
+
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+
+        // At the very top
+        if (scrollY < 80) {
+          setActiveSection("home");
+          return;
+        }
+
+        // At the very bottom
+        if (windowHeight + scrollY >= docHeight - 60) {
+          setActiveSection("contact");
+          return;
+        }
+
+        // Calculate which section is active based on viewport reading zone
+        const triggerPoint = scrollY + Math.min(windowHeight * 0.35, 300);
+        let currentActive = "home";
+
+        for (const id of sectionIds) {
+          const section = document.getElementById(id);
+          if (section) {
+            const top = section.offsetTop;
+            if (triggerPoint >= top) {
+              currentActive = id;
+            }
+          }
+        }
+
+        setActiveSection(currentActive);
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
-    const sectionIds = navigation
-      .map((item) => item.href.replace("#", ""))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSections = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              a.boundingClientRect.top - b.boundingClientRect.top
-          );
-
-        if (visibleSections.length > 0) {
-          setActiveSection(visibleSections[0].target.id);
-        }
-      },
-      {
-        root: null,
-        rootMargin: "-18% 0px -58% 0px",
-        threshold: [0.05, 0.1, 0.25],
-      }
-    );
-
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-
-      if (section) {
-        observer.observe(section);
-      }
-    });
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
     };
   }, []);
 
@@ -83,16 +101,29 @@ export default function Navbar() {
       return;
     }
 
-    target.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-        .matches
-        ? "auto"
-        : "smooth",
-      block: "start",
-    });
-
+    // Set immediate active section so the indicator glides seamlessly
     setActiveSection(id);
     setMobileMenuOpen(false);
+
+    // Prevent scroll spy from fighting with smooth click scroll
+    isClickScrollingRef.current = true;
+    if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+    clickTimeoutRef.current = setTimeout(() => {
+      isClickScrollingRef.current = false;
+    }, 900);
+
+    const isHome = id === "home";
+    const yOffset = isHome ? 0 : -72;
+    const targetY = isHome
+      ? 0
+      : target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({
+      top: Math.max(0, targetY),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
   };
 
   return (
@@ -157,11 +188,14 @@ export default function Navbar() {
                         className="ref-nav-indicator"
                         transition={{
                           type: "spring",
-                          stiffness: 420,
-                          damping: 32,
+                          stiffness: 340,
+                          damping: 28,
+                          mass: 0.75,
                         }}
                         aria-hidden="true"
                       >
+                        <span className="ref-nav-indicator-glow" />
+                        <span className="ref-nav-indicator-bar" />
                         <span className="ref-nav-indicator-dot" />
                       </motion.span>
                     )}
@@ -229,10 +263,9 @@ export default function Navbar() {
                       }}
                     >
                       <span>{item.name}</span>
-
                       {isActive && (
                         <span
-                          className="ref-mobile-dot"
+                          className="ref-mobile-indicator-dot"
                           aria-hidden="true"
                         />
                       )}
@@ -240,23 +273,18 @@ export default function Navbar() {
                   </li>
                 );
               })}
-
-              <li className="ref-mobile-resume-item">
-                <a
-                  href="/resume.pdf"
-                  download="Devanarayanan_Resume.pdf"
-                  className="ref-resume-btn ref-mobile-resume-btn"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Download
-                    size={15}
-                    strokeWidth={2.2}
-                    aria-hidden="true"
-                  />
-                  <span>Download Resume</span>
-                </a>
-              </li>
             </ul>
+
+            <div className="ref-mobile-actions">
+              <a
+                href="/resume.pdf"
+                download="Devanarayanan_Resume.pdf"
+                className="ref-mobile-resume"
+              >
+                <Download size={16} aria-hidden="true" />
+                <span>Download Resume</span>
+              </a>
+            </div>
           </div>
         )}
       </div>

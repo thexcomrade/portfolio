@@ -61,8 +61,8 @@ export default function Projects() {
                       className="project-button project-github"
                       aria-label={`View ${project.title} source code on GitHub`}
                     >
-                      <FaGithub aria-hidden="true" />
-                      <span> Code </span>
+                      <FaGithub aria-hidden="true" size={16} />
+                      <span>Code</span>
                     </a>
                   ) : (
                     <button
