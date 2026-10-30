@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SpaceBackground from "@/components/SpaceBackground";
-import WelcomePopup from "@/components/WelcomePopup";
 
 export const metadata: Metadata = {
   title: "Devanarayanan | AI & ML Engineer",
@@ -26,7 +25,6 @@ export default function RootLayout({
       </head>
       <body>
         <SpaceBackground />
-        <WelcomePopup />
         {children}
       </body>
     </html>
