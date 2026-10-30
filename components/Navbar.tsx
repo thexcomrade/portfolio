@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { navigation } from "@/constants/navigation";
 
 const navIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -31,6 +32,7 @@ const navIcons: Record<string, React.ComponentType<{ size?: number; className?: 
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
+  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isClickScrollingRef = useRef(false);
@@ -45,6 +47,9 @@ export default function Navbar() {
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // When the user scrolls, clear manual hover so scroll-spy actively drives the sliding capsule
+      setHoveredSection(null);
 
       // If user clicked a nav link, let smooth scroll finish without jittering
       if (isClickScrollingRef.current) return;
@@ -65,20 +70,23 @@ export default function Navbar() {
         }
 
         // At the very bottom
-        if (windowHeight + scrollY >= docHeight - 60) {
+        if (windowHeight + scrollY >= docHeight - 80) {
           setActiveSection("contact");
           return;
         }
 
-        // Calculate which section is active based on viewport reading zone
-        const triggerPoint = scrollY + Math.min(windowHeight * 0.35, 300);
+        // Calculate which section is active based on exact viewport reading zone (40% down)
+        const midViewport = windowHeight * 0.4;
         let currentActive = "home";
 
         for (const id of sectionIds) {
           const section = document.getElementById(id);
           if (section) {
-            const top = section.offsetTop;
-            if (triggerPoint >= top) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= midViewport && rect.bottom > midViewport) {
+              currentActive = id;
+              break;
+            } else if (rect.top <= midViewport) {
               currentActive = id;
             }
           }
@@ -125,6 +133,7 @@ export default function Navbar() {
 
     // Set immediate active section so the indicator glides seamlessly
     setActiveSection(id);
+    setHoveredSection(null);
     setMobileMenuOpen(false);
 
     // Prevent scroll spy from fighting with smooth click scroll
@@ -183,33 +192,59 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* DESKTOP DOCK NAVIGATION (Expanding Glass Bar Animation) */}
-          <div className="ref-dock-menu" role="menubar" aria-label="Primary navigation">
+          {/* DESKTOP DOCK NAVIGATION (Sliding Fluid Orange Capsule Pill) */}
+          <nav
+            className="ref-dock-menu"
+            role="menubar"
+            aria-label="Primary navigation"
+            onMouseLeave={() => setHoveredSection(null)}
+          >
             {navigation.map((item) => {
               const id = item.href.replace("#", "");
               const isActive = activeSection === id;
+              const isCurrent =
+                hoveredSection !== null ? hoveredSection === id : isActive;
               const IconComponent = navIcons[id] || HomeIcon;
 
               return (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`ref-dock-link ${isActive ? "active" : ""}`}
+                  className={`ref-dock-link ${isActive ? "active" : ""} ${
+                    isCurrent ? "current" : ""
+                  }`}
                   aria-current={isActive ? "location" : undefined}
+                  onMouseEnter={() => setHoveredSection(id)}
+                  onFocus={() => setHoveredSection(id)}
+                  onBlur={() => setHoveredSection(null)}
                   onClick={(event) => {
                     event.preventDefault();
                     handleNavigationClick(item.href);
                   }}
                   title={item.name}
                 >
+                  {isCurrent && (
+                    <motion.div
+                      layoutId="activeOrangeCapsule"
+                      className="ref-orange-capsule"
+                      transition={{
+                        type: "spring",
+                        stiffness: 460,
+                        damping: 32,
+                        mass: 0.6,
+                      }}
+                    />
+                  )}
+
                   <span className="ref-dock-icon" aria-hidden="true">
-                    <IconComponent size={17} />
+                    <IconComponent size={15} />
                   </span>
+
                   <span className="ref-dock-title">{item.name}</span>
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
           {/* RESUME + MOBILE MENU */}
           <div className="ref-navbar-right">

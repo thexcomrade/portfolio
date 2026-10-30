@@ -212,45 +212,73 @@ export default function Home() {
             <div className="ref-hero-orbitals" aria-hidden="true">
               <svg
                 className="ref-orbitals-svg"
-                viewBox="0 0 700 700"
+                viewBox="0 0 800 800"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
+                {/* Technical Crosshairs through center (400, 400) */}
+                <line
+                  x1="0"
+                  y1="400"
+                  x2="800"
+                  y2="400"
+                  stroke="currentColor"
+                  strokeOpacity=".22"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="400"
+                  y1="0"
+                  x2="400"
+                  y2="800"
+                  stroke="currentColor"
+                  strokeOpacity=".22"
+                  strokeWidth="1"
+                />
+
+                {/* Inner, Middle & Outer Concentric Circles centered at (400, 400) */}
                 <circle
-                  cx="350"
-                  cy="350"
-                  r="280"
+                  cx="400"
+                  cy="400"
+                  r="170"
                   stroke="currentColor"
-                  strokeOpacity=".32"
+                  strokeOpacity=".4"
+                  strokeWidth="1.2"
                 />
-
                 <circle
-                  cx="350"
-                  cy="350"
-                  r="195"
+                  cx="400"
+                  cy="400"
+                  r="260"
                   stroke="currentColor"
-                  strokeOpacity=".46"
+                  strokeOpacity=".3"
+                  strokeWidth="1"
                 />
-
                 <circle
-                  cx="350"
-                  cy="350"
-                  r="130"
-                  stroke="currentColor"
-                  strokeOpacity=".32"
-                />
-
-                <path
-                  d="M90 460A280 280 0 0 0 580 510"
-                  stroke="currentColor"
-                  strokeOpacity=".48"
-                />
-
-                <path
-                  d="M170 100A250 250 0 0 1 610 270"
+                  cx="400"
+                  cy="400"
+                  r="370"
                   stroke="currentColor"
                   strokeOpacity=".2"
+                  strokeWidth="1"
+                />
+
+                {/* Sweeping Intersecting Orbital Arc (Matching Reference) */}
+                <circle
+                  cx="560"
+                  cy="460"
+                  r="290"
+                  stroke="currentColor"
+                  strokeOpacity=".28"
+                  strokeWidth="1"
+                />
+
+                {/* Technical measurement dashes */}
+                <path
+                  d="M160 260A290 290 0 0 1 640 260"
+                  stroke="currentColor"
+                  strokeOpacity=".24"
                   strokeDasharray="4 8"
+                  strokeWidth="1"
                 />
               </svg>
             </div>
@@ -264,14 +292,13 @@ export default function Home() {
               }}
             >
               <Image
-  src="/nanappan.png"
-  alt="Devanarayanan V S"
-  width={2800}
-  height={1345}
-  priority
-  className="ref-portrait-img"
-  sizes="(max-width: 640px) 95vw, (max-width: 1024px) 75vw, 58vw"
-/>
+                src="/nanappan.png"
+                alt="Devanarayanan V S"
+                width={1200}
+                height={1000}
+                priority
+                className="ref-portrait-img"
+              />
 
               <div
                 className="ref-portrait-fade"

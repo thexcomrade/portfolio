@@ -333,7 +333,7 @@ export default function Contact() {
               <div className="contact-form-card">
                 <div className="contact-form-card-header">
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8, flexWrap: "wrap", gap: 8 }}>
-                    <p className="contact-form-eyebrow" style={{ margin: 0 }}>SEND A MESSAGE</p>
+                    <p className="contact-form-eyebrow" style={{ margin: 0 }}>WANNA TEXT ME A </p>
                     <button
                       type="button"
                       onClick={handleCopyEmail}
@@ -358,7 +358,7 @@ export default function Contact() {
                       </span>
                     </button>
                   </div>
-                  <h3 className="contact-form-title">Start a Conversation</h3>
+                  <h1 className="contact-form-title">MESSAGE</h1>
                 </div>
 
                 {submitted ? (

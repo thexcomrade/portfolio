@@ -19,6 +19,7 @@ interface Achievement {
   duration: string;
   description: string;
   category: string;
+  certificateUrl: string;
 }
 
 const achievements: Achievement[] = [
@@ -31,6 +32,7 @@ const achievements: Achievement[] = [
     category: "Industry Internship",
     description:
       "Hands-on training in robotics, drone aerodynamics, embedded controllers, Arduino programming, sensors, automation, and real-time hardware telemetry.",
+    certificateUrl: "/certificates/cyborg-robotics.jpg",
   },
   {
     id: "techmaghi-robotics",
@@ -41,6 +43,7 @@ const achievements: Achievement[] = [
     category: "Technical Internship",
     description:
       "Intensive training in robotics fundamentals, microcontroller programming, embedded circuits, hardware-software integration, and automated control systems.",
+    certificateUrl: "/certificates/techmaghi-robotics.jpg",
   },
   {
     id: "genzee-quiz",
@@ -51,6 +54,7 @@ const achievements: Achievement[] = [
     category: "Technical Event",
     description:
       "National-level competitive technical evaluation covering robotics engineering, drone development, autonomous automation, and cutting-edge computing paradigms.",
+    certificateUrl: "/certificates/genzee-quiz.jpg",
   },
   {
     id: "genzee-webinar",
@@ -61,6 +65,7 @@ const achievements: Achievement[] = [
     category: "Professional Development",
     description:
       "Advanced technical session covering artificial intelligence market landscapes, engineering career trajectories, and scalable software delivery standards.",
+    certificateUrl: "/certificates/genzee-webinar.jpg",
   },
   {
     id: "ev-workshop",
@@ -71,6 +76,7 @@ const achievements: Achievement[] = [
     category: "Automotive AI",
     description:
       "Comprehensive workshop exploring autonomous vehicle architectures, intelligent transportation systems, LiDAR/RADAR sensing, and self-driving computer vision models.",
+    certificateUrl: "/certificates/ev-workshop.jpg",
   },
   {
     id: "ncc-cert",
@@ -81,6 +87,7 @@ const achievements: Achievement[] = [
     category: "Leadership & Discipline",
     description:
       "Rigorous leadership, tactical discipline, operational teamwork, resilience under pressure, and structured military-grade field training.",
+    certificateUrl: "/certificates/ncc-certificate.jpg",
   },
 ];
 
@@ -101,7 +108,15 @@ export default function Achievements() {
         {/* Achievements Grid */}
         <div className="achievements-grid">
           {achievements.map((item) => (
-            <article key={item.id} className="achievement-card">
+            <a
+              key={item.id}
+              href={item.certificateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="achievement-card"
+              title={`View ${item.title} Certificate`}
+              aria-label={`View certificate for ${item.title} (opens JPG in new tab)`}
+            >
               <div className="achievement-top">
                 <div className="achievement-icon">{item.icon}</div>
                 <span className="achievement-category">{item.category}</span>
@@ -115,12 +130,12 @@ export default function Achievements() {
               <div className="achievement-divider" aria-hidden="true" />
 
               <div className="achievement-footer">
-                <span className="achievement-label">{item.category}</span>
+                <span className="achievement-label">View Certificate</span>
                 <span className="achievement-arrow" aria-hidden="true">
                   <ArrowUpRight size={16} />
                 </span>
               </div>
-            </article>
+            </a>
           ))}
         </div>
 
