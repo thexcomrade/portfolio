@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="footer-brand-col">
             <Link href="#home" className="footer-logo">
               <Image
-                src="/file.svg"
+                src="/file.png"
                 alt="DV Logo"
                 width={36}
                 height={36}

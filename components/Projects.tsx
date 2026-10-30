@@ -11,9 +11,8 @@ export default function Projects() {
       <div className="section-inner">
         {/* Section Heading */}
         <div className="section-header">
-          <p className="section-eyebrow">CHAPTER 02 // SIGNATURE CREATIONS</p>
           <h2 className="section-title">
-            Flagship <span>Projects &amp; Systems</span>
+            Flagship <span>Projects &amp; Works</span>
           </h2>
           <p className="section-subtitle">
             Tangible, production-tested proofs of concept engineered for real-world impact.
@@ -84,8 +83,10 @@ export default function Projects() {
                       className="project-button project-demo"
                       aria-label={`Open live demo for ${project.title}`}
                     >
-                      <span>Live Demo</span>
-                      <ExternalLink size={13} aria-hidden="true" />
+                      <span className="inline-flex items-center gap-2">
+  Live Demo
+  <ExternalLink size={15} aria-hidden="true" />
+</span>
                     </a>
                   )}
                 </div>

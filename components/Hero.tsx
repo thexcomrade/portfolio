@@ -120,23 +120,16 @@ export default function Home() {
             </div>
 
             <div className="ref-hero-heading-group">
-              <h1
-                id="ref-hero-title"
-                className="ref-hero-title-solid"
-              >
-                DEVA
-              </h1>
-
-              <span
-                className="ref-hero-title-outline"
-                aria-hidden="true"
-              >
-                NARAYANAN
-              </span>
-
-              <span className="ref-visually-hidden">
-                Devanarayanan V S
-              </span>
+              <Image
+                src="/back.png"
+                alt="DEVA NARAYANAN"
+                width={3110}
+                height={1524}
+                priority
+                className="ref-hero-name-artwork"
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 480px"
+              />
+              <h1 className="sr-only">DEVANARAYANAN V S - AI &amp; ML Engineer</h1>
             </div>
 
             <p className="ref-hero-descriptor">
@@ -155,30 +148,14 @@ export default function Home() {
 
             <p className="ref-hero-intro">
               Passionate about Artificial Intelligence, Machine
-              Learning, Data Science, and modern software engineering.
-              Focused on building intelligent applications,
-              production-ready machine learning systems, and scalable
-              software solutions that solve real-world problems.
+              Learning, and modern software engineering.
+              Focused on building intelligent applications and scalable
+              software solutions with real-world impact.
             </p>
 
             <div className="ref-hero-actions">
               <a href="#contact" className="ref-btn-primary">
                 <span>Hire Me</span>
-                <svg
-                  viewBox="0 0 24 24"
-                  width="17"
-                  height="17"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M7 17 17 7M7 7h10v10"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
               </a>
 
               <a
@@ -205,15 +182,15 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Keep metrics factual; update them to match your real portfolio. */}
+            {/* Portfolio highlights matching reference image */}
             <div
               className="ref-hero-stats"
               aria-label="Portfolio highlights"
             >
               <div className="ref-stat-item">
-                <span className="ref-stat-value">AI</span>
+                <span className="ref-stat-value">5+</span>
                 <span className="ref-stat-label">
-                  Intelligent Systems
+                  Experiences
                 </span>
               </div>
 
@@ -223,9 +200,9 @@ export default function Home() {
               />
 
               <div className="ref-stat-item">
-                <span className="ref-stat-value">ML</span>
+                <span className="ref-stat-value">10+</span>
                 <span className="ref-stat-label">
-                  Applied Learning
+                  Projects
                 </span>
               </div>
 
@@ -235,9 +212,9 @@ export default function Home() {
               />
 
               <div className="ref-stat-item">
-                <span className="ref-stat-value">DEV</span>
+                <span className="ref-stat-value">15+</span>
                 <span className="ref-stat-label">
-                  Product Engineering
+                  Happy Clients
                 </span>
               </div>
             </div>
@@ -253,6 +230,11 @@ export default function Home() {
           >
             <div
               className="ref-hero-ambient-glow"
+              aria-hidden="true"
+            />
+
+            <div
+              className="ref-hero-sun-disc"
               aria-hidden="true"
             />
 
@@ -332,14 +314,14 @@ export default function Home() {
               }}
             >
               <Image
-                src="/nanu.png"
-                alt="Devanarayanan V S"
-                width={1200}
-                height={1200}
-                priority
-                className="ref-portrait-img"
-                sizes="(max-width: 640px) 95vw, (max-width: 1024px) 75vw, 58vw"
-              />
+  src="/nanu.png"
+  alt="Devanarayanan V S"
+  width={2800}
+  height={1345}
+  priority
+  className="ref-portrait-img"
+  sizes="(max-width: 640px) 95vw, (max-width: 1024px) 75vw, 58vw"
+/>
 
               <div
                 className="ref-portrait-fade"
@@ -368,7 +350,7 @@ export default function Home() {
               <span className="ref-label-dash" />
               <span className="ref-label-text">ML</span>
               <span className="ref-label-text">DATA</span>
-              <span className="ref-label-text">AI SYSTEMS</span>
+              <span className="ref-label-text">SOLUTIONS</span>
             </div>
           </div>
         </div>
@@ -382,7 +364,7 @@ export default function Home() {
           <span className="ref-mouse-icon" aria-hidden="true">
             <span className="ref-mouse-wheel" />
           </span>
-          <span className="ref-scroll-text">SCROLL TO EXPLORE</span>
+          <span className="ref-scroll-text">SCROLL DOWN</span>
         </a>
       </section>
     </main>

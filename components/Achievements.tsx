@@ -90,7 +90,6 @@ export default function Achievements() {
       <div className="section-inner">
         {/* Section Heading */}
         <div className="section-header">
-          <p className="section-eyebrow">CHAPTER 05 // FIELD RECORDS</p>
           <h2 className="section-title">
             Certifications &amp; <span>Honors</span>
           </h2>

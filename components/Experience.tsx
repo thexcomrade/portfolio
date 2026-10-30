@@ -25,8 +25,6 @@ export default function Experience() {
       <div className="section-inner">
         {/* Section Heading */}
         <div className="section-header">
-          <p className="section-eyebrow">CHAPTER 04 // FIELD DOSSIER</p>
-
           <h2 className="section-title">
             Professional <span>Experience &amp; Industry</span>
           </h2>

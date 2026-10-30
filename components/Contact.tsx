@@ -203,13 +203,9 @@ export default function Contact() {
       <div className="section-inner contact-inner">
         {/* Section Header */}
         <div className="section-header">
-          <p className="section-eyebrow">CHAPTER 06 // INITIATE TRANSMISSION</p>
           <h2 className="section-title">
             Start a <span>Conversation</span>
           </h2>
-          <p className="section-subtitle">
-            Ready to build something intelligent? My inbox and channels are always open.
-          </p>
         </div>
 
         {/* Main Content Grid */}
@@ -272,7 +268,7 @@ export default function Contact() {
             <div className="contact-info-block">
               <div className="contact-status-badge">
                 <span className="contact-status-dot" aria-hidden="true" />
-                <span>Available for AI &amp; ML Opportunities</span>
+                <span>Available for Opportunities : Wanna Hire me?</span>
               </div>
 
               <h3 className="contact-cta-heading">
@@ -299,7 +295,7 @@ export default function Contact() {
                     <a
                       href="mailto:devanarayananstackuplearning@gmail.com"
                       className="contact-detail-value"
-                      style={{ color: "#36f7f9", textDecoration: "none" }}
+                      style={{ color: "#ff8c38", textDecoration: "none" }}
                     >
                       devanarayananstackuplearning@gmail.com
                     </a>
@@ -345,22 +341,26 @@ export default function Contact() {
                       title="Click to copy email address"
                       aria-label="Copy direct email address to clipboard"
                     >
-                      {copied ? (
-                        <>
-                          <Check size={13} aria-hidden="true" />
-                          <span>Copied Email!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy size={13} aria-hidden="true" />
-                          <span>Copy Email</span>
-                        </>
-                      )}
+                      <Mail size={13} aria-hidden="true" className="contact-copy-mail-icon" />
+                      <span className="contact-copy-address">devanarayananstackuplearning@gmail.com</span>
+                      <span className={`contact-copy-pill ${copied ? "copied" : ""}`}>
+                        {copied ? (
+                          <>
+                            <Check size={11} aria-hidden="true" />
+                            <span>COPIED</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={11} aria-hidden="true" />
+                            <span>COPY</span>
+                          </>
+                        )}
+                      </span>
                     </button>
                   </div>
                   <h3 className="contact-form-title">Start a Conversation</h3>
                   <p className="contact-form-sub">
-                    Directly delivered to <strong style={{ color: "#36f7f9" }}>devanarayananstackuplearning@gmail.com</strong>
+                    Directly delivered to <strong style={{ color: "#ff8c38" }}>devanarayananstackuplearning@gmail.com</strong>
                   </p>
                 </div>
 

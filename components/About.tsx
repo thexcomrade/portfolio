@@ -63,27 +63,22 @@ export default function About() {
       <div className="section-inner">
         {/* Section Header */}
         <div className="section-header">
-          <p className="section-eyebrow">CHAPTER 01 // THE MANIFESTO</p>
           <h2 className="section-title">
             The Story of <span>Me &amp; My Code</span>
           </h2>
-          <p className="section-subtitle">
-            Not a blog of text—a journey of curiosity, autonomy, and deliberate engineering.
-          </p>
         </div>
 
         {/* Narrative Manifesto Banner */}
         <div className="story-manifesto-card">
           <div className="story-manifesto-badge">
-            <Terminal size={14} aria-hidden="true" />
+            <Terminal size={15} aria-hidden="true" />
             <span>MY CORE PHILOSOPHY</span>
           </div>
           <blockquote className="story-manifesto-quote">
             &ldquo;I don&apos;t write software merely to generate lines of code. I build autonomous intelligence that bridges abstract neural mathematics with tangible, real-world human solutions.&rdquo;
           </blockquote>
           <div className="story-manifesto-footer">
-            <span className="story-manifesto-author">— DEVANARAYANAN</span>
-            <span className="story-manifesto-role">AI &amp; Machine Learning Engineer</span>
+            <span className="story-manifesto-author"> — DEVANARAYANAN</span>
           </div>
         </div>
 
@@ -103,9 +98,9 @@ export default function About() {
                 />
               </div>
               <div className="story-portrait-info">
-                <span className="story-dossier-badge">DEV DOSSIER</span>
-                <h3 className="story-dossier-name">Devanarayanan</h3>
-                <p className="story-dossier-title">AI &amp; ML Systems Architect</p>
+                <span className="story-dossier-badge">STUDENT</span>
+                <h3 className="story-dossier-name">DEVANARAYANAN VS</h3>
+                <p className="story-dossier-title">AI &amp; ML Engineer</p>
 
                 <div className="story-dossier-meta">
                   <span className="story-dossier-location">

@@ -163,13 +163,9 @@ export default function Skills() {
       <div className="section-inner">
         {/* Section Header */}
         <div className="section-header">
-          <p className="section-eyebrow">CHAPTER 03 // THE CAPABILITIES</p>
           <h2 className="section-title">
             Neural &amp; <span>Engineering Stack</span>
           </h2>
-          <p className="section-subtitle">
-            Specialized tools, frameworks, and architecture deployed across production environments.
-          </p>
         </div>
 
         {/* Category Filters */}

@@ -29,7 +29,7 @@ export const projects: Project[] = [
   {
     image: "/projects/tripgenius.jpg",
     badge: "Generative AI",
-    title: "TripGenius AI",
+    title: "TripGeni AI",
     description:
       "AI-powered travel planner that creates personalized itineraries using destination intelligence, weather forecasts, budget analysis, and Generative AI for a seamless travel experience.",
     technologies: [
