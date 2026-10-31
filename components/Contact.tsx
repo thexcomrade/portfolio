@@ -97,6 +97,7 @@ export default function Contact() {
   const [copied, setCopied] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "fallback">("idle");
   const [statusMessage, setStatusMessage] = useState("");
+  const [lastSubmitTime, setLastSubmitTime] = useState<number>(0);
 
   // Auto-suggest subjects based on message content
   const suggestions = useMemo(() => {
@@ -119,7 +120,7 @@ export default function Contact() {
       setActivePanel("location");
     } else if (link.href) {
       if (link.href.startsWith("/")) {
-        window.open(link.href, "_blank");
+        window.open(link.href, "_blank", "noopener,noreferrer");
       } else {
         window.open(link.href, "_blank", "noopener,noreferrer");
       }
@@ -138,6 +139,19 @@ export default function Contact() {
       setStatusMessage("Please provide your name, email, and message.");
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setStatusMessage("Please enter a valid email address.");
+      return;
+    }
+
+    const now = Date.now();
+    if (now - lastSubmitTime < 5000) {
+      setStatusMessage("Please wait a moment before sending another message.");
+      return;
+    }
+    setLastSubmitTime(now);
 
     setLoading(true);
     setStatusMessage("");
@@ -333,7 +347,7 @@ export default function Contact() {
               <div className="contact-form-card">
                 <div className="contact-form-card-header">
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8, flexWrap: "wrap", gap: 8 }}>
-                    <p className="contact-form-eyebrow" style={{ margin: 0 }}>WANNA TEXT ME A </p>
+                    <p className="contact-form-eyebrow" style={{ margin: 0 }}>LET'S BUILD SOMETHING TOGETHER </p>
                     <button
                       type="button"
                       onClick={handleCopyEmail}
@@ -358,7 +372,7 @@ export default function Contact() {
                       </span>
                     </button>
                   </div>
-                  <h1 className="contact-form-title">MESSAGE</h1>
+                  <h1 className="contact-form-title">SEND A MESSAGE</h1>
                 </div>
 
                 {submitted ? (
@@ -386,6 +400,8 @@ export default function Contact() {
                   </div>
                 ) : (
                   <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                    {/* Anti-spam honeypot (hidden from humans, traps bots) */}
+                    <input type="checkbox" name="botcheck" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
                     {statusMessage && (
                       <div className="contact-form-error" style={{ color: "#ff8c38", fontSize: "0.85rem", fontWeight: 600 }}>
                         {statusMessage}
@@ -402,7 +418,6 @@ export default function Contact() {
                           autoComplete="name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          placeholder="Your Name"
                         />
                       </div>
                       <div className="contact-field">
@@ -415,7 +430,6 @@ export default function Contact() {
                           autoComplete="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          placeholder="you@example.com"
                         />
                       </div>
                     </div>
@@ -463,7 +477,7 @@ export default function Contact() {
 
                     <div className="contact-form-footer">
                       <span className="contact-form-hint">
-                        AI • ML • Full Stack Engineer
+                        AI • ML • ENGINEER | OPEN TO COLLABORATION, JOBS, AND PROJECTS
                       </span>
                       <button
                         type="submit"

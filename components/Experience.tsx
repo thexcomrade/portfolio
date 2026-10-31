@@ -14,8 +14,7 @@ const skills = [
   "Machine Learning",
   "FastAPI",
   "Deep Learning",
-  "Computer Vision",
-  "Data Science",
+  "Html & CSS",
   "Problem Solving",
 ];
 
@@ -58,11 +57,11 @@ export default function Experience() {
               </h3>
 
               <div className="exp-role-badge">
-                <span>AI &amp; Machine Learning Intern</span>
+                <span>Software Engineer Intern</span>
 
                 <span className="exp-date-tag">
                   <FaCalendarAlt />
-                  2026 — Present
+                  August 2026 - Present
                 </span>
               </div>
 
@@ -156,7 +155,7 @@ export default function Experience() {
                   </h4>
 
                   <p className="id-title">
-                    AI &amp; MACHINE LEARNING INTERN
+                INTERN SOFTWARE ENGINEER
                   </p>
 
                   <div className="id-fields-grid">

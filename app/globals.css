@@ -1764,6 +1764,7 @@ section {
   font-weight: 800;
   color: white;
   line-height: 1.15;
+  letter-spacing: -0.045em;
 }
 .section-title span {
   background: linear-gradient(90deg, #e54704, #ff7a18);
@@ -9393,6 +9394,7 @@ html {
 .exp-summary-text {
   font-size: 0.92rem;
   line-height: 1.7;
+  text-align: justify;
   color: #cbd5e1;
   margin-bottom: 24px;
 }
@@ -10076,10 +10078,10 @@ html {
 
 }
 .contact-form-title { 
-  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-size: 24px;
   font-weight: 900;
   line-height: 0.85;
-  letter-spacing: -0.045em;
+  letter-spacing: 0.045em;
   color: #ffffff;
   margin: 0 0 28px;
   padding: 0;
@@ -10334,7 +10336,20 @@ html {
     grid-template-columns: 1fr;
   }
   .contact-left {
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+  .contact-radial-menu {
+    margin: 0 auto;
+  }
+  .contact-info-block {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .contact-status-badge {
+    margin: 0 auto;
   }
 }
 @media (max-width: 640px) {
@@ -11573,4 +11588,194 @@ html {
 .achievement-certificate-link:focus-visible {
   outline: 2px solid #ff8a24;
   outline-offset: 4px;
+}
+
+/* ================================================================
+   MOBILE-ONLY REFINEMENTS: Experience & Contact Middle Alignment
+   Applies strictly to mobile phone view (max-width: 768px)
+   Zero impact on tablet or desktop layouts.
+================================================================ */
+@media (max-width: 768px) {
+  /* Experience Section Mobile Middle Alignment & Clean Polish */
+  .experience-section .section-inner {
+    padding-inline: 12px;
+  }
+
+  .experience-master-card {
+    padding: 24px 18px;
+    border-radius: 20px;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.55);
+    width: 100%;
+  }
+
+  .exp-master-header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+  }
+
+  .exp-status-live {
+    justify-content: center;
+    text-align: center;
+    font-size: 0.70rem;
+    letter-spacing: 0.10em;
+  }
+
+  .exp-company-brand {
+    justify-content: center;
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.10em;
+  }
+
+  .exp-master-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .exp-info-col {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .exp-company-name {
+    font-size: 1.65rem;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .exp-role-badge {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+  }
+
+  .exp-date-tag {
+    font-size: 0.78rem;
+    padding: 4px 12px;
+  }
+
+  .exp-summary-text {
+    text-align: justify; 
+    font-size: 0.88rem;
+    line-height: 1.65;
+    max-width: 480px;
+    margin-inline: auto;
+    margin-bottom: 20px;
+  }
+
+  .exp-skills-flex {
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 22px;
+    width: 100%;
+  }
+
+  .exp-skill-pill {
+    font-size: 0.72rem;
+    padding: 5px 12px;
+  }
+
+  .exp-focus-cards {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .exp-focus-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px 14px;
+    gap: 10px;
+    border-radius: 14px;
+  }
+
+  .focus-card-icon {
+    margin-inline: auto;
+  }
+
+  .exp-id-col {
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+    margin-top: 10px;
+  }
+
+  .exp-id-badge-frame {
+    padding: 20px 16px;
+    border-radius: 20px;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
+  }
+
+  .id-photo-wrapper {
+    max-width: 240px;
+    margin-inline: auto;
+    margin-bottom: 14px;
+  }
+
+  .id-meta-block {
+    text-align: center;
+  }
+
+  .id-fields-grid {
+    text-align: center;
+    gap: 8px;
+  }
+
+  /* Contact Section Mobile Middle Alignment */
+  .contact-grid {
+    gap: 36px;
+  }
+
+  .contact-left {
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .contact-radial-menu {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .contact-info-block {
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .contact-status-badge {
+    margin: 0 auto !important;
+  }
+
+  .contact-details-list {
+    align-items: center;
+    width: 100%;
+    max-width: 380px;
+    margin-inline: auto;
+  }
+
+  .contact-details-list li {
+    justify-content: flex-start;
+    text-align: left;
+    width: 100%;
+  }
+
+  .contact-panel-tabs {
+    justify-content: center;
+  }
 }
