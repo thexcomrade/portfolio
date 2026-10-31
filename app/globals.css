@@ -1071,7 +1071,7 @@ transform-origin: center bottom;
     left: calc(50% - 200px);
   }
   .ref-portrait-img {
-  top: 0;
+  top: 20;
   left: clamp(65px, 7vw, 125px);
   height: clamp(900px, 118vh, 1320px) !important;
 }
@@ -1091,7 +1091,7 @@ transform-origin: center bottom;
     left: calc(50% - 150px);
   }
   .ref-portrait-img {
-    top: -45px;
+    top: -35px;
     height: clamp(620px, 81vh, 730px) !important;
   }
 }
@@ -1110,7 +1110,7 @@ transform-origin: center bottom;
     left: calc(50% - 110px);
   }
   .ref-portrait-img {
-    top: -35px;
+    top:40px;
     height: clamp(560px, 76vh, 660px) !important;
   }
 }
