@@ -457,12 +457,74 @@ section {
 .ref-grid-lines {
   position: absolute;
   inset: 0;
-  background-size: 64px 64px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 122, 24, 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 122, 24, 0.055) 1px, transparent 1px);
-  mask-image: radial-gradient(circle at 62% 44%, #000 35%, rgba(0,0,0,0.4) 75%, transparent 100%);
-  -webkit-mask-image: radial-gradient(circle at 62% 44%, #000 35%, rgba(0,0,0,0.4) 75%, transparent 100%);
+  pointer-events: none;
+
+  /* Fine grid + major grid spacing */
+  background-size: 72px 72px, 288px 288px;
+
+  background-image:
+    /* Fine vertical lines */
+    linear-gradient(
+      to right,
+      rgba(148, 163, 184, 0.055) 1px,
+      transparent 1px
+    ),
+
+    /* Fine horizontal lines */
+    linear-gradient(
+      to bottom,
+      rgba(148, 163, 184, 0.055) 1px,
+      transparent 1px
+    );
+
+  /* Fade grid around edges */
+  mask-image: radial-gradient(
+    ellipse at 55% 45%,
+    #000 25%,
+    rgba(0, 0, 0, 0.75) 65%,
+    transparent 100%
+  );
+
+  -webkit-mask-image: radial-gradient(
+    ellipse at 55% 45%,
+    #000 25%,
+    rgba(0, 0, 0, 0.75) 65%,
+    transparent 100%
+  );
+}
+.ref-hero-grid-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(255, 122, 24, 0.075) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255, 122, 24, 0.075) 1px,
+      transparent 1px
+    );
+
+  background-size: 288px 288px;
+
+  opacity: 0.65;
+
+  mask-image: radial-gradient(
+    ellipse at 55% 45%,
+    #000 20%,
+    transparent 85%
+  );
+
+  -webkit-mask-image: radial-gradient(
+    ellipse at 55% 45%,
+    #000 20%,
+    transparent 85%
+  );
 }
 .ref-cyber-node,
 .ref-grid-node {
@@ -657,6 +719,9 @@ section {
   text-transform: uppercase;
   color: #94a3b8;
   margin: 0 0 14px 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 .ref-descriptor-bullet {
   color: #ff7a18;
@@ -843,6 +908,58 @@ section {
   pointer-events: none;
   z-index: 3;
 }
+.ref-orbit-particle-one {
+  transform-box: view-box;
+  transform-origin: 400px 400px;
+  animation: ref-orbit-one 14s linear infinite;
+}
+
+.ref-orbit-particle-two {
+  transform-box: view-box;
+  transform-origin: 400px 400px;
+  animation: ref-orbit-two 9s linear infinite;
+}
+
+@keyframes ref-orbit-one {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ref-orbit-two {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.ref-orbit-glow {
+  filter:
+    drop-shadow(0 0 4px currentColor)
+    drop-shadow(0 0 9px rgba(255, 122, 24, 0.9));
+}
+
+@keyframes ref-orbit-one {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ref-orbit-two {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ref-orbit-particle-one,
+  .ref-orbit-particle-two {
+    animation: none;
+  }
+}
 .ref-orbitals-svg {
   width: 100%;
   height: 100%;
@@ -866,6 +983,9 @@ section {
   position: relative;
   z-index: 5;
 
+  left: clamp(20px, 2vw, 55px);
+  top: -70px;
+
   display: block;
 
   width: auto !important;
@@ -881,20 +1001,20 @@ section {
   pointer-events: none;
   -webkit-user-drag: none;
 
-  -webkit-mask-image: linear-gradient(
+  -webkit-mask-image:
+  linear-gradient(
     to bottom,
     #000 0%,
-    #000 78%,
-    rgba(0, 0, 0, 0.5) 90%,
+    #000 72%,
+    rgba(0, 0, 0, 0.7) 85%,
     transparent 100%
   );
 
   mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 78%,
-    rgba(0, 0, 0, 0.5) 90%,
-    transparent 100%
+    to right,
+    transparent 0%,
+    #000 12%,
+    #000 100%
   );
 
   filter:
@@ -938,10 +1058,10 @@ section {
 }
 
 /* Laptop and tablet */
-@media (max-width: 1024px) {
-  .ref-hero-right {
-    min-height: 440px;
-    height: 60vh;
+@media (max-width: 768px) {
+  .ref-portrait-img {
+    left: 0;
+    top: -15px;
   }
 
   .ref-hero-ambient-glow {
@@ -1037,12 +1157,11 @@ section {
 }
 .ref-label-statement {
   position: absolute;
-  left: 2%;
-  bottom: 12%;
-  z-index: 15;
+  left: 0%;
+  bottom: 43%;
+  z-index: 10;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   pointer-events: none;
 }
 .ref-statement-line {
@@ -1063,10 +1182,11 @@ section {
 }
 .ref-label-vertical {
   position: absolute;
-  right: 15%;
-  top: 34%;
+  right: 6%;
+  left: auto;
+  top: 28.5%;
   transform: none;
-  z-index: 15;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1482,6 +1602,7 @@ section {
   font-size: 2rem;
   color: #ff8c38;
   line-height: 1;
+  letter-spacing: 3.5px;
 }
 
 .story-metric-desc {
@@ -1562,6 +1683,7 @@ section {
 .story-act-subtitle {
   font-size: 0.78rem;
   font-weight: 700;
+  text-align: justify;
   letter-spacing: 0.06em;
   color: #ff8c38;
   margin-bottom: 12px;
@@ -1569,8 +1691,10 @@ section {
 }
 
 .story-act-description {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.8;
   font-size: 0.85rem;
-  line-height: 1.65;
   color: #cbd5e1;
   margin-bottom: 18px;
   flex: 1;

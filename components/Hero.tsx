@@ -104,18 +104,12 @@ export default function Home() {
             </div>
 
             <p className="ref-hero-descriptor">
-              <span>AI &amp; ML ENGINEER</span>
-              <span
-                className="ref-descriptor-bullet"
-                aria-hidden="true"
-              />
-              <span>DEVELOPER</span>
-              <span
-                className="ref-descriptor-bullet"
-                aria-hidden="true"
-              />
-              <span>RESEARCHER</span>
-            </p>
+  <span>AI &amp; ML ENGINEER</span>
+  <span className="ref-descriptor-separator">|</span>
+  <span>DEVELOPER</span>
+  <span className="ref-descriptor-separator">|</span>
+  <span>RESEARCHER</span>
+</p>
 
             <p className="ref-hero-intro">
               Passionate about Artificial Intelligence, Machine
@@ -209,79 +203,107 @@ export default function Home() {
               aria-hidden="true"
             />
 
-            <div className="ref-hero-orbitals" aria-hidden="true">
-              <svg
-                className="ref-orbitals-svg"
-                viewBox="0 0 800 800"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Technical Crosshairs through center (400, 400) */}
-                <line
-                  x1="0"
-                  y1="400"
-                  x2="800"
-                  y2="400"
-                  stroke="currentColor"
-                  strokeOpacity=".22"
-                  strokeWidth="1"
-                />
-                <line
-                  x1="400"
-                  y1="0"
-                  x2="400"
-                  y2="800"
-                  stroke="currentColor"
-                  strokeOpacity=".22"
-                  strokeWidth="1"
-                />
+            
+<div className="ref-hero-orbitals" aria-hidden="true">
+  <svg
+    className="ref-orbitals-svg"
+    viewBox="0 0 800 800"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* Technical Crosshairs through center (400, 400) */}
+    <line
+      x1="0"
+      y1="400"
+      x2="800"
+      y2="400"
+      stroke="currentColor"
+      strokeOpacity=".22"
+      strokeWidth="1"
+    />
+    <line
+      x1="400"
+      y1="0"
+      x2="400"
+      y2="800"
+      stroke="currentColor"
+      strokeOpacity=".22"
+      strokeWidth="1"
+    />
 
-                {/* Inner, Middle & Outer Concentric Circles centered at (400, 400) */}
-                <circle
-                  cx="400"
-                  cy="400"
-                  r="170"
-                  stroke="currentColor"
-                  strokeOpacity=".4"
-                  strokeWidth="1.2"
-                />
-                <circle
-                  cx="400"
-                  cy="400"
-                  r="260"
-                  stroke="currentColor"
-                  strokeOpacity=".3"
-                  strokeWidth="1"
-                />
-                <circle
-                  cx="400"
-                  cy="400"
-                  r="370"
-                  stroke="currentColor"
-                  strokeOpacity=".2"
-                  strokeWidth="1"
-                />
+    {/* Inner, Middle & Outer Concentric Circles */}
+    <circle
+      cx="400"
+      cy="400"
+      r="170"
+      stroke="currentColor"
+      strokeOpacity=".4"
+      strokeWidth="1.2"
+    />
+    <circle
+      cx="400"
+      cy="400"
+      r="260"
+      stroke="currentColor"
+      strokeOpacity=".3"
+      strokeWidth="1"
+    />
+    <circle
+      cx="400"
+      cy="400"
+      r="370"
+      stroke="currentColor"
+      strokeOpacity=".2"
+      strokeWidth="1"
+    />
 
-                {/* Sweeping Intersecting Orbital Arc (Matching Reference) */}
-                <circle
-                  cx="560"
-                  cy="460"
-                  r="290"
-                  stroke="currentColor"
-                  strokeOpacity=".28"
-                  strokeWidth="1"
-                />
+    {/* Sweeping Intersecting Orbital Arc */}
+    <circle
+      cx="560"
+      cy="460"
+      r="290"
+      stroke="currentColor"
+      strokeOpacity=".28"
+      strokeWidth="1"
+    />
 
-                {/* Technical measurement dashes */}
-                <path
-                  d="M160 260A290 290 0 0 1 640 260"
-                  stroke="currentColor"
-                  strokeOpacity=".24"
-                  strokeDasharray="4 8"
-                  strokeWidth="1"
-                />
-              </svg>
-            </div>
+    {/* Technical Measurement Dashes */}
+    <path
+      d="M160 260A290 290 0 0 1 640 260"
+      stroke="currentColor"
+      strokeOpacity=".24"
+      strokeDasharray="4 8"
+      strokeWidth="1"
+    />
+
+    {/* =====================================
+        ANIMATED ORBITAL PARTICLES
+    ====================================== */}
+
+    {/* Outer orbit - Orange particle */}
+    <g className="ref-orbit-particle-one">
+      <circle
+        cx="400"
+        cy="30"
+        r="5"
+        fill="#ff7a18"
+        className="ref-orbit-glow"
+      />
+    </g>
+
+    {/* Inner orbit - Champagne particle */}
+    <g className="ref-orbit-particle-two">
+      <circle
+        cx="400"
+        cy="140"
+        r="3.5"
+        fill="#ffd09b"
+        className="ref-orbit-glow"
+      />
+    </g>
+  </svg>
+</div>
+
 
             <div
               className="ref-portrait-stage"

@@ -9,6 +9,7 @@ import {
   Terminal,
   Code2,
   CheckCircle2,
+  HeartPulse,
 } from "lucide-react";
 
 export default function About() {
@@ -22,39 +23,39 @@ export default function About() {
   const storyActs = [
     {
       act: "ACT 01",
-      title: "The Physical Spark",
-      subtitle: "Robotics & Embedded Telemetry",
+      title: "Where It All Began",
+      subtitle: "Robotics, Arduino & Embedded Systems",
       icon: <Zap size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "My journey began in physical computing—programming microcontrollers, routing motor drivers, and tuning drone aerodynamics. Grounding code in the physical realm forged an obsession with autonomous behavior.",
-      highlight: "Hardware-to-Software Bridge",
+        "My curiosity about technology started beyond the screen. Working with Arduino, motor drivers, sensors, Bluetooth modules, and obstacle-avoiding robots introduced me to the connection between software and the physical world. It was where I first learned to turn an idea into something that actually moves.",
+    highlight: "From Writing Code to Building Things",
     },
     {
       act: "ACT 02",
-      title: "The Neural Transition",
-      subtitle: "Machine Learning & Vision",
+      title: "Discovering Intelligence",
+      subtitle: "Artificial Intelligence & Machine Learning",
       icon: <BrainCircuit size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "Transitioned from rule-based logic to statistical machine learning. Developed deep computer vision models, predictive health analytics, and high-accuracy classification pipelines with Scikit-Learn and PyTorch.",
-      highlight: "Mathematical Foundations",
+        "Pursuing B.Tech in Artificial Intelligence and Machine Learning changed how I approached problems. I explored Python, machine learning, deep learning, computer vision, and neural networks, moving from basic programming concepts towards systems that can learn from data and recognize patterns.",
+    highlight: "Learning to Build Intelligent Systems",
     },
     {
       act: "ACT 03",
-      title: "Generative Intelligence",
-      subtitle: "LLMs, RAG & Autonomous Agents",
-      icon: <Sparkles size={20} className="story-act-icon" aria-hidden="true" />,
+      title: "Technology with a Purpose",
+      subtitle: "Healthcare AI & Research Applications",
+      icon: <HeartPulse size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "Architecting modern Generative AI systems. Building production-grade retrieval-augmented generation (RAG) pipelines, context-aware autonomous agents, and intelligent travel assistants like TripGenius.",
-      highlight: "Production GenAI Pipelines",
+        "I became increasingly interested in using AI to solve problems that matter. My diabetic foot ulcer detection project introduced me to medical image analysis, CNN architectures, and model evaluation. Ideas like NutriPlan AI further shaped my interest in bringing artificial intelligence closer to healthcare and everyday life.",
+    highlight: "Exploring AI Beyond the Classroom",
     },
     {
       act: "ACT 04",
-      title: "The Engineering Ethos",
-      subtitle: "Scalable Full-Stack Systems",
+      title: "Building Beyond Idea",
+      subtitle: "Full-Stack Development & Applied AI",
       icon: <Code2 size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "An algorithm is only as impactful as its interface. I engineer resilient Next.js frontends, high-throughput FastAPI backends, and deterministic state systems that turn complex models into seamless products.",
-      highlight: "End-to-End System Design",
+        "Today, I enjoy bringing different technologies together. From Deepfake Face Detection and HandPlay to TripGenius, I explore how AI, software engineering, and thoughtful interfaces can become useful applications. I continue learning, experimenting, breaking things, fixing them, and building projects that reflect the engineer I am becoming.",
+    highlight: "Turning Experiments into Meaningful Projects",
     },
   ];
 
@@ -128,7 +129,7 @@ export default function About() {
               </div>
               <div className="story-metric-box">
                 <span className="story-metric-number">100%</span>
-                <span className="story-metric-desc">Production-Tested Code</span>
+                <span className="story-metric-desc">Production - Tested Code</span>
               </div>
             </div>
           </div>

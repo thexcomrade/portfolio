@@ -71,7 +71,7 @@ export default function Posters() {
       setActivePosterIndex((prev) =>
         prev === null ? 0 : (prev + 1) % filteredPosters.length
       );
-    }, 1200);
+    }, 1000);
 
     return () => clearInterval(timer);
   }, [activePosterIndex, isHovered, filteredPosters.length]);
