@@ -989,9 +989,9 @@ section {
 
 .ref-portrait-img {
   position: relative;
-  z-index: 5;
+  z-index: 3;
 
-  top: -20px;
+  top: 45px;
   left: -13px;
 
   display: block;
