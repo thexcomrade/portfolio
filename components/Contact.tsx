@@ -517,7 +517,7 @@ export default function Contact() {
                 <div className="contact-map-frame">
                   <iframe
                     title="Kalluvathukkal Kollam Kerala Map"
-                    src="https://maps.google.com/maps?q=8.832251072036884,76.74886269114106&z=15&output=embed"
+                    src="https://maps.google.com/maps?q=Kalluvathukkal%2C%20Kollam%2C%20Kerala&t=&z=14&ie=UTF8&iwloc=&output=embed"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}

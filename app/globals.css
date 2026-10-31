@@ -538,17 +538,17 @@ section {
 
 /* Two-Column Container Layout */
 .ref-hero-container {
-  max-width: 1720px;
+  max-width: 1820px;
   width: 100%;
   height: 100%;
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 70px);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 38% 62%;
+  grid-template-columns: 36% 64%;
   align-items: center;
   position: relative;
   z-index: 3;
-  padding: 0 32px;
+  padding: 0 clamp(24px, 3vw, 52px);
 }
 
 /* Left Column: Typography, Actions & Stats */
@@ -794,6 +794,8 @@ section {
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr;
   align-items: center;
+  position: relative;
+  z-index: 10;
   background: rgba(13, 16, 24, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1.5px solid rgba(255, 122, 24, 0.45);
@@ -843,7 +845,7 @@ section {
   min-height: clamp(680px, 86vh, 960px);
   overflow: visible;
   isolation: isolate;
-  padding-bottom: 28px;
+  padding-bottom: 0px;
 }
 .ref-hero-ambient-glow {
   position: absolute;
@@ -904,7 +906,7 @@ section {
   left: calc(50% - 170px);
   transform: translate(-50%, -50%);
 
-  width: clamp(600px, 66vw, 960px);
+  width: clamp(600px, 64vw, 940px);
   aspect-ratio: 1 / 1;
   height: auto;
 
@@ -984,17 +986,20 @@ section {
   overflow: visible;
   transition: transform 0.25s ease-out;
 }
+
 .ref-portrait-img {
   position: relative;
   z-index: 5;
 
-  left: clamp(20px, 2vw, 55px);
-  top: -70px;
+  top: -20px;
+  left: -13px;
 
   display: block;
-
   width: auto !important;
-  height: clamp(780px, 92vh, 1060px) !important;
+ height: clamp(950px, 115vh, 1300px) !important;
+
+transform: translateX(120px) scale(1.15);
+transform-origin: center bottom;
 
   max-width: none !important;
   max-height: none !important;
@@ -1002,30 +1007,34 @@ section {
   object-fit: contain;
   object-position: center bottom;
 
+  transform: translateX(55px) scale(1.18);
+  transform-origin: center bottom;
+
   user-select: none;
   pointer-events: none;
   -webkit-user-drag: none;
 
-  -webkit-mask-image:
-  linear-gradient(
+  -webkit-mask-image: linear-gradient(
     to bottom,
     #000 0%,
-    #000 72%,
-    rgba(0, 0, 0, 0.7) 85%,
+    #000 76%,
+    rgba(0, 0, 0, 0.65) 88%,
     transparent 100%
   );
 
   mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    #000 12%,
-    #000 100%
+    to bottom,
+    #000 0%,
+    #000 76%,
+    rgba(0, 0, 0, 0.65) 88%,
+    transparent 100%
   );
 
   filter:
-    drop-shadow(0 0 16px rgba(255, 122, 24, 0.65))
-    drop-shadow(0 0 38px rgba(234, 88, 12, 0.35));
+    drop-shadow(0 0 18px rgba(255, 122, 24, 0.55))
+    drop-shadow(0 0 42px rgba(234, 88, 12, 0.32));
 }
+
 .ref-portrait-fade {
   display: none;
 }
@@ -1036,121 +1045,127 @@ section {
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 200px;
+  height: 90px;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(5, 6, 8, 0.2) 20%,
-    rgba(5, 6, 8, 0.65) 50%,
-    rgba(5, 6, 8, 0.95) 80%,
+    rgba(5, 6, 8, 0.4) 40%,
+    rgba(5, 6, 8, 0.85) 75%,
     #050608 100%
   );
   pointer-events: none;
   z-index: 8;
 }
-/* Large desktop */
-@media (min-width: 1440px) {
+
+/* Extra large desktop (1600px+) */
+@media (min-width: 1600px) {
   .ref-hero-right {
     min-height: clamp(740px, 90vh, 1020px);
-    height: 100%;
   }
-
-  .ref-portrait-img {
-    height: clamp(740px, 90vh, 1020px) !important;
-    width: auto !important;
-    max-width: none !important;
-  }
-}
-
-/* Laptop and tablet */
-@media (max-width: 768px) {
-  .ref-portrait-img {
-    left: 0;
-    top: -15px;
-  }
-
-  .ref-hero-ambient-glow {
-    top: 44%;
-    left: 50%;
-    width: 380px;
-  }
-
-  .ref-hero-sun-disc {
-    top: 44%;
-    left: 50%;
-    width: 240px;
-  }
-
-  .ref-hero-orbitals {
-    top: 44%;
-    left: 50%;
-    width: 480px;
-  }
-
   .ref-portrait-stage {
-    width: 100%;
-    margin-left: 0;
+    margin-left: -200px;
   }
-
+  .ref-hero-ambient-glow,
+  .ref-hero-sun-disc,
+  .ref-hero-orbitals {
+    left: calc(50% - 200px);
+  }
   .ref-portrait-img {
-  height: clamp(420px, 58vh, 600px) !important;
-  width: auto !important;
-  max-width: none !important;
+  top: 0;
+  left: clamp(65px, 7vw, 125px);
+  height: clamp(900px, 118vh, 1320px) !important;
 }
 }
 
-/* Mobile */
-@media (max-width: 640px) {
+/* Medium Desktop & Laptop (1200px - 1599px) */
+@media (min-width: 1200px) and (max-width: 1599px) {
   .ref-hero-right {
-    min-height: 460px;
-    height: 58vh;
+    min-height: clamp(660px, 86vh, 880px);
   }
-
-  .ref-hero-ambient-glow {
-    top: 44%;
-    left: 50%;
-    width: 380px;
-    filter: blur(40px);
-  }
-
-  .ref-hero-sun-disc {
-    top: 44%;
-    left: 50%;
-    width: 220px;
-  }
-
-  .ref-hero-orbitals {
-    top: 44%;
-    left: 50%;
-    width: 460px;
-  }
-
   .ref-portrait-stage {
-    width: 100%;
-    margin-left: 0;
+    margin-left: -150px;
   }
-
+  .ref-hero-ambient-glow,
+  .ref-hero-sun-disc,
+  .ref-hero-orbitals {
+    left: calc(50% - 150px);
+  }
   .ref-portrait-img {
-    width: 100%;
-    height: auto;
-    max-width: 500px;
-    max-height: 52vh;
-    object-fit: contain;
-    object-position: center bottom;
-  }
-
-  .ref-portrait-fade {
-    height: 15%;
+    top: -45px;
+    height: clamp(620px, 81vh, 730px) !important;
   }
 }
 
-/* Small mobile */
-@media (max-width: 480px) {
+/* Compact Laptop (1025px - 1199px) */
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .ref-hero-right {
+    min-height: clamp(600px, 82vh, 760px);
+  }
+  .ref-portrait-stage {
+    margin-left: -110px;
+  }
+  .ref-hero-ambient-glow,
+  .ref-hero-sun-disc,
+  .ref-hero-orbitals {
+    left: calc(50% - 110px);
+  }
   .ref-portrait-img {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    max-height: 48vh;
+    top: -35px;
+    height: clamp(560px, 76vh, 660px) !important;
+  }
+}
+
+/* Tablet (769px - 1024px) */
+@media (max-width: 1024px) {
+  .ref-portrait-stage {
+    margin-left: 0;
+  }
+  .ref-hero-ambient-glow,
+  .ref-hero-sun-disc,
+  .ref-hero-orbitals {
+    left: 50%;
+  }
+  .ref-portrait-img {
+    top: 0;
+    width: 100% !important;
+    height: auto !important;
+    max-width: min(92vw, 680px) !important;
+    max-height: 52vh !important;
+    object-fit: contain !important;
+  }
+}
+
+/* Mobile / Small Tablet (max-width: 768px) */
+@media (max-width: 768px) {
+  .ref-hero-right {
+    min-height: 440px;
+  }
+  .ref-portrait-stage {
+    margin-left: 0;
+  }
+  .ref-hero-ambient-glow,
+  .ref-hero-sun-disc,
+  .ref-hero-orbitals {
+    left: 50%;
+  }
+  .ref-portrait-img {
+    top: 0;
+    width: 100% !important;
+    height: auto !important;
+    max-width: min(94vw, 520px) !important;
+    max-height: 48vh !important;
+    object-fit: contain !important;
+  }
+}
+
+/* Small Mobile (max-width: 640px) */
+@media (max-width: 640px) {
+  .ref-portrait-img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: min(95vw, 420px) !important;
+    max-height: 46vh !important;
+    object-fit: contain !important;
   }
 }
 
@@ -1162,8 +1177,8 @@ section {
 }
 .ref-label-statement {
   position: absolute;
-  left: 0%;
-  bottom: 43%;
+  left: 2%;
+  bottom: 38%;
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -1187,9 +1202,9 @@ section {
 }
 .ref-label-vertical {
   position: absolute;
-  right: 6%;
+  right: 4%;
   left: auto;
-  top: 28.5%;
+  top: 26%;
   transform: none;
   z-index: 10;
   display: flex;
