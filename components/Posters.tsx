@@ -217,9 +217,9 @@ export default function Posters() {
           <div className="posters-tooling">
             <span className="tooling-label">DESIGN STACK</span>
             <span className="tooling-pill">Adobe Photoshop CC</span>
-            <span className="tooling-pill">Adobe Illustrator</span>
-            <span className="tooling-pill">Cinema 4D Passes</span>
-            <span className="tooling-pill">Camera Raw Color Grading</span>
+            <span className="tooling-pill">Adobe Lightroom</span>
+            <span className="tooling-pill">Picsart</span>
+            <span className="tooling-pill">Snapseed</span>
           </div>
           <p className="posters-note">
             Available for visual identity, album keyart, event branding, and creative poster commissions.

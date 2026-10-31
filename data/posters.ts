@@ -250,4 +250,16 @@ export const posters: PosterItem[] = [
     aspectRatio: 0.75,
     orientation: "portrait",
   },
+  {
+    id: 20,
+    title: "Cousin: Lifelong Best Friend",
+    category: "Editorial & Digital Art",
+    description: "Heartwarming portrait and typography poster celebrating childhood camaraderie, innocent memories, and lifelong brotherhood.",
+    src: "/poster/optimized/20.jpg",
+    fullSrc: "/poster/20.jpg",
+    width: 1200,
+    height: 1697,
+    aspectRatio: 0.75,
+    orientation: "portrait",
+  },
 ];

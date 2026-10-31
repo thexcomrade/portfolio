@@ -227,6 +227,11 @@ section {
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #ee6311;
 }
 .ref-brand-logo-box {
   display: flex;
@@ -5904,12 +5909,13 @@ section {
   z-index:2;
 }
 .contact-form-eyebrow {
-  font-size:.78rem;
+  font-size:.75rem;
   font-weight:700;
   letter-spacing:.22em;
   text-transform:uppercase;
   color:#ff8c38;
-  margin-bottom:14px;
+  margin-bottom:4px;
+  line-height: 0.85;
 }
 .contact-form-header h3 {
   font-family:var(--font-space);
@@ -9654,10 +9660,10 @@ html {
   margin-bottom: 14px;
 }
 .footer-brand-name {
-  font-family: var(--font-space), sans-serif;
-  font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.035em;
   color: #ffffff;
 }
 .footer-brand-tagline {
@@ -10072,7 +10078,7 @@ html {
 .contact-form-title { 
   font-size: clamp(2.4rem, 4vw, 3.2rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 0.85;
   letter-spacing: -0.045em;
   color: #ffffff;
   margin: 0 0 28px;
@@ -11048,6 +11054,69 @@ html {
   overflow: hidden;
 }
 
+
+/* Section Footer Meta & Tooling Stack */
+.posters-footer-meta {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.posters-tooling {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tooling-label {
+  font-family: var(--font-space), monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ff7a18;
+  letter-spacing: 0.12em;
+  padding: 5px 12px;
+  background: rgba(255, 122, 24, 0.12);
+  border: 1px solid rgba(255, 122, 24, 0.35);
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.tooling-pill {
+  font-family: var(--font-space), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 5px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.tooling-pill:hover {
+  border-color: rgba(255, 122, 24, 0.55);
+  color: #ffffff;
+  background: rgba(255, 122, 24, 0.12);
+  transform: translateY(-1px);
+}
+
+.posters-note {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  max-width: 620px;
+  margin: 0;
+  line-height: 1.55;
+}
+
 /* ======================================================
    3D CAROUSEL MODAL (Middle Highlighted, Rest Blurred)
 ====================================================== */
@@ -11111,6 +11180,22 @@ html {
   background: #ff7a18;
   box-shadow: 0 0 10px #ff7a18;
 }
+.counter-current {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.counter-sep {
+  color: #64748b;
+  font-weight: 400;
+  margin: 0 1px;
+}
+
+.counter-total {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
 
 .carousel-title-hud {
   display: flex;
