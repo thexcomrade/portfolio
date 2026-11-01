@@ -90,7 +90,7 @@ export default function About() {
             <div className="story-portrait-card">
               <div className="story-portrait-wrapper">
                 <Image
-                  src="/deva.jpg"
+                  src="/deva.png"
                   alt="Devanarayanan V S portrait"
                   width={420}
                   height={420}
