@@ -157,7 +157,7 @@ export default function Contact() {
     setStatusMessage("");
 
     const targetEmail = "devanarayananstackuplearning@gmail.com";
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+    const accessKey = process.env.NEXT_WEB3FORMS_KEY;
 
     if (accessKey && accessKey.trim() !== "") {
       try {
