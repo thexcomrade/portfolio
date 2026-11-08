@@ -15,52 +15,44 @@ export default function Projects() {
             Flagship <span>Projects &amp; Works</span>
           </h2>
           <p className="section-subtitle">
-            Tangible, production-tested proofs of concept engineered for real-world impact.
+            Engineered proofs of concept spanning generative AI, computer vision, robotics, and full-stack software.
           </p>
         </div>
 
         {/* Projects Grid */}
         <div className="projects-grid">
           {projects.map((project) => (
-            <article key={project.title} className="project-card">
-              {/* Project Visual Preview */}
+            <article key={project.slug} className="project-card">
+              {/* Project Visual Thumbnail */}
               <div className="project-image-wrapper">
                 <Image
                   src={project.image}
-                  alt={project.title}
+                  alt={`${project.title} preview screenshot`}
                   width={900}
-                  height={600}
+                  height={506}
                   className="project-image"
                   priority={project.slug === "trip-geni"}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="project-image-overlay" aria-hidden="true" />
               </div>
 
               {/* Card Content */}
               <div className="project-content">
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, flexWrap: "wrap", gap: 6 }}>
-                  <span className="project-badge" style={{ margin: 0 }}>{project.badge}</span>
+                <div className="project-meta-row">
+                  <span className="project-badge">{project.badge}</span>
                   {project.status === "prototype" && (
-                    <span style={{
-                      fontSize: "0.68rem",
-                      fontWeight: 700,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      padding: "3px 9px",
-                      borderRadius: "999px",
-                      background: "rgba(234, 179, 8, 0.12)",
-                      border: "1px solid rgba(234, 179, 8, 0.3)",
-                      color: "#facc15"
-                    }}>
+                    <span className="project-status-pill">
                       Prototype
                     </span>
                   )}
                 </div>
+
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
 
                 {/* Technologies List */}
-                <div className="project-technologies">
+                <div className="project-technologies" aria-label="Technologies used">
                   {project.technologies.map((tech) => (
                     <span key={tech} className="project-chip">
                       {tech}
@@ -70,41 +62,40 @@ export default function Projects() {
 
                 {/* Project Actions */}
                 <div className="project-buttons">
-                  {project.github ? (
+                  {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="project-button project-github"
-                      aria-label={`View ${project.title} source code on GitHub`}
+                      aria-label={`View ${project.title} source code on GitHub (opens in new tab)`}
                     >
-                      <FaGithub aria-hidden="true" size={16} />
-                      <span>Code</span>
+                      <FaGithub aria-hidden="true" size={15} />
+                      <span>{project.demo ? "Code" : "Source Code"}</span>
                     </a>
-                  ) : (
-                    <button
-                      className="project-button project-disabled"
-                      disabled
-                      aria-label={`${project.title} is a proprietary private repository`}
-                    >
-                      <Lock size={13} aria-hidden="true" />
-                      <span>Private</span>
-                    </button>
                   )}
 
-                  {project.demo && (
+                  {project.demo ? (
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="project-button project-demo"
-                      aria-label={`Open live demo for ${project.title}`}
+                      aria-label={`Open live demo for ${project.title} (opens in new tab)`}
                     >
-                      <span className="inline-flex items-center gap-2">
-                        Live Demo
-                        <ExternalLink size={13} aria-hidden="true" />
-                      </span>
+                      <span>Live Demo</span>
+                      <ExternalLink size={13} aria-hidden="true" />
                     </a>
+                  ) : (
+                    project.status === "prototype" && (
+                      <div
+                        className="project-button project-disabled"
+                        aria-label={`${project.title} is currently in active prototyping`}
+                      >
+                        <Lock size={12} aria-hidden="true" />
+                        <span>In Development</span>
+                      </div>
+                    )
                   )}
                 </div>
               </div>
@@ -120,7 +111,7 @@ export default function Projects() {
             target="_blank"
             rel="noopener noreferrer"
             className="projects-github-button"
-            aria-label="Visit Devanarayanan's GitHub Profile"
+            aria-label="Visit Devanarayanan's GitHub Profile (opens in new tab)"
           >
             <FaGithub size={17} aria-hidden="true" />
             <span>Explore More on GitHub</span>

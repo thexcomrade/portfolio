@@ -28,15 +28,14 @@ export const projects: Project[] = [
     title: "Trip Geni",
     summary: "AI-Powered Full-Stack Travel Planning Platform",
     description:
-      "Full-stack travel planning platform generating personalized itineraries, destination insights, and budget breakdowns. Combines Gemini 2.5 Flash with a curated 100+ destination Tourism RAG knowledge base for deterministic fallback routing.",
+      "An AI-powered travel planning platform that generates personalized itineraries, destination insights, and budget breakdowns using Gemini and Tourism RAG.",
     status: "completed",
     technologies: [
       "Next.js",
-      "TypeScript",
       "FastAPI",
-      "Python",
       "Gemini 2.5 Flash",
-      "RAG Pipeline",
+      "Tourism RAG",
+      "TypeScript",
     ],
     metrics: [
       { label: "Knowledge Base", value: "100+ Destinations" },
@@ -50,9 +49,9 @@ export const projects: Project[] = [
     image: "/projects/deepfake.jpg",
     badge: "Computer Vision & ML",
     title: "Deepfake Face Detection System",
-    summary: "High-Precision Still Image Facial Manipulation Classifier",
+    summary: "High-Precision Facial Manipulation Classifier",
     description:
-      "Web-based still-image deepfake detection system utilizing OpenCV facial feature extraction and a Linear Support Vector Classifier (SVC). Benchmarked on 1,000 held-out face images with an ultra-lightweight 7.63ms CPU inference footprint.",
+      "A computer vision application that analyzes facial images to identify potential deepfakes using machine learning and image-processing techniques.",
     status: "completed",
     technologies: [
       "Python",
@@ -73,16 +72,15 @@ export const projects: Project[] = [
     image: "/projects/nutriplan.jpg",
     badge: "Healthcare & Nutrition AI",
     title: "Nutri Plan AI",
-    summary: "AI-Powered Nutrition & Personalized Dietary Intelligence Prototype",
+    summary: "AI-Powered Dietary Intelligence Prototype",
     description:
-      "AI-driven nutrition assistant designed to deliver personalized meal plans and dietary recommendations. Engineered with modular FastAPI backend services, structured nutritional data schemas, and machine learning models.",
+      "An AI-powered nutrition assistant prototype that provides personalized dietary plans and health recommendations using machine learning.",
     status: "prototype",
     technologies: [
       "Python",
       "FastAPI",
       "Scikit-Learn",
       "REST APIs",
-      "Data Schemas",
     ],
     metrics: [
       { label: "Status", value: "AI Prototype" },
@@ -97,14 +95,14 @@ export const projects: Project[] = [
     title: "Bluetooth Obstacle Avoidance Robot",
     summary: "Autonomous 4-Wheel Microcontroller Mobile Robot",
     description:
-      "Autonomous 4-wheel robotic vehicle featuring ultrasonic distance sensing, micro-servo scanning routines, and L293D motor driver logic. Integrated with HC-05 Bluetooth module for real-time manual override and dual-mode autonomous navigation.",
+      "An autonomous four-wheel robotic vehicle featuring ultrasonic distance sensing, micro-servo scanning, and Bluetooth remote navigation.",
     status: "completed",
     technologies: [
-      "Arduino C++",
+      "Arduino",
+      "C++",
       "Ultrasonic Sensor",
       "HC-05 Bluetooth",
-      "L293D Driver",
-      "Embedded Systems",
+      "L293D",
     ],
     metrics: [
       { label: "Platform", value: "Arduino 4-Wheel" },
@@ -119,14 +117,13 @@ export const projects: Project[] = [
     title: "FROBO Companion Robot",
     summary: "Interactive Desktop Companion Prototype",
     description:
-      "Exploratory desktop companion robot prototype combining ESP32/Arduino microcontroller control, OLED animated emotional facial expressions, capacitive touch sensing, and custom 3D-printed chassis.",
+      "An interactive desktop companion robot prototype combining microcontroller hardware, animated OLED emotional expressions, and touch sensing.",
     status: "prototype",
     technologies: [
       "ESP32",
-      "Arduino",
+      "Arduino C++",
       "OLED Display",
-      "Embedded C++",
-      "3D Modeling",
+      "Capacitive Touch",
     ],
     metrics: [
       { label: "Display", value: "OLED Animation" },
@@ -141,13 +138,13 @@ export const projects: Project[] = [
     title: "Love Chronicles",
     summary: "Dynamic Storytelling & Animated Web Experience",
     description:
-      "Responsive digital storytelling web application engineered with lightweight vanilla JavaScript, fluid CSS animations, dynamic memory timelines, and Flask backend integration.",
+      "A responsive digital storytelling web experience featuring fluid interactive animations, dynamic timelines, and multimedia memory galleries.",
     status: "completed",
     technologies: [
       "JavaScript",
-      "HTML5 / CSS3",
+      "HTML5",
+      "CSS3",
       "Flask",
-      "Responsive UI",
     ],
     metrics: [
       { label: "Core", value: "Vanilla JS" },
