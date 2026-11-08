@@ -100,22 +100,20 @@ export default function Home() {
                 className="ref-hero-name-artwork"
                 sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 480px"
               />
-              <h1 className="sr-only">DEVANARAYANAN V S - AI &amp; ML Engineer</h1>
+              <h1 className="sr-only">DEVANARAYANAN- AI &amp; ML Engineer</h1>
             </div>
 
             <p className="ref-hero-descriptor">
-  <span>AI &amp; ML ENGINEER</span>
-  <span className="ref-descriptor-separator">|</span>
-  <span>DEVELOPER</span>
-  <span className="ref-descriptor-separator">|</span>
-  <span>RESEARCHER</span>
-</p>
+              <span>AI &amp; ML ENGINEER</span>
+              <span className="ref-descriptor-separator">|</span>
+              <span>FULL-STACK DEVELOPER</span>
+              <span className="ref-descriptor-separator">|</span>
+              <span>ROBOTICS &amp; AUTOMATION</span>
+            </p>
 
             <p className="ref-hero-intro">
-              Passionate about Artificial Intelligence, Machine
-              Learning, and modern software engineering.
-              Focused on building intelligent applications and scalable
-              software solutions with real-world impact.
+              B.Tech in Artificial Intelligence &amp; Machine Learning with a minor in Robotics.
+              Building high-performance RAG pipelines, computer vision models, and scalable full-stack applications with Next.js and FastAPI.
             </p>
 
             <div className="ref-hero-actions">
@@ -147,15 +145,15 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Portfolio highlights matching reference image */}
+            {/* Verified Technical Highlights */}
             <div
               className="ref-hero-stats"
-              aria-label="Portfolio highlights"
+              aria-label="Verified technical highlights"
             >
               <div className="ref-stat-item">
-                <span className="ref-stat-value">5+</span>
+                <span className="ref-stat-value">B.Tech</span>
                 <span className="ref-stat-label">
-                  Experiences
+                  AI &amp; ML &apos;26
                 </span>
               </div>
 
@@ -165,9 +163,9 @@ export default function Home() {
               />
 
               <div className="ref-stat-item">
-                <span className="ref-stat-value">10+</span>
+                <span className="ref-stat-value">93.4%</span>
                 <span className="ref-stat-label">
-                  Projects
+                  Deepfake CV Acc
                 </span>
               </div>
 
@@ -177,9 +175,9 @@ export default function Home() {
               />
 
               <div className="ref-stat-item">
-                <span className="ref-stat-value">25+</span>
+                <span className="ref-stat-value">RAG + ML</span>
                 <span className="ref-stat-label">
-                  Happy Clients
+                  Production Focus
                 </span>
               </div>
             </div>

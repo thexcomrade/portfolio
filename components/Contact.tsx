@@ -347,7 +347,7 @@ export default function Contact() {
               <div className="contact-form-card">
                 <div className="contact-form-card-header">
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8, flexWrap: "wrap", gap: 8 }}>
-                    <p className="contact-form-eyebrow" style={{ margin: 0 }}>LET'S BUILD SOMETHING TOGETHER </p>
+                    <p className="contact-form-eyebrow" style={{ margin: 0 }}>LET&apos;S BUILD SOMETHING TOGETHER </p>
                     <button
                       type="button"
                       onClick={handleCopyEmail}

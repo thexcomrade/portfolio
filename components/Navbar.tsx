@@ -16,7 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { navigation } from "@/constants/navigation";
 
 const navIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -188,7 +188,7 @@ export default function Navbar() {
             </span>
 
             <span className="ref-brand-title">
-              DEVANARAYANAN <span className="ref-brand-initials">V S</span>
+              DEVANARAYANAN
             </span>
           </Link>
 

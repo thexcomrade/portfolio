@@ -4,7 +4,6 @@ import Image from "next/image";
 import {
   BrainCircuit,
   Zap,
-  Sparkles,
   MapPin,
   Terminal,
   Code2,
@@ -27,35 +26,35 @@ export default function About() {
       subtitle: "Robotics, Arduino & Embedded Systems",
       icon: <Zap size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "My curiosity about technology started beyond the screen. Working with Arduino, motor drivers, sensors, Bluetooth modules, and obstacle-avoiding robots introduced me to the connection between software and the physical world. It was where I first learned to turn an idea into something that actually moves.",
-    highlight: "From Writing Code to Building Things",
+        "My curiosity about technology began in hardware. Working with Arduino, motor drivers, ultrasonic distance sensors, and Bluetooth modules at Sainik School Kazhakkootam and beyond taught me how code interacts with the physical world, creating tangible autonomous machines.",
+      highlight: "Bridging Embedded Logic to Real Movement",
     },
     {
       act: "ACT 02",
-      title: "Discovering Intelligence",
-      subtitle: "Artificial Intelligence & Machine Learning",
+      title: "Foundations in Intelligence",
+      subtitle: "Machine Learning, Deep Learning & CV",
       icon: <BrainCircuit size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "Pursuing B.Tech in Artificial Intelligence and Machine Learning changed how I approached problems. I explored Python, machine learning, deep learning, computer vision, and neural networks, moving from basic programming concepts towards systems that can learn from data and recognize patterns.",
-    highlight: "Learning to Build Intelligent Systems",
+        "Pursuing my B.Tech in AI & ML at Mangalam College of Engineering (APJAKTU) gave me rigorous mathematical and algorithmic grounding. I developed computer vision pipelines with OpenCV, evaluated classification architectures, and engineered our 93.4% accurate Deepfake Face Detection System.",
+      highlight: "From Algorithms to Verified Evaluation",
     },
     {
       act: "ACT 03",
-      title: "Technology with a Purpose",
-      subtitle: "Healthcare AI & Research Applications",
+      title: "Purposeful Engineering",
+      subtitle: "Healthcare Data & Resilient Architecture",
       icon: <HeartPulse size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "I became increasingly interested in using AI to solve problems that matter. My diabetic foot ulcer detection project introduced me to medical image analysis, CNN architectures, and model evaluation. Ideas like NutriPlan AI further shaped my interest in bringing artificial intelligence closer to healthcare and everyday life.",
-    highlight: "Exploring AI Beyond the Classroom",
+        "Engineering MediBridge AI focused my efforts on medical data integrity—structuring unified patient record schemas and building secure RESTful backend services that solve operational bottlenecks in clinical coordination.",
+      highlight: "Unified Architectures for Critical Domains",
     },
     {
       act: "ACT 04",
-      title: "Building Beyond Idea",
-      subtitle: "Full-Stack Development & Applied AI",
+      title: "Full-Stack Applied AI",
+      subtitle: "Production RAG Pipelines & Modern Web",
       icon: <Code2 size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "Today, I enjoy bringing different technologies together. From Deepfake Face Detection and HandPlay to TripGenius, I explore how AI, software engineering, and thoughtful interfaces can become useful applications. I continue learning, experimenting, breaking things, fixing them, and building projects that reflect the engineer I am becoming.",
-    highlight: "Turning Experiments into Meaningful Projects",
+        "As a Software Engineer Intern at Stackup Learning, I build production-grade systems linking Next.js and TypeScript frontends with Python and FastAPI backends, integrating Gemini 2.5 Flash with custom 100+ destination RAG knowledge bases for Trip Geni.",
+      highlight: "Enterprise RAG & Full-Stack Reliability",
     },
   ];
 
@@ -73,13 +72,13 @@ export default function About() {
         <div className="story-manifesto-card">
           <div className="story-manifesto-badge">
             <Terminal size={15} aria-hidden="true" />
-            <span>MY CORE PHILOSOPHY</span>
+            <span>ENGINEERING PRINCIPLE</span>
           </div>
           <blockquote className="story-manifesto-quote">
-            &ldquo;I don&apos;t write software merely to generate lines of code. I build autonomous intelligence that bridges abstract neural mathematics with tangible, real-world human solutions.&rdquo;
+            &ldquo;I don&apos;t write code just to fill repositories. I build pragmatic AI systems and full-stack software that connect machine learning models with reliable real-world engineering.&rdquo;
           </blockquote>
           <div className="story-manifesto-footer">
-            <span className="story-manifesto-author"> — DEVANARAYANAN</span>
+            <span className="story-manifesto-author"> — DEVANARAYANAN V S</span>
           </div>
         </div>
 
@@ -99,14 +98,14 @@ export default function About() {
                 />
               </div>
               <div className="story-portrait-info">
-                <span className="story-dossier-badge">STUDENT</span>
-                <h3 className="story-dossier-name">DEVANARAYANAN VS</h3>
-                <p className="story-dossier-title">AI &amp; ML Engineer</p>
+                <span className="story-dossier-badge">B.TECH AI &amp; ML</span>
+                <h3 className="story-dossier-name">DEVANARAYANAN V S</h3>
+                <p className="story-dossier-title">AI/ML &amp; Software Engineer</p>
 
                 <div className="story-dossier-meta">
                   <span className="story-dossier-location">
                     <MapPin size={13} aria-hidden="true" />
-                    <span>Kerala, India</span>
+                    <span>Kollam, Kerala, India</span>
                   </span>
                   <span className="story-meta-dot" aria-hidden="true">•</span>
                   <span suppressHydrationWarning>
@@ -116,7 +115,7 @@ export default function About() {
 
                 <div className="story-status-pill">
                   <span className="story-status-pulse" aria-hidden="true" />
-                  <span>Available for Visionary AI Roles</span>
+                  <span>Available for Engineering Roles</span>
                 </div>
               </div>
             </div>
@@ -124,12 +123,12 @@ export default function About() {
             {/* Quick Metrics Cards */}
             <div className="story-metrics-stack">
               <div className="story-metric-box">
-                <span className="story-metric-number">3+</span>
-                <span className="story-metric-desc">Autonomous Systems Deployed</span>
+                <span className="story-metric-number">93.4%</span>
+                <span className="story-metric-desc">Deepfake Model Accuracy</span>
               </div>
               <div className="story-metric-box">
-                <span className="story-metric-number">100%</span>
-                <span className="story-metric-desc">Production - Tested Code</span>
+                <span className="story-metric-number">7.63ms</span>
+                <span className="story-metric-desc">Per-Face CPU Inference</span>
               </div>
             </div>
           </div>

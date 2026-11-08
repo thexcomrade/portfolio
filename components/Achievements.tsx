@@ -9,6 +9,7 @@ import {
   Shield,
   Sparkles,
   ArrowUpRight,
+  CheckCircle2,
 } from "lucide-react";
 
 interface Achievement {
@@ -19,7 +20,7 @@ interface Achievement {
   duration: string;
   description: string;
   category: string;
-  certificateUrl: string;
+  certificateUrl?: string;
 }
 
 const achievements: Achievement[] = [
@@ -27,11 +28,11 @@ const achievements: Achievement[] = [
     id: "cyborg-robotics",
     icon: <Bot size={22} aria-hidden="true" />,
     title: "Robotics & Drone Development Internship",
-    organization: "Cyborg AI Gen Automation",
+    organization: "Genzee Technologies",
     duration: "June 2025 • 7 Days",
     category: "Industry Internship",
     description:
-      "Hands-on training in robotics, drone aerodynamics, embedded controllers, Arduino programming, sensors, automation, and real-time hardware telemetry.",
+      "Hands-on training in robotics architectures, drone aerodynamics, embedded controllers, Arduino programming, sensors, and real-time hardware telemetry.",
     certificateUrl: "/certificates/cyborg-robotics.jpg",
   },
   {
@@ -72,22 +73,20 @@ const achievements: Achievement[] = [
     icon: <Car size={22} aria-hidden="true" />,
     title: "Self-Driving Electric Vehicle Workshop",
     organization: "Technical Workshop",
-    duration: "Technical Session",
-    category: "Automotive AI",
+    duration: "Technical Training",
+    category: "Intelligent Systems",
     description:
-      "Comprehensive workshop exploring autonomous vehicle architectures, intelligent transportation systems, LiDAR/RADAR sensing, and self-driving computer vision models.",
-    certificateUrl: "/certificates/ev-workshop.jpg",
+      "Comprehensive workshop exploring autonomous vehicle architectures, intelligent transportation systems, sensor fusion, and self-driving computer vision models.",
   },
   {
     id: "ncc-cert",
     icon: <Shield size={22} aria-hidden="true" />,
     title: "NCC 'C' Certificate",
-    organization: "National Cadet Corps",
-    duration: "B Grade",
+    organization: "16 Kerala Battalion, National Cadet Corps",
+    duration: "B Grade Verified",
     category: "Leadership & Discipline",
     description:
-      "Rigorous leadership, tactical discipline, operational teamwork, resilience under pressure, and structured military-grade field training.",
-    certificateUrl: "/certificates/ncc-certificate.jpg",
+      "Rigorous leadership, tactical discipline, operational teamwork, resilience under pressure, and structured field training through Sainik School Kazhakkootam & NCC.",
   },
 ];
 

@@ -1,113 +1,158 @@
+export type ProjectStatus = "completed" | "in-progress" | "prototype";
+
+export interface ProjectMetric {
+  label: string;
+  value: string;
+}
+
 export interface Project {
+  slug: string;
   image: string;
   badge: string;
   title: string;
+  summary: string;
   description: string;
+  status: ProjectStatus;
   technologies: string[];
-  github: string;
+  metrics?: ProjectMetric[];
+  github?: string;
   demo?: string;
+  report?: string;
 }
 
 export const projects: Project[] = [
   {
-    image: "/projects/nutriplan.jpg",
-    badge: "Healthcare AI",
-    title: "NutriPlan AI",
-    description:
-      "AI-powered nutrition assistant that generates personalized meal plans using Machine Learning, Generative AI, and real-time health integrations. Built to deliver intelligent dietary recommendations, multilingual support, AI chatbot assistance, and smart health tracking.",
-    technologies: [
-      "Flutter",
-      "FastAPI",
-      "Firebase",
-      "Python",
-      "Scikit-Learn",
-      "OpenAI",
-    ],
-    github: "https://github.com/thexcomrade/NutriPlan-AI",
-    demo: "",
-  },
-  {
+    slug: "trip-geni",
     image: "/projects/tripgenius.jpg",
-    badge: "Generative AI",
-    title: "TripGeni AI",
+    badge: "Generative AI & RAG",
+    title: "Trip Geni",
+    summary: "AI-Powered Full-Stack Travel Planning Platform",
     description:
-      "AI-powered travel planner that creates personalized itineraries using destination intelligence, weather forecasts, budget analysis, and Generative AI for a seamless travel experience.",
+      "Full-stack travel planning platform generating personalized itineraries, destination insights, and budget breakdowns. Combines Gemini 2.5 Flash with a curated 100+ destination Tourism RAG knowledge base for deterministic fallback routing.",
+    status: "completed",
     technologies: [
       "Next.js",
+      "TypeScript",
       "FastAPI",
-      "OpenAI",
       "Python",
-      "Firebase",
-      "Weather API",
+      "Gemini 2.5 Flash",
+      "RAG Pipeline",
+    ],
+    metrics: [
+      { label: "Knowledge Base", value: "100+ Destinations" },
+      { label: "Architecture", value: "Full-Stack RAG" },
     ],
     github: "https://github.com/thexcomrade/TripGenius",
     demo: "https://tripgenius-kohl.vercel.app/",
   },
   {
-    image: "/projects/frobo.jpg",
-    badge: "Robotics",
-    title: "FROBO",
-    description:
-      "Affordable emotional desktop companion robot inspired by premium AI companions. Designed with expressive OLED animations, touch interaction, sensors, and embedded AI to create human-like emotional responses.",
-    technologies: [
-      "Arduino",
-      "ESP32",
-      "Embedded AI",
-      "OLED",
-      "Sensors",
-      "3D Printing",
-    ],
-    github: "https://github.com/thexcomrade/FROBO",
-    demo: "",
-  },
-  {
+    slug: "deepfake-detection",
     image: "/projects/deepfake.jpg",
-    badge: "Computer Vision",
-    title: "Deep Fake Face Detection",
+    badge: "Computer Vision & ML",
+    title: "Deepfake Face Detection System",
+    summary: "High-Precision Still Image Facial Manipulation Classifier",
     description:
-      "Computer Vision application capable of detecting manipulated facial images using OpenCV, handcrafted feature extraction, and an SVM classifier with real-time confidence prediction.",
+      "Web-based still-image deepfake detection system utilizing OpenCV facial feature extraction and a Linear Support Vector Classifier (SVC). Benchmarked on 1,000 held-out face images with an ultra-lightweight 7.63ms CPU inference footprint.",
+    status: "completed",
     technologies: [
       "Python",
       "OpenCV",
-      "Flask",
       "Scikit-Learn",
-      "SVM",
-      "Computer Vision",
+      "Linear SVC",
+      "Flask",
+    ],
+    metrics: [
+      { label: "Evaluation Acc", value: "93.40%" },
+      { label: "CPU Latency", value: "7.63ms" },
     ],
     github: "https://github.com/thexcomrade/DEEP-FAKE-FACE-DETECTION",
     demo: "https://deepfakefacedetection.vercel.app/",
   },
   {
-    image: "/projects/robot.jpg",
-    badge: "Embedded Systems",
-    title: "Smart Obstacle Avoiding Robot",
+    slug: "medibridge-ai",
+    image: "/projects/nutriplan.jpg",
+    badge: "Healthcare Architecture",
+    title: "MediBridge AI",
+    summary: "Unified Patient Medical Records Management Prototype",
     description:
-      "Autonomous robot capable of obstacle avoidance, Bluetooth control, and voice-command navigation. Developed using Arduino, an ultrasonic sensor, Bluetooth communication, and an L293D motor driver.",
+      "AI-powered platform designed to organize and unify fragmented patient medical records. Built with structured RESTful API architecture in Python and FastAPI, validating early-stage diagnostic data schemas and record consolidation.",
+    status: "prototype",
     technologies: [
-      "Arduino",
-      "Bluetooth",
-      "Ultrasonic Sensor",
-      "L293D",
-      "Embedded Systems",
-      "Robotics",
+      "Python",
+      "FastAPI",
+      "SQLAlchemy",
+      "REST APIs",
+      "Data Schemas",
     ],
-    github: "https://github.com/thexcomrade/smart-obstacle-avoiding-robot",
-    demo: "",
+    metrics: [
+      { label: "Status", value: "Backend Prototype" },
+      { label: "Design", value: "Modular APIs" },
+    ],
+    github: "https://github.com/thexcomrade/NutriPlan-AI",
   },
   {
-    image: "/projects/lovechronicles.jpg",
-    badge: "Frontend",
-    title: "Love Chronicles",
+    slug: "smart-obstacle-robot",
+    image: "/projects/robot.jpg",
+    badge: "Robotics & Embedded",
+    title: "Bluetooth Obstacle Avoidance Robot",
+    summary: "Autonomous 4-Wheel Microcontroller Mobile Robot",
     description:
-      "Interactive digital anniversary website featuring dynamic storytelling, animated user interface, personalized memories, image galleries, and responsive web design for creating memorable digital experiences.",
+      "Autonomous 4-wheel robotic vehicle featuring ultrasonic distance sensing, micro-servo scanning routines, and L293D motor driver logic. Integrated with HC-05 Bluetooth module for real-time manual override and dual-mode autonomous navigation.",
+    status: "completed",
     technologies: [
-      "HTML5",
-      "CSS3",
+      "Arduino C++",
+      "Ultrasonic Sensor",
+      "HC-05 Bluetooth",
+      "L293D Driver",
+      "Embedded Systems",
+    ],
+    metrics: [
+      { label: "Platform", value: "Arduino 4-Wheel" },
+      { label: "Navigation", value: "Dual Autonomous" },
+    ],
+    github: "https://github.com/thexcomrade/smart-obstacle-avoiding-robot",
+  },
+  {
+    slug: "frobo-companion",
+    image: "/projects/frobo.jpg",
+    badge: "Hardware & Robotics",
+    title: "FROBO Companion Robot",
+    summary: "Interactive Desktop Companion Prototype",
+    description:
+      "Exploratory desktop companion robot prototype combining ESP32/Arduino microcontroller control, OLED animated emotional facial expressions, capacitive touch sensing, and custom 3D-printed chassis.",
+    status: "prototype",
+    technologies: [
+      "ESP32",
+      "Arduino",
+      "OLED Display",
+      "Embedded C++",
+      "3D Modeling",
+    ],
+    metrics: [
+      { label: "Display", value: "OLED Animation" },
+      { label: "Control", value: "Capacitive Touch" },
+    ],
+    github: "https://github.com/thexcomrade/FROBO",
+  },
+  {
+    slug: "love-chronicles",
+    image: "/projects/lovechronicles.jpg",
+    badge: "Interactive Web",
+    title: "Love Chronicles",
+    summary: "Dynamic Storytelling & Animated Web Experience",
+    description:
+      "Responsive digital storytelling web application engineered with lightweight vanilla JavaScript, fluid CSS animations, dynamic memory timelines, and Flask backend integration.",
+    status: "completed",
+    technologies: [
       "JavaScript",
+      "HTML5 / CSS3",
       "Flask",
       "Responsive UI",
     ],
+    metrics: [
+      { label: "Core", value: "Vanilla JS" },
+      { label: "Interaction", value: "Fluid Motion" },
+    ],
     github: "https://github.com/thexcomrade/Love-Chronicles",
-    demo: "",
   },
 ];

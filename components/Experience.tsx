@@ -10,12 +10,13 @@ import {
 
 const skills = [
   "Python",
-  "Artificial Intelligence",
-  "Machine Learning",
   "FastAPI",
-  "Deep Learning",
-  "Html & CSS",
-  "Problem Solving",
+  "Next.js",
+  "TypeScript",
+  "RAG Pipelines",
+  "Machine Learning",
+  "REST APIs",
+  "OpenAI & Gemini",
 ];
 
 export default function Experience() {
@@ -44,7 +45,7 @@ export default function Experience() {
 
             <div className="exp-company-brand">
               <span className="brand-dot" />
-              STACKMOD INNOVATION
+              STACKUP LEARNING
             </div>
           </div>
 
@@ -53,7 +54,7 @@ export default function Experience() {
             {/* Left Content Side */}
             <div className="exp-info-col">
               <h3 className="exp-company-name">
-                Stackmod Innovation
+                Stackup Learning
               </h3>
 
               <div className="exp-role-badge">
@@ -61,16 +62,12 @@ export default function Experience() {
 
                 <span className="exp-date-tag">
                   <FaCalendarAlt />
-                  August 2026 - Present
+                  August 2026 - Present (6-Month Internship)
                 </span>
               </div>
 
               <p className="exp-summary-text">
-                Developing real-world Artificial Intelligence and Machine
-                Learning software, scalable AI backend services, and
-                data-driven applications. Collaborating with cross-functional
-                engineering teams to implement production-ready AI models and
-                tackle complex technical challenges.
+                Six-month Artificial Intelligence and Machine Learning internship. Engineering full-stack and backend services with Next.js, TypeScript, Python, and FastAPI. Developing RAG knowledge pipelines with destination datasets to power intelligent, personalized travel planning.
               </p>
 
               {/* Skills Tags */}
@@ -93,11 +90,10 @@ export default function Experience() {
                   </div>
 
                   <div>
-                    <h4>AI System Engineering</h4>
+                    <h4>Tourism RAG &amp; LLM Pipelines</h4>
 
                     <p>
-                      Building intelligent APIs &amp; neural network
-                      inference pipelines.
+                      Curating destination knowledge bases and engineering fallback generation routines.
                     </p>
                   </div>
                 </div>
@@ -108,11 +104,10 @@ export default function Experience() {
                   </div>
 
                   <div>
-                    <h4>Backend Integration</h4>
+                    <h4>Full-Stack &amp; API Integration</h4>
 
                     <p>
-                      Designing high-throughput FastAPI endpoints with
-                      async optimization.
+                      Building high-performance async FastAPI endpoints paired with Next.js &amp; TypeScript.
                     </p>
                   </div>
                 </div>

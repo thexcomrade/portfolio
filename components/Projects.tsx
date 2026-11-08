@@ -31,14 +31,31 @@ export default function Projects() {
                   width={900}
                   height={600}
                   className="project-image"
-                  priority={project.title === "NutriPlan AI"}
+                  priority={project.slug === "trip-geni"}
                 />
                 <div className="project-image-overlay" aria-hidden="true" />
               </div>
 
               {/* Card Content */}
               <div className="project-content">
-                <span className="project-badge">{project.badge}</span>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, flexWrap: "wrap", gap: 6 }}>
+                  <span className="project-badge" style={{ margin: 0 }}>{project.badge}</span>
+                  {project.status === "prototype" && (
+                    <span style={{
+                      fontSize: "0.68rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      padding: "3px 9px",
+                      borderRadius: "999px",
+                      background: "rgba(234, 179, 8, 0.12)",
+                      border: "1px solid rgba(234, 179, 8, 0.3)",
+                      color: "#facc15"
+                    }}>
+                      Prototype
+                    </span>
+                  )}
+                </div>
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
 
@@ -84,8 +101,9 @@ export default function Projects() {
                       aria-label={`Open live demo for ${project.title}`}
                     >
                       <span className="inline-flex items-center gap-2">
-  Live Demo
-</span>
+                        Live Demo
+                        <ExternalLink size={13} aria-hidden="true" />
+                      </span>
                     </a>
                   )}
                 </div>
