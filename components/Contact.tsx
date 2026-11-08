@@ -316,6 +316,21 @@ export default function Contact() {
                     </a>
                   </div>
                 </li>
+                <li>
+                  <span className="contact-detail-icon" aria-hidden="true">
+                    <Phone size={16} />
+                  </span>
+                  <div>
+                    <span className="contact-detail-label">Direct Phone</span>
+                    <a
+                      href="tel:+918078421005"
+                      className="contact-detail-value"
+                      style={{ color: "#ff8c38", textDecoration: "none" }}
+                    >
+                      +91 8078421005
+                    </a>
+                  </div>
+                </li>
               </ul>
 
               <div className="contact-panel-tabs" role="tablist" aria-label="Contact View Options">
@@ -518,13 +533,11 @@ export default function Contact() {
                 <div className="contact-map-frame">
                   <iframe
                     title="Kalluvathukkal Kollam Kerala Map"
-                    src="https://maps.google.com/maps?q=Kalluvathukkal%2C%20Kollam%2C%20Kerala&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=76.7188%2C8.8122%2C76.7788%2C8.8522&layer=mapnik&marker=8.8322%2C76.7488"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
-                    allowFullScreen
                     loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
                   />
                 </div>
                 <div className="contact-map-footer">

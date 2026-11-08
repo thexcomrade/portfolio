@@ -3,29 +3,25 @@
 import { useState } from "react";
 import {
   FaPython,
-  FaDocker,
-  FaAws,
   FaGitAlt,
-  FaEye,
+  FaRobot,
 } from "react-icons/fa";
 import {
-  SiTensorflow,
   SiPytorch,
   SiNextdotjs,
   SiFastapi,
   SiTypescript,
   SiScikitlearn,
-  SiMongodb,
   SiOpencv,
 } from "react-icons/si";
-import { X, Sparkles, BrainCircuit } from "lucide-react";
+import { X, Sparkles } from "lucide-react";
 
 interface SkillItem {
   name: string;
   category: string;
   icon: React.ReactNode;
   color: string;
-  proficiency: number;
+  level: string;
   description: string;
   details: string[];
 }
@@ -36,142 +32,101 @@ const skillsData: SkillItem[] = [
     category: "AI & Machine Learning",
     icon: <FaPython />,
     color: "#38bdf8",
-    proficiency: 85,
-    description: "Primary language for deep learning, NLP, computer vision, and high-performance backend APIs.",
-    details: ["NumPy & Pandas data pipelines", "PyTorch & TensorFlow model workflows", "Async I/O & FastAPI integration"],
+    level: "Core Language",
+    description: "Primary language for deep learning, computer vision, data manipulation, and high-performance backend services.",
+    details: ["NumPy & Pandas vectorized data pipelines", "Scikit-Learn, PyTorch & TensorFlow workflows", "Asynchronous I/O with FastAPI and Pydantic schemas"],
   },
   {
-    name: "PyTorch",
-    category: "AI & Machine Learning",
-    icon: <SiPytorch />,
-    color: "#EE4C2C",
-    proficiency: 70,
-    description: "Research & production framework for neural network training, fine-tuning, and evaluation.",
-    details: ["Custom Loss Functions & Optimizers", "CNNs, RNNs & Transformer Architectures", "CUDA acceleration & PyTorch Lightning"],
+    name: "Generative AI & RAG",
+    category: "Generative AI & RAG",
+    icon: <Sparkles />,
+    color: "#ff7a18",
+    level: "Production Deployed",
+    description: "Retrieval-Augmented Generation architectures combining curated vector knowledge with frontier LLMs.",
+    details: ["Gemini 2.5 Flash & OpenAI LLM integration", "Tourism RAG knowledge base across 100+ destinations", "Deterministic fallback routing & structured JSON generation"],
   },
   {
-    name: "Deep Learning",
-    category: "AI & Machine Learning",
-    icon: <BrainCircuit />,
-    color: "#FF7A18",
-    proficiency: 82,
-  description: "Neural network architectures for image classification, feature extraction, and intelligent prediction systems.",
-  details: [
-    "CNN Architectures & Image Classification",
-    "Transfer Learning with EfficientNetB3 & VGG16",
-    "Model Training & Evaluation"]
+    name: "Computer Vision & OpenCV",
+    category: "Computer Vision",
+    icon: <SiOpencv />,
+    color: "#36f7f9",
+    level: "Evaluation Benchmark",
+    description: "Facial landmarking, image feature extraction, and real-time deepfake classification pipelines.",
+    details: ["OpenCV color-space & edge feature extraction", "Linear SVC classifier benchmarked on 1,000 face images", "7.63ms per-face CPU inference latency footprint"],
   },
   {
-    name: "TensorFlow",
-    category: "AI & Machine Learning",
-    icon: <SiTensorflow />,
-    color: "#FF6F00",
-    proficiency: 75,
-    description: "End-to-end open source platform for machine learning model development and inference optimization.",
-    details: ["Keras High-Level API", "TensorFlow Lite & Edge Deployment", "Model Optimization & Quantization"],
-  },
-  {
-    name: "Scikit-Learn",
+    name: "Machine Learning & Scikit-Learn",
     category: "AI & Machine Learning",
     icon: <SiScikitlearn />,
     color: "#F7931E",
-    proficiency: 82,
-    description: "Classical machine learning library for regression, classification, clustering, and data preparation.",
-    details: ["Pipeline Automation", "Cross-Validation & Hyperparameter Tuning", "Feature Engineering & Dimensionality Reduction"],
+    level: "Core Specialization",
+    description: "Classical statistical machine learning algorithms, classification models, and rigorous metric evaluation.",
+    details: ["Linear Support Vector Classification (SVC)", "Cross-validation, hyperparameter tuning & grid search", "Evaluation metrics: ROC-AUC (0.9275), F1-Score (93.31%), Accuracy (93.40%)"],
   },
   {
-    name: "Computer Vision",
+    name: "Deep Learning & PyTorch",
     category: "AI & Machine Learning",
-    icon: <FaEye />,
-    color: "#36f7f9",
-    proficiency: 85,
-    description: "Image processing, object detection, facial recognition, and real-time video analytics.",
-    details: ["OpenCV & YOLO Model Deployments", "Facial Landmark & Deepfake Detection", "Medical Image Preprocessing"],
+    icon: <SiPytorch />,
+    color: "#EE4C2C",
+    level: "Applied Engineering",
+    description: "Neural network architectures for image classification, transfer learning, and pattern recognition.",
+    details: ["Convolutional Neural Networks (CNNs)", "Transfer learning with standard vision backbones", "Model training, validation splits & loss convergence"],
   },
   {
-    name: "FastAPI",
+    name: "FastAPI & Python Backends",
     category: "Backend & Systems",
     icon: <SiFastapi />,
     color: "#009688",
-    proficiency: 72,
-    description: "High-performance Python web framework for serving production AI model inference endpoints.",
-    details: ["Pydantic Schema Validation", "Asynchronous Endpoint Optimization", "Swagger / OpenAPI Documentation"],
+    level: "Production Deployed",
+    description: "Asynchronous RESTful APIs engineered for scalable microservices and low-latency model inference.",
+    details: ["Asynchronous route handlers with strict Pydantic validation", "SQLAlchemy ORM integration & medical data schema design", "OpenAPI / Swagger automatic specification and documentation"],
   },
   {
-    name: "React & Next.js",
+    name: "Next.js & React 19",
     category: "Web & Frontend",
     icon: <SiNextdotjs />,
     color: "#ffffff",
-    proficiency: 75,
-    description: "Full-stack web application development with React 19, Next.js App Router, and static generation.",
-    details: ["App Router Architecture", "Server Actions & API Handlers", "Framer Motion & Canvas 2D Integration"],
+    level: "Production Deployed",
+    description: "Modern full-stack web applications with Next.js App Router, server-rendered components, and responsive UI.",
+    details: ["Next.js 16 App Router architecture & TypeScript contracts", "Accessible, keyboard-navigable component design (WCAG AA)", "Framer Motion restrained physics and responsive layout composition"],
   },
   {
     name: "TypeScript",
     category: "Web & Frontend",
     icon: <SiTypescript />,
     color: "#3178C6",
-    proficiency: 68,
-    description: "Typed JavaScript development for scalable frontend architectures and robust API contracts.",
-    details: ["Strict Type Safety", "Interface & Generic Design", "React Component Typing"],
+    level: "Core Specialization",
+    description: "Strictly typed JavaScript ensuring bug-free data flow between client interfaces and backend endpoints.",
+    details: ["Strict type checking without unwarranted any types", "Generic data models and structured project interfaces", "Type-safe React hooks, props, and API response contracts"],
   },
   {
-    name: "Docker & Containers",
-    category: "Cloud & DevOps",
-    icon: <FaDocker />,
-    color: "#2496ED",
-    proficiency: 45,
-    description: "Containerizing AI applications and backend microservices for reproducible cross-platform deployments.",
-    details: ["Multi-stage Dockerfiles", "Docker Compose Orchestration", "Isolated GPU-enabled Environments"],
+    name: "Robotics & Embedded Systems",
+    category: "Robotics & Hardware",
+    icon: <FaRobot />,
+    color: "#10b981",
+    level: "Hardware Verified",
+    description: "Physical autonomous mobile robots, microcontrollers, sensor integration, and motor actuation.",
+    details: ["Arduino C++ embedded firmware & L293D motor drivers", "Ultrasonic distance sensing with micro-servo scanning routines", "HC-05 Bluetooth transceiver communication & mobile override"],
   },
   {
-    name: "AWS Cloud",
-    category: "Cloud & DevOps",
-    icon: <FaAws />,
-    color: "#FF9900",
-    proficiency: 65,
-    description: "Cloud computing infrastructure for model hosting, object storage, and serverless execution.",
-    details: ["S3 Bucket Management", "EC2 Instance Configuration", "Lambda Serverless Functions"],
-  },
-  {
-    name: "MongoDB & NoSQL",
-    category: "Backend & Systems",
-    icon: <SiMongodb />,
-    color: "#47A248",
-    proficiency: 58,
-    description: "NoSQL document database for flexible data structures and rapid application prototyping.",
-    details: ["Aggregation Pipelines", "Mongoose ODM Integration", "Indexing & Query Optimization"],
-  },
-  {
-    name: "Git & Version Control",
+    name: "Git, GitHub & Engineering Tools",
     category: "Developer Tools",
     icon: <FaGitAlt />,
     color: "#F05032",
-    proficiency: 72,
-    description: "Distributed version control, collaborative Git workflows, and continuous integration pipelines.",
-    details: ["Branching & Pull Request Workflows", "GitHub Actions Automation", "Conflict Resolution & Clean History"],
+    level: "Production Workflow",
+    description: "Professional version control, collaborative development, and deployment pipelines.",
+    details: ["Branching strategies, semantic commits & code reviews", "GitHub Actions CI/CD workflows and linting checks", "Google Colab GPU environments & reproducible requirements"],
   },
-{
-  name: "OpenCV",
-  category: "AI & Machine Learning",
-  icon: <SiOpencv />,
-  color: "#5C3EE8",
-  proficiency: 70,
-  description: "Computer vision and image processing for real-time detection, image analysis, and visual recognition.",
-  details: [
-    "Image Processing & Transformation",
-    "Object Detection & Image Analysis",
-    "Real-Time Video Processing",
-  ],
-},
 ];
 
 const categories = [
   "All",
   "AI & Machine Learning",
+  "Generative AI & RAG",
+  "Computer Vision",
   "Backend & Systems",
   "Web & Frontend",
-  "Cloud & DevOps",
+  "Robotics & Hardware",
   "Developer Tools",
 ];
 
@@ -190,8 +145,11 @@ export default function Skills() {
         {/* Section Header */}
         <div className="section-header">
           <h2 className="section-title">
-            Neural &amp; <span>Engineering Stack</span>
+            Technical <span>Competencies &amp; Stack</span>
           </h2>
+          <p className="section-subtitle">
+            Evidence-based tools and technologies deployed across practical AI/ML, backend APIs, and hardware systems.
+          </p>
         </div>
 
         {/* Category Filters */}
@@ -232,16 +190,19 @@ export default function Skills() {
               <h3 className="skill-card-title">{skill.name}</h3>
               <p className="skill-card-desc">{skill.description}</p>
 
-              {/* Progress Bar */}
+              {/* Competency Level indicator */}
               <div className="skill-progress-container">
                 <div className="skill-progress-header">
-                  <span>Proficiency</span>
-                  <span>{skill.proficiency}%</span>
+                  <span>Competency</span>
+                  <span style={{ color: "var(--skill-accent, #ff7a18)", fontWeight: 700 }}>{skill.level}</span>
                 </div>
                 <div className="skill-progress-track">
                   <div
                     className="skill-progress-fill"
-                    style={{ width: `${skill.proficiency}%` }}
+                    style={{
+                      width: "100%",
+                      background: "linear-gradient(90deg, rgba(229, 71, 4, 0.4), var(--skill-accent, #ff7a18))",
+                    }}
                   />
                 </div>
               </div>

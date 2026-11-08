@@ -44,8 +44,8 @@ export default function About() {
       subtitle: "Healthcare Data & Resilient Architecture",
       icon: <HeartPulse size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "Engineering Nutri Plan AI focused my efforts on medical data integrity—structuring unified patient record schemas and building secure RESTful backend services that solve operational bottlenecks in clinical coordination.",
-      highlight: "Unified Architectures for Critical Domains",
+        "Developing Nutri Plan AI and exploring healthcare applications focused my efforts on data integrity—structuring domain schemas, evaluating medical vision models, and building resilient FastAPI services for real-world impact.",
+      highlight: "Pragmatic Architecture for Critical Domains",
     },
     {
       act: "ACT 04",

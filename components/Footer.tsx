@@ -24,10 +24,10 @@ export default function Footer() {
                 width={36}
                 height={36}
               />
-              <span className="footer-brand-name">DEVANARAYANAN</span>
+              <span className="footer-brand-name">DEVANARAYANAN V S</span>
             </Link>
             <p className="footer-brand-tagline">
-              Artificial Intelligence &amp; Machine Learning Engineer building intelligent, scalable, and impactful solutions.
+              AI/ML &amp; Software Engineer. Specializing in practical machine learning, RAG pipelines, and full-stack software.
             </p>
           </div>
 
@@ -48,7 +48,7 @@ export default function Footer() {
         {/* Bottom Footer Row */}
         <div className="footer-bottom-row">
           <p className="footer-copyright" suppressHydrationWarning>
-            © {new Date().getFullYear()} Devanarayanan. All rights reserved.
+            © {new Date().getFullYear()} Devanarayanan V S. All rights reserved.
           </p>
 
           <button

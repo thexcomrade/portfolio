@@ -71,21 +71,21 @@ export const projects: Project[] = [
   {
     slug: "nutriplan-ai",
     image: "/projects/nutriplan.jpg",
-    badge: "Healthcare Architecture",
+    badge: "Healthcare & Nutrition AI",
     title: "Nutri Plan AI",
-    summary: "Unified Patient Medical Records Management Prototype",
+    summary: "AI-Powered Nutrition & Personalized Dietary Intelligence Prototype",
     description:
-      "AI-powered platform designed to organize and unify fragmented patient medical records. Built with structured RESTful API architecture in Python and FastAPI, validating early-stage diagnostic data schemas and record consolidation.",
+      "AI-driven nutrition assistant designed to deliver personalized meal plans and dietary recommendations. Engineered with modular FastAPI backend services, structured nutritional data schemas, and machine learning models.",
     status: "prototype",
     technologies: [
       "Python",
       "FastAPI",
-      "SQLAlchemy",
+      "Scikit-Learn",
       "REST APIs",
       "Data Schemas",
     ],
     metrics: [
-      { label: "Status", value: "Backend Prototype" },
+      { label: "Status", value: "AI Prototype" },
       { label: "Design", value: "Modular APIs" },
     ],
     github: "https://github.com/thexcomrade/NutriPlan-AI",
