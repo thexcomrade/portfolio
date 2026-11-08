@@ -44,7 +44,7 @@ export default function About() {
       subtitle: "Healthcare Data & Resilient Architecture",
       icon: <HeartPulse size={20} className="story-act-icon" aria-hidden="true" />,
       description:
-        "Engineering MediBridge AI focused my efforts on medical data integrity—structuring unified patient record schemas and building secure RESTful backend services that solve operational bottlenecks in clinical coordination.",
+        "Engineering Nutri Plan AI focused my efforts on medical data integrity—structuring unified patient record schemas and building secure RESTful backend services that solve operational bottlenecks in clinical coordination.",
       highlight: "Unified Architectures for Critical Domains",
     },
     {

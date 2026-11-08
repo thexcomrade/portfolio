@@ -69,10 +69,10 @@ export const projects: Project[] = [
     demo: "https://deepfakefacedetection.vercel.app/",
   },
   {
-    slug: "medibridge-ai",
+    slug: "nutriplan-ai",
     image: "/projects/nutriplan.jpg",
     badge: "Healthcare Architecture",
-    title: "MediBridge AI",
+    title: "Nutri Plan AI",
     summary: "Unified Patient Medical Records Management Prototype",
     description:
       "AI-powered platform designed to organize and unify fragmented patient medical records. Built with structured RESTful API architecture in Python and FastAPI, validating early-stage diagnostic data schemas and record consolidation.",

@@ -9,6 +9,7 @@ import {
 import {
   Mail,
   MapPin,
+  Phone,
   Download,
   Share2,
   X,
@@ -128,7 +129,7 @@ export default function Contact() {
   }
 
   function handleCopyEmail() {
-    navigator.clipboard.writeText("devanarayananstackuplearning@gmail.com");
+    navigator.clipboard.writeText("sskzm5780@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   }
@@ -156,7 +157,7 @@ export default function Contact() {
     setLoading(true);
     setStatusMessage("");
 
-    const targetEmail = "devanarayananstackuplearning@gmail.com";
+    const targetEmail = "sskzm5780@gmail.com";
     const accessKey = process.env.NEXT_WEB3FORMS_KEY;
 
     if (accessKey && accessKey.trim() !== "") {
@@ -195,7 +196,7 @@ export default function Contact() {
       }
     }
 
-    // Direct Mailto Fallback: Opens email client prefilled to devanarayananstackuplearning@gmail.com
+    // Direct Mailto Fallback: Opens email client prefilled to sskzm5780@gmail.com
     const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(
       subject.trim() || `Portfolio Inquiry from ${name}`
     )}&body=${encodeURIComponent(
@@ -307,11 +308,11 @@ export default function Contact() {
                   <div>
                     <span className="contact-detail-label">Direct Email</span>
                     <a
-                      href="mailto:devanarayananstackuplearning@gmail.com"
+                      href="mailto:sskzm5780@gmail.com"
                       className="contact-detail-value"
                       style={{ color: "#ff8c38", textDecoration: "none" }}
                     >
-                      devanarayananstackuplearning@gmail.com
+                      sskzm5780@gmail.com
                     </a>
                   </div>
                 </li>
@@ -356,7 +357,7 @@ export default function Contact() {
                       aria-label="Copy direct email address to clipboard"
                     >
                       <Mail size={13} aria-hidden="true" className="contact-copy-mail-icon" />
-                      <span className="contact-copy-address">devanarayananstackuplearning@gmail.com</span>
+                      <span className="contact-copy-address">sskzm5780@gmail.com</span>
                       <span className={`contact-copy-pill ${copied ? "copied" : ""}`}>
                         {copied ? (
                           <>
@@ -383,8 +384,8 @@ export default function Contact() {
                     <h4>Message Sent!</h4>
                     <p>
                       {formStatus === "fallback"
-                        ? "Opening your default email app to send directly to devanarayananstackuplearning@gmail.com. I will review and reply within 24 hours!"
-                        : "Thank you for reaching out! Your message was delivered directly to devanarayananstackuplearning@gmail.com. I will reply within 24 hours."}
+                        ? "Opening your default email app to send directly to sskzm5780@gmail.com. I will review and reply within 24 hours!"
+                        : "Thank you for reaching out! Your message was delivered directly to sskzm5780@gmail.com. I will reply within 24 hours."}
                     </p>
                     <button
                       type="button"

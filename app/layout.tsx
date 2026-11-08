@@ -3,8 +3,9 @@ import "./globals.css";
 import SpaceBackground from "@/components/SpaceBackground";
 
 export const metadata: Metadata = {
-  title: "Devanarayanan | AI & ML Engineer",
-  description: "Modern AI & ML Engineer Portfolio featuring cutting-edge artificial intelligence, machine learning, and deep learning engineering solutions.",
+  title: "Devanarayanan V S | AI/ML Engineer & Software Developer",
+  description:
+    "Portfolio of Devanarayanan V S, AI/ML & Software Engineer specializing in practical machine learning, RAG pipelines, computer vision systems, and full-stack development with Next.js and FastAPI.",
 };
 
 export default function RootLayout({
