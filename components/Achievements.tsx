@@ -106,36 +106,63 @@ export default function Achievements() {
 
         {/* Achievements Grid */}
         <div className="achievements-grid">
-          {achievements.map((item) => (
-            <a
-              key={item.id}
-              href={item.certificateUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="achievement-card"
-              title={`View ${item.title} Certificate`}
-              aria-label={`View certificate for ${item.title} (opens JPG in new tab)`}
-            >
-              <div className="achievement-top">
-                <div className="achievement-icon">{item.icon}</div>
-                <span className="achievement-category">{item.category}</span>
+          {achievements.map((item) => {
+            const cardContent = (
+              <>
+                <div className="achievement-top">
+                  <div className="achievement-icon">{item.icon}</div>
+                  <span className="achievement-category">{item.category}</span>
+                </div>
+
+                <h3 className="achievement-title">{item.title}</h3>
+                <div className="achievement-organization">{item.organization}</div>
+                <div className="achievement-duration">{item.duration}</div>
+
+                <p className="achievement-description">{item.description}</p>
+                <div className="achievement-divider" aria-hidden="true" />
+
+                <div className="achievement-footer">
+                  {item.certificateUrl ? (
+                    <>
+                      <span className="achievement-label">View Certificate</span>
+                      <span className="achievement-arrow" aria-hidden="true">
+                        <ArrowUpRight size={16} />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="achievement-label" style={{ opacity: 0.85 }}>Verified Credential</span>
+                      <span className="achievement-arrow" aria-hidden="true" style={{ color: "#22c55e" }}>
+                        <CheckCircle2 size={15} />
+                      </span>
+                    </>
+                  )}
+                </div>
+              </>
+            );
+
+            return item.certificateUrl ? (
+              <a
+                key={item.id}
+                href={item.certificateUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="achievement-card"
+                title={`View ${item.title} Certificate`}
+                aria-label={`View certificate for ${item.title} (opens JPG in new tab)`}
+              >
+                {cardContent}
+              </a>
+            ) : (
+              <div
+                key={item.id}
+                className="achievement-card"
+                aria-label={`${item.title} - ${item.organization}`}
+              >
+                {cardContent}
               </div>
-
-              <h3 className="achievement-title">{item.title}</h3>
-              <div className="achievement-organization">{item.organization}</div>
-              <div className="achievement-duration">{item.duration}</div>
-
-              <p className="achievement-description">{item.description}</p>
-              <div className="achievement-divider" aria-hidden="true" />
-
-              <div className="achievement-footer">
-                <span className="achievement-label">View Certificate</span>
-                <span className="achievement-arrow" aria-hidden="true">
-                  <ArrowUpRight size={16} />
-                </span>
-              </div>
-            </a>
-          ))}
+            );
+          })}
         </div>
 
         {/* Continuous Learning Bottom Banner */}
